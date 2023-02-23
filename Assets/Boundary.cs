@@ -5,50 +5,21 @@ using UnityEngine;
 
 public class Boundary : MonoBehaviour
 {
-    private Vector2 mapScale;
-    private SpriteRenderer spriteRenderer;
-    [SerializeField] private Transform target;
+    [SerializeField] private Transform playerPosition;
+    [SerializeField] private float offSet;
 
-    private void Start()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        mapScale = new Vector2(transform.localScale.x, transform.localScale.y);
-        Debug.Log("Sprite scale: " + mapScale);
+        if (other.CompareTag("Player"))
+        {
+            playerPosition.position = playerPosition.position - (playerPosition.position * 2);
+            Debug.Log("playerPosition.position: " + playerPosition.position);
+            Debug.Log("collided");
+        }
     }
 
     private void Update()
     {
-        Debug.Log("Sprite scale: " + target.position);
+        Debug.Log("playerPosition.position: " + playerPosition.position);
     }
-
-    // private void OnTriggerEnter2D(Collider2D other)
-    // {
-    //     // Check if the object that collided with the boundary is the player
-    //     if (other.CompareTag("Player"))
-    //     {
-    //         // Get the position of the object that collided with the boundary
-    //         Vector3 position = other.transform.position;
-    //
-    //         // Teleport the object to the opposite side of the map
-    //         if (position.x < transform.position.x - mapScale.x / 2)
-    //         {
-    //             position.x = transform.position.x + mapScale.x / 2;
-    //         }
-    //         else if (position.x > transform.position.x + mapScale.x / 2)
-    //         {
-    //             position.x = transform.position.x - mapScale.x / 2;
-    //         }
-    //
-    //         if (position.y < transform.position.y - mapScale.y / 2)
-    //         {
-    //             position.y = transform.position.y + mapScale.y / 2;
-    //         }
-    //         else if (position.y > transform.position.y + mapScale.y / 2)
-    //         {
-    //             position.y = transform.position.y - mapScale.y / 2;
-    //         }
-    //
-    //         other.transform.position = position;
-    //     }
-    // }
 }
