@@ -5,12 +5,7 @@ using UnityEngine.InputSystem;
 
 public class FaceMouseController : MonoBehaviour
 {
-    private InputActionAsset asset;
-
-    void Awake()
-    {
-        asset = GetComponent<PlayerInput>().actions;
-    }
+    public InputActionAsset asset;
 
     void OnEnable() 
     {
