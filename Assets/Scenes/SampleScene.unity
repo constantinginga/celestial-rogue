@@ -409,6 +409,7 @@ GameObject:
   - component: {fileID: 995335467}
   - component: {fileID: 995335466}
   - component: {fileID: 995335468}
+  - component: {fileID: 995335469}
   m_Layer: 0
   m_Name: Meteor
   m_TagString: Untagged
@@ -499,6 +500,27 @@ CircleCollider2D:
   m_Offset: {x: -0.036364675, y: 0}
   serializedVersion: 2
   m_Radius: 1.2563435
+--- !u!50 &995335469
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995335465}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &1145940149
 GameObject:
   m_ObjectHideFlags: 0
