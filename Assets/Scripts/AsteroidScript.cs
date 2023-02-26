@@ -9,9 +9,11 @@ public class AsteroidScript : MonoBehaviour
 {
     private Rigidbody2D rigidBody2D;
 
-    [SerializeField] private float size = 1.0f;
-    [SerializeField] private float minSize = 0.5f;
-    [SerializeField] private float maxSize = 1.5f;
+    [SerializeField] public float size = 1.0f;
+    [SerializeField] public float minSize = 0.5f;
+    [SerializeField] public float maxSize = 1.5f;
+    [SerializeField] private float speed = 50.0f;
+    [SerializeField] private float maxLifetime = 30.0f;
     
     void Awake()
     {
@@ -24,5 +26,12 @@ public class AsteroidScript : MonoBehaviour
         this.transform.localScale = Vector3.one * this.size;
 
         rigidBody2D.mass = size;
+    }
+
+    public void setTrajectory(Vector2 direction)
+    {
+        rigidBody2D.AddForce(direction * this.speed);
+        
+        Destroy(this.gameObject, this.maxLifetime);
     }
 }
