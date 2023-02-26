@@ -199,8 +199,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   asteroidPrefab: {fileID: 6250386697580802003, guid: f96e1847381d813439c528d80833f6fd, type: 3}
-  spawnRate: 2
-  spawnAmount: 1
+  spawnRate: 3
+  spawnAmountMoving: 1
+  spawnAmountStationary: 10
   spawnDistance: 50
   trajectoryVariance: 15
 --- !u!4 &479715945
@@ -3777,6 +3778,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 964197081003918284, guid: 7678f2e552fca4138aa857425fe6a446, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 14.300049
+      objectReference: {fileID: 0}
     - target: {fileID: 1492748418577224083, guid: 7678f2e552fca4138aa857425fe6a446, type: 3}
       propertyPath: m_Name
       value: Player
