@@ -34,4 +34,28 @@ public class AsteroidScript : MonoBehaviour
         
         Destroy(this.gameObject, this.maxLifetime);
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("bullet"))
+        {
+            if ((this.size / 2) >= this.minSize)
+            {
+                createSplitAsteroid();
+                createSplitAsteroid();
+            }
+            
+            Destroy(this.gameObject);
+        }
+    }
+
+    private void createSplitAsteroid()
+    {
+        Vector2 offset = this.transform.position;
+        offset = Random.insideUnitCircle * 0.5f;
+        
+        AsteroidScript half = Instantiate(this, offset, this.transform.rotation);
+        half.size = this.size / 2;
+        half.setTrajectory(Random.insideUnitCircle.normalized);
+    }
 }
