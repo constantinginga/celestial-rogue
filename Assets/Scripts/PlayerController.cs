@@ -18,7 +18,8 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate() 
     {
-        rb.velocity = new Vector2(input.movementPos.x, input.movementPos.y) * speed;
+        //rb.velocity = new Vector2(input.movementPos.x, input.movementPos.y) * speed;
+        rb.AddRelativeForce(new Vector2(input.movementPos.x, input.movementPos.y) * speed);
         
     }
 }

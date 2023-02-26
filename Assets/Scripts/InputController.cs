@@ -5,14 +5,13 @@ using UnityEngine.InputSystem;
 
 public class InputController : MonoBehaviour
 {
-    private InputActionAsset asset;
+    public InputActionAsset asset;
     private InputAction movement;
     public Vector2 mousePos, movementPos;
     public InputActionMap player;
 
     void Awake()
     {
-        asset = GetComponent<PlayerInput>().actions;
         player = asset.FindActionMap("Player");
     }
 
