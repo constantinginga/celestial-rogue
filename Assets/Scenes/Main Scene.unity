@@ -6199,6 +6199,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4996285427133740708, guid: 09276948482441348920e2bcb2adb631, type: 3}
   m_PrefabInstance: {fileID: 1717657571}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1747096879 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2040155241369273322, guid: 7678f2e552fca4138aa857425fe6a446, type: 3}
+  m_PrefabInstance: {fileID: 1492748420018987468}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1892600865
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6324,6 +6335,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2497048449181466663, guid: 7678f2e552fca4138aa857425fe6a446, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 1747096879}
     - target: {fileID: 8230964652814541666, guid: 7678f2e552fca4138aa857425fe6a446, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
