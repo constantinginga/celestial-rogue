@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,20 +34,16 @@ public class AsteroidScript : MonoBehaviour
         
         Destroy(this.gameObject, this.maxLifetime);
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("bullet"))
-        {
-            if ((this.size / 2) >= this.minSize)
-            {
-                createSplitAsteroid();
-                createSplitAsteroid();
-            }
+    
+	private void TakeDamage(int damage){
+		if ((this.size / 2) >= this.minSize)
+		{
+			createSplitAsteroid();
+			createSplitAsteroid();
+		}
             
-            Destroy(this.gameObject);
-        }
-    }
+		Destroy(this.gameObject);
+	}
 
     private void createSplitAsteroid()
     {

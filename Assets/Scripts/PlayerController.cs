@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -25,15 +25,6 @@ public class PlayerController : MonoBehaviour
         rb.AddRelativeForce(new Vector2(input.movementPos.x, input.movementPos.y) * speed);
     }
 
-    // THIS IS ONLY FOR TESTING, REMOVE THIS LATER WHEN THE ENEMY CAN DAMAGE THE PLAYER
-    // private void Update()
-    // {
-    //     if (Input.GetKeyDown(KeyCode.Space))
-    //     {
-    //         TakeDamage(10);
-    //     }
-    // }
-
     private void TakeDamage(int damageAmount)
     {
         if (currentHealth <= 0)
@@ -52,7 +43,8 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
-        // Handle death
+	    // Handle death
+	    Destroy(gameObject);
     }
 
     private void OnEnable()
