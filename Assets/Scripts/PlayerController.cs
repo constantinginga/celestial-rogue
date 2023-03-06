@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     public Slider healthBar;
+    public Slider overHeat;
     private Rigidbody2D rb;
     private InputController input;
     public delegate void TakeDamageDelegate(int damageAmount);
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
         input = GetComponent<InputController>();
         currentHealth = maxHealth;
         UpdateHealthBar();
+        overHeat.maxValue = 10;
     }
 
     void FixedUpdate()
@@ -36,6 +38,11 @@ public class PlayerController : MonoBehaviour
         UpdateHealthBar();
     }
 
+    private void updateOverheat(int value)
+    {
+        overHeat.value = value;
+    }
+    
     private void UpdateHealthBar()
     {
         healthBar.value = currentHealth;

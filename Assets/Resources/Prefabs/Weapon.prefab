@@ -102,3 +102,7 @@ MonoBehaviour:
   bulletSpeed: 10
   damageAmount: 1
   shootDelay: 0.3
+  opponentLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  overHeat: 10
