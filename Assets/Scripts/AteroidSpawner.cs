@@ -8,7 +8,7 @@ public class AteroidSpawner : MonoBehaviour
     [SerializeField] private AsteroidScript asteroidPrefab;
     [SerializeField] private float spawnRate = 2.0f;
     [SerializeField] private int spawnAmountMoving = 1;
-    [SerializeField] private int spawnAmountStationary = 10;
+    [SerializeField] private int spawnAmountStationary = 5;
     [SerializeField] private float spawnDistance = 50.0f;
     [SerializeField] private float trajectoryVariance = 15.0f;
 
@@ -42,7 +42,7 @@ public class AteroidSpawner : MonoBehaviour
             Vector3 spawnPoint = new Vector3(Random.Range(-50, 50),Random.Range(-20, 20),0);
 
             AsteroidScript asteroid = Instantiate(this.asteroidPrefab, spawnPoint, this.transform.rotation);
-            asteroid.size = asteroid.maxSize;
+            asteroid.size = asteroid.maxSize + 1f;
         }
     }
 

@@ -136,8 +136,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf391786b4d23fa4790d82ddabd2bcde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: 0.3
-  minSize: 1
-  maxSize: 5
-  speed: 2
+  asteroidHp: 0
+  size: 1
+  minSize: 0.5
+  maxSize: 2
+  speed: 5
   maxLifetime: 20

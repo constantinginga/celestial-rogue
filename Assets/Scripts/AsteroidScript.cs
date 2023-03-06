@@ -8,7 +8,8 @@ using Random = UnityEngine.Random;
 public class AsteroidScript : MonoBehaviour
 {
     private Rigidbody2D rigidBody2D;
-
+    
+    [SerializeField] public float asteroidHp;
     [SerializeField] public float size = 1.0f;
     [SerializeField] public float minSize = 0.5f;
     [SerializeField] public float maxSize = 1.5f;
@@ -25,7 +26,8 @@ public class AsteroidScript : MonoBehaviour
         this.transform.eulerAngles = new Vector3(0.0f, 0.0f, Random.value * 360.0f);
         this.transform.localScale = Vector3.one * this.size;
 
-        rigidBody2D.mass = size;
+        rigidBody2D.mass = size * 2;
+        asteroidHp = rigidBody2D.mass;
     }
 
     public void setTrajectory(Vector2 direction)
@@ -36,22 +38,24 @@ public class AsteroidScript : MonoBehaviour
     }
     
 	private void TakeDamage(int damage){
-		if ((this.size / 2) >= this.minSize)
-		{
-			createSplitAsteroid();
-			createSplitAsteroid();
-		}
-            
-		Destroy(this.gameObject);
-	}
+        asteroidHp -= damage;
 
+        if (asteroidHp <= 0)
+        {
+            if ((this.size / 2) >= this.minSize)
+            {
+                createSplitAsteroid();
+                createSplitAsteroid();
+            }
+            
+            Destroy(this.gameObject);
+        }
+    }
+    
     private void createSplitAsteroid()
     {
-        Vector2 offset = this.transform.position;
-        offset = Random.insideUnitCircle * 0.5f;
-        
-        AsteroidScript half = Instantiate(this, offset, this.transform.rotation);
+        AsteroidScript half = Instantiate(this, transform.position, this.transform.rotation);
         half.size = this.size / 2;
-        half.setTrajectory(Random.insideUnitCircle.normalized);
+        half.setTrajectory(Random.insideUnitCircle.normalized * this.speed * 5f);
     }
 }
