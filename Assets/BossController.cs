@@ -9,21 +9,23 @@ public class BossController : MonoBehaviour
 	public int Health = 10;
 	public float fireRate = 0.75F;
 	[Header("Components")]
-	public Slider Heathbar;
+	public Slider Healthbar;
 	public Transform Target;
+	[Header("Booleans")]
+	public bool canFire;
+	[Header("Phase 1")]
 	public List<ShootingController> BulletSpawns;
 	public Transform BulletSpawnsParent;
-	[Header("Booleans")]
-	public bool canFire = true;
+
+	void Awake(){
+		canFire = true;
+		Healthbar.maxValue = Health;
+		Healthbar.value = Health;
+	}
 
 	void Update(){
 		if(canFire){
-			if(BulletSpawnsParent.rotation.z == 0){
-				BulletSpawnsParent.rotation = Quaternion.Euler(0,0,22.5F);
-			}
-			else{
-				BulletSpawnsParent.rotation = Quaternion.Euler(0,0,0);
-			}
+			BulletSpawnsParent.Rotate(0,0, 11.25F);
 			foreach (ShootingController item in BulletSpawns)
 			{
 				StartCoroutine(item.StartShooting());
@@ -44,12 +46,12 @@ public class BossController : MonoBehaviour
 		UpdateHealthbar();
 		if (Health <= 0)
 		{
-			Destroy(transform.parent.gameObject);
+			Destroy(gameObject);
 		}
 	}
 	
 	void UpdateHealthbar(){
-		Heathbar.value = Health;
+		Healthbar.value = Health;
 	}
 	
 	public void startFiringCooldDown()
