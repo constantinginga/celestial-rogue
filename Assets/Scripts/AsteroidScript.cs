@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -12,9 +13,9 @@ public class AsteroidScript : MonoBehaviour
     [SerializeField] public float asteroidHp;
     [SerializeField] public float size = 1.0f;
     [SerializeField] public float minSize = 0.5f;
-    [SerializeField] public float maxSize = 1.5f;
-    [SerializeField] private float speed = 50.0f;
-    [SerializeField] private float maxLifetime = 30.0f;
+    [SerializeField] public float maxSize = 2f;
+    [SerializeField] private float speed = 5.0f;
+    [SerializeField] private float maxLifetime = 20.0f;
     
     void Awake()
     {
@@ -49,6 +50,14 @@ public class AsteroidScript : MonoBehaviour
             }
             
             Destroy(this.gameObject);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<PlayerController>() != null)
+        {
+            collision.gameObject.SendMessage("TakeDamage", 10 + speed);
         }
     }
     
