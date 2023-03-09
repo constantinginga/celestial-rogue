@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public int currentHealth;
     public Slider healthBar;
     public Slider overHeat;
+    public TextMeshProUGUI credits;
     private Rigidbody2D rb;
     private InputController input;
     public delegate void TakeDamageDelegate(int damageAmount);

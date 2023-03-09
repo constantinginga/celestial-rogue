@@ -92,9 +92,9 @@ public class ShootingController : MonoBehaviour
 
 	public IEnumerator coolDown()
 	{
-		if (overHeat)
+		if (overHeat && shootAmount < overHeatThreshold + 1)
 		{
-			shootAmount *= 2;
+			shootAmount += overHeatThreshold / 2;
 			overHeat = false;
 		}
 		
@@ -121,7 +121,6 @@ public class ShootingController : MonoBehaviour
 	        if (shootAmount >= overHeatThreshold && isPlayer)
 	        {
 		        overHeat = true;
-		        Debug.Log("OVERHEAT");
 	        }
 	        else
 	        {
