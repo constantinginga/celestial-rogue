@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using UnityEngine.Rendering.Universal;
 
 public class PlayerController : MonoBehaviour
@@ -8,6 +9,8 @@ public class PlayerController : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     public Slider healthBar;
+    public Slider overHeat;
+    public TextMeshProUGUI credits;
     public ParticleSystem EngineEmission;
     public Light2D EngineLight;
     private Rigidbody2D rb;
@@ -21,6 +24,7 @@ public class PlayerController : MonoBehaviour
         input = GetComponent<InputController>();
         currentHealth = maxHealth;
         UpdateHealthBar();
+        overHeat.maxValue = 10;
     }
 
     void FixedUpdate()
@@ -51,6 +55,11 @@ public class PlayerController : MonoBehaviour
         UpdateHealthBar();
     }
 
+    private void updateOverheat(int value)
+    {
+        overHeat.value = value;
+    }
+    
     private void UpdateHealthBar()
     {
         healthBar.value = currentHealth;

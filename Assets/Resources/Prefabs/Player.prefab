@@ -5250,8 +5250,6 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   healthBar: {fileID: 2040155241369273322}
-  EngineEmission: {fileID: 1061413036}
-  EngineLight: {fileID: 860365738}
 --- !u!114 &5915456456923448233
 MonoBehaviour:
   m_ObjectHideFlags: 0

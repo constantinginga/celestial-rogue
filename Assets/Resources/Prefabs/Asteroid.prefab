@@ -100,9 +100,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.036364675, y: 0}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.2563435
+  m_Radius: 1.3
 --- !u!50 &5011346802274999103
 Rigidbody2D:
   serializedVersion: 4
@@ -136,8 +136,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf391786b4d23fa4790d82ddabd2bcde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: 0.3
-  minSize: 1
-  maxSize: 5
-  speed: 2
+  asteroidHp: 0
+  size: 1
+  minSize: 0.5
+  maxSize: 2
+  speed: 5
   maxLifetime: 20
