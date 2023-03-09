@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
-
+using UnityEngine.Rendering.Universal;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,6 +11,8 @@ public class PlayerController : MonoBehaviour
     public Slider healthBar;
     public Slider overHeat;
     public TextMeshProUGUI credits;
+    public ParticleSystem EngineEmission;
+    public Light2D EngineLight;
     private Rigidbody2D rb;
     private InputController input;
     public delegate void TakeDamageDelegate(int damageAmount);
@@ -29,6 +30,18 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         rb.AddRelativeForce(new Vector2(input.movementPos.x, input.movementPos.y) * speed);
+    }
+
+    void Update(){
+        if(input.movementPos.x > 0 || input.movementPos.y > 0){
+            EngineEmission.Play();
+            EngineLight.enabled = true;
+        }
+        else{
+            EngineEmission.Stop();
+            EngineLight.enabled = false;
+        }
+
     }
 
     private void TakeDamage(int damageAmount)
