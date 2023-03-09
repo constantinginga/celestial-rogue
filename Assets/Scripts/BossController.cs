@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class BossController : MonoBehaviour
 {
 	[Header("General Attributes")]
-	public int Health = 10;
+	public int Health;
 	public int MaxHealth;
 	public int CurrentPhase;
 	[Header("Components")]
@@ -35,8 +35,8 @@ public class BossController : MonoBehaviour
 		canSpawnAOE = true;
 		canSpawnMobs = true;
 		MaxHealth = Health;
-		Healthbar.value = Health;
 		Healthbar.maxValue = MaxHealth;
+		Healthbar.value = Health;
 		CurrentPhase = 1;
 	}
 
