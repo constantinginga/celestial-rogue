@@ -15,6 +15,10 @@ public class EnemyController : MonoBehaviour
 	public ShootingController shootingController;
 	bool canFire = true;
 
+	void Awake(){
+		target.target = GameObject.FindFirstObjectByType<PlayerController>().transform;
+	}
+
     void Update()
     {
 	    if(target.target && isInFiringDistance() && canFire){

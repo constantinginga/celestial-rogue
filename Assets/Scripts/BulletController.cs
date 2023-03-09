@@ -13,7 +13,7 @@ public class BulletController : MonoBehaviour
 	{
 		if ((opponentLayer | (1 << collision.gameObject.layer)) == opponentLayer)
         {
-    		collision.SendMessage("TakeDamage", damageAmount);
+    		collision.gameObject.SendMessage("TakeDamage", damageAmount);
             Destroy(gameObject);
         }
     }
