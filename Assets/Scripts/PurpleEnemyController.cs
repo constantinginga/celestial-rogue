@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PurpleEnemyController : MonoBehaviour
@@ -7,23 +6,24 @@ public class PurpleEnemyController : MonoBehaviour
     public float FiringDistance = 10F;
     public float fireRate = 0.75F;
     public float dodgeCooldown = 2F;
-    public float dodgeDistance = 2000F;
+    public float dodgeDistance = 3000F;
+    public float circleColliderRadius = 1F;
+    private CircleCollider2D circleCollider;
     bool canFire = true,
         canDodge = true;
     public EnemyController enemyController;
-    ShootingController shootingController,
-        playerShootingController;
-
-    Transform target;
-    Transform left,
+    ShootingController shootingController;
+    Transform target,
+        left,
         right;
 
     void Awake()
     {
+        gameObject.AddComponent<CircleCollider2D>();
+        circleCollider = GetComponent<CircleCollider2D>();
+        circleCollider.radius = circleColliderRadius;
+        circleCollider.isTrigger = true;
         enemyController = GetComponent<EnemyController>();
-        playerShootingController = GameObject
-            .FindObjectOfType<InputController>()
-            .GetComponentInChildren<ShootingController>();
         shootingController = enemyController.shootingController;
         target = enemyController.target.target;
         left = transform.Find("Left");
@@ -32,10 +32,6 @@ public class PurpleEnemyController : MonoBehaviour
 
     void Update()
     {
-        if (canDodge && playerShootingController.shootAction.inProgress)
-        {
-            Dodge();
-        }
         if (target && isInFiringDistance() && canFire)
         {
             StartCoroutine(shootingController.StartShooting());
@@ -63,22 +59,33 @@ public class PurpleEnemyController : MonoBehaviour
         canFire = true;
     }
 
-    void Dodge()
+    void OnTriggerEnter2D(Collider2D other)
     {
-        StartCoroutine(startDodgeCooldown());
-        // move the enemy sideways depending on its orientation
-        Rigidbody2D rb = enemyController.GetComponent<Rigidbody2D>();
-        Vector2 movementDirection =
-            Random.Range(0, 1) == 0
-                ? left.position - transform.position
-                : right.position - transform.position;
-        rb.AddForce(movementDirection * dodgeDistance);
+        if (other.gameObject.layer == 9 && canDodge)
+        {
+            // cast game object to bullet controller
+            BulletController bulletController = other.gameObject.GetComponent<BulletController>();
+            if (bulletController.parentLayer == 7)
+            {
+                // move the enemy sideways depending on its orientation
+                Rigidbody2D rb = enemyController.GetComponent<Rigidbody2D>();
+                Vector2 movementDirection =
+                    Random.Range(0, 2) == 0
+                        ? left.position - transform.position
+                        : right.position - transform.position;
+                rb.AddForce(movementDirection * dodgeDistance);
+                // start the dodge cooldown
+                StartCoroutine(startDodgeCooldown());
+            }
+        }
     }
 
     IEnumerator startDodgeCooldown()
     {
+        enemyController.isInvincible = false;
         canDodge = false;
         yield return new WaitForSeconds(dodgeCooldown);
         canDodge = true;
+        enemyController.isInvincible = true;
     }
 }

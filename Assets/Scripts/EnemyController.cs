@@ -26,9 +26,11 @@ public class EnemyController : MonoBehaviour
     public ParticleSystem DeathExplosion;
     public GameObject ShipWreck;
     public Texture2D texture;
+    public bool isInvincible;
 
     void Awake()
     {
+        isInvincible = false;
         target.target = GameObject.FindFirstObjectByType<PlayerController>().transform;
         Object[] data = AssetDatabase.LoadAllAssetsAtPath(AssetDatabase.GetAssetPath(texture));
         if (data != null)
@@ -74,15 +76,24 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (Health <= 0)
+        if (!isInvincible)
         {
-            Instantiate(DeathExplosion, transform.position, Quaternion.identity);
-            GameObject shipwreck = Instantiate(ShipWreck, transform.position, Quaternion.identity);
-            shipwreck.GetComponent<ShipWreckController>().CreateWreck(ChosenSpaceship.ToString());
-            Destroy(transform.parent.gameObject);
+            if (Health <= 0)
+            {
+                Instantiate(DeathExplosion, transform.position, Quaternion.identity);
+                GameObject shipwreck = Instantiate(
+                    ShipWreck,
+                    transform.position,
+                    Quaternion.identity
+                );
+                shipwreck
+                    .GetComponent<ShipWreckController>()
+                    .CreateWreck(ChosenSpaceship.ToString());
+                Destroy(transform.parent.gameObject);
+            }
+            Health -= damage;
+            UpdateHealthbar();
         }
-        Health -= damage;
-        UpdateHealthbar();
     }
 
     void UpdateHealthbar()

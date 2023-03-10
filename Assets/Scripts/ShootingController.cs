@@ -81,6 +81,7 @@ public class ShootingController : MonoBehaviour
             bullet = Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
             if (bullet.TryGetComponent<BulletController>(out BulletController bulletComponent))
             {
+                bulletComponent.parentLayer = transform.parent.gameObject.layer;
                 bulletComponent.damageAmount = damageAmount;
                 bulletComponent.opponentLayer = opponentLayer.value;
             }
@@ -88,8 +89,6 @@ public class ShootingController : MonoBehaviour
             Destroy(bullet, 3f); // Destroy the bullet after 3 seconds
             yield return new WaitForSeconds(shootDelay);
         }
-
-        shootingCoroutine = null;
     }
 
     private void OnDestroy()
