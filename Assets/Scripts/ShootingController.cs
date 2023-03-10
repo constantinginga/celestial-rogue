@@ -15,6 +15,7 @@ public class ShootingController : MonoBehaviour
     private InputActionMap weapon;
     private GameObject bullet;
     private Coroutine shootingCoroutine;
+    private float lastShotTime = -Mathf.Infinity; 
 
     private void Awake()
 	{
@@ -46,6 +47,14 @@ public class ShootingController : MonoBehaviour
 
     private void Shoot()
     {
+        float currentTime = Time.time;
+        if (currentTime - lastShotTime < shootDelay)
+        {
+            return;
+        }
+
+        lastShotTime = currentTime;
+
         if (shootingCoroutine == null)
         {
             shootingCoroutine = StartCoroutine(StartShooting());
@@ -75,6 +84,8 @@ public class ShootingController : MonoBehaviour
             Destroy(bullet, 3f); // Destroy the bullet after 3 seconds
             yield return new WaitForSeconds(shootDelay);
         }
+
+        shootingCoroutine = null;
     }
 
     private void OnDestroy()
