@@ -6070,6 +6070,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 739162568}
+    - target: {fileID: 5188483950125648670, guid: 4f5ba3f0ea92ad14f90980c55b57dfea, type: 3}
+      propertyPath: ChosenSpaceship
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f5ba3f0ea92ad14f90980c55b57dfea, type: 3}
 --- !u!1001 &1492748420018987468
