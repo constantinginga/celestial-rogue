@@ -84,6 +84,10 @@ public class PlayerController : MonoBehaviour
         UpdateHealthBar();
     }
 
+    private void Slowdown(int effectAmount){
+        speed = effectAmount;
+    }
+
     private void UpdateHealthBar()
     {
         healthBar.value = currentHealth;

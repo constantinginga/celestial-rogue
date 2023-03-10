@@ -54,7 +54,7 @@ public class EnemyController : MonoBehaviour
 				//gameObject.AddComponent<Seeker>();
 				break;
 			case SpaceshipsEnum.Enemy_Blue:
-				
+				gameObject.AddComponent<EnemyBlue>();
 				break;
 			case SpaceshipsEnum.Enemy_Pink:
 				
@@ -95,7 +95,7 @@ public class EnemyController : MonoBehaviour
 	    UpdateHealthbar();
     }
     
-	bool isInFiringDistance(){
+	public bool isInFiringDistance(){
 		return Vector2.Distance(transform.position, target.target.position) <= FiringDistance;
 	}
 	
