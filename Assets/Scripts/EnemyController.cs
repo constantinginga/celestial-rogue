@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
@@ -48,14 +48,13 @@ public class EnemyController : MonoBehaviour
                 }
             }
         }
-
         switch (ChosenSpaceship)
         {
             case SpaceshipsEnum.Enemy_Red:
                 //gameObject.AddComponent<Seeker>();
                 break;
             case SpaceshipsEnum.Enemy_Blue:
-
+                gameObject.AddComponent<EnemyBlue>();
                 break;
             case SpaceshipsEnum.Enemy_Pink:
 
