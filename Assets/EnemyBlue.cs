@@ -5,8 +5,8 @@ using Pathfinding;
 
 public class EnemyBlue : MonoBehaviour
 {
-    public int Health = 20;
-    public float DebuffCooldown = 10F;
+    public int Health = 30;
+    public float DebuffCooldown = 7.5F;
     public float NewLocationSetCooldown = 5F;
     LayerMask CollisionLayer;
     bool CanDebuff;
@@ -20,7 +20,7 @@ public class EnemyBlue : MonoBehaviour
         startDebuffCooldDown();
         setNewTarget = true;
         CollisionLayer = LayerMask.GetMask("Player","Enemy","Asteroid");
-        target.target = null;
+        target = GetComponent<AIDestinationSetter>();
         target.target = chooseRandomLocation();
         startNewLocationCooldown();
     }
@@ -66,10 +66,10 @@ public class EnemyBlue : MonoBehaviour
                 tmp.transform.position = new Vector3(Random.Range(-50F, 50F), Random.Range(-20F, 20F), 0);
                 tmp.AddComponent<CircleCollider2D>();
                 tmp.GetComponent<CircleCollider2D>().isTrigger = true;
+                tmp.GetComponent<CircleCollider2D>().radius = 0.235F;
                 CircleCollider2D col = tmp.GetComponent<CircleCollider2D>();
 		    if (!col.IsTouchingLayers(CollisionLayer))
 		    {
-                print(tmp.transform.position);
 				return tmp.transform;
 		    }
 		}
