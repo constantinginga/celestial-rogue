@@ -47,6 +47,28 @@ public class EnemyController : MonoBehaviour
 				
             }
         }
+
+		switch (ChosenSpaceship)
+		{
+			case SpaceshipsEnum.Enemy_Red:
+				//gameObject.AddComponent<Seeker>();
+				break;
+			case SpaceshipsEnum.Enemy_Blue:
+				
+				break;
+			case SpaceshipsEnum.Enemy_Pink:
+				
+				break;
+			case SpaceshipsEnum.Enemy_Green:
+				
+				break;
+			case SpaceshipsEnum.Enemy_Grey:
+				
+				break;
+			case SpaceshipsEnum.Enemy_Purple:
+				
+				break;
+		}
 	}
 
     void Update()
