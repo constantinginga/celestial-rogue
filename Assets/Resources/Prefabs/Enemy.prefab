@@ -403,7 +403,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 4
   m_Sprite: {fileID: -1303317163, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -573,7 +573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 424ab0afb36ff4f1987f4692fc7e3b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChosenSpaceship: 0
+  ChosenSpaceship: 2
   Health: 10
   FiringDistance: 10
   fireRate: 0.75
