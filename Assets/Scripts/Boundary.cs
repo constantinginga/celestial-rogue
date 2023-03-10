@@ -14,6 +14,7 @@ public class Boundary : MonoBehaviour
         // Check if the other collider is the player
         if (other.GetComponent<PlayerController>())
         {
+            Debug.LogWarning("AAAAAAAAAAAAAAAAAAAAAAAAAAA");
             Vector2 playerPosition = player.position;
 
             if (Horizontal)
