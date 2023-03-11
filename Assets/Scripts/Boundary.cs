@@ -11,12 +11,10 @@ public class Boundary : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Check if the other collider is the player
         if (other.GetComponent<PlayerController>())
         {
-            Debug.LogWarning("AAAAAAAAAAAAAAAAAAAAAAAAAAA");
             Vector2 playerPosition = player.position;
-
+            
             if (Horizontal)
             {
                 playerPosition.y = playerPosition.y - playerPosition.y * 2;
@@ -24,7 +22,7 @@ public class Boundary : MonoBehaviour
             else
             {
                 playerPosition.x = playerPosition.x - playerPosition.x * 2;
-            }
+            } 
 
             player.position = playerPosition;
         }
