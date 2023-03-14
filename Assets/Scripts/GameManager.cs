@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
 	float converter = 0.0F;
 	Timer timer;
 	AteroidSpawner asteroidSpawner;
+	bool stopped;
 
 	void Awake(){
 		Instantiate(Player, new Vector2(0,0), Quaternion.identity);
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour
 		timer = Player.GetComponentInChildren<Timer>();
 		asteroidSpawner = GameObject.FindFirstObjectByType<AteroidSpawner>();
 		Level = 1;
+		stopped = false;
 		StartLevel();
 	}
 
@@ -39,10 +41,12 @@ public class GameManager : MonoBehaviour
 	{
 		converter += Time.deltaTime;
 		currentTime = (int)converter;
-		if(currentTime == LevelLength && PlayerController.currentHealth > 0){
+		if(currentTime == LevelLength && PlayerController.currentHealth > 0 && !stopped){
 			//Some transition maybe?
 			//Open shop
 			print("Success");
+			stopped = true;
+			//This is still fucked
 			Shop.gameObject.SetActive(true);
 			//Despawn everything in the background meantime
 			asteroidSpawner.Stop();
@@ -118,7 +122,7 @@ public class GameManager : MonoBehaviour
 		}
 		foreach (EnemyController enemy in EnemiesParent.GetComponentsInChildren<EnemyController>())
 		{
-			Destroy(enemy.gameObject);
+			Destroy(enemy.transform.parent.gameObject);
 		}
 	}
 }
