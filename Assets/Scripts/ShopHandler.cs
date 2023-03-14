@@ -1,18 +1,18 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShopHandler : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	public Button VentureForthButton; 
+	GameManager GameManager;
+ 
+	void Awake(){
+		GameManager = GameObject.FindFirstObjectByType<GameManager>();
+	}
+    
+	public void VentureForth(){
+		GameManager.StartLevel();
+	}
 }

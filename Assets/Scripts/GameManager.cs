@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class GameManager : MonoBehaviour
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
 
 	void Awake(){
 		Instantiate(Player, new Vector2(0,0), Quaternion.identity);
+		Player = GameObject.FindGameObjectWithTag("Player");
 		PlayerController = Player.GetComponentInChildren<PlayerController>();
 		Shop = Player.GetComponentInChildren<ShopHandler>(true);
 		timer = Player.GetComponentInChildren<Timer>();
@@ -35,7 +37,7 @@ public class GameManager : MonoBehaviour
 		stopped = false;
 		StartLevel();
 	}
-
+	
     // Update is called once per frame
     void Update()
 	{
@@ -43,27 +45,23 @@ public class GameManager : MonoBehaviour
 		currentTime = (int)converter;
 		if(currentTime == LevelLength && PlayerController.currentHealth > 0 && !stopped){
 			//Some transition maybe?
-			//Open shop
-			print("Success");
 			stopped = true;
-			//This is still fucked
-			Shop.gameObject.SetActive(true);
+			OpenShop();
 			//Despawn everything in the background meantime
 			asteroidSpawner.Stop();
 			DespawnEverything();
 			currentTime = 0;
-			timer.currentTime = 0;
-			timer.stopped = true;
+			timer.Reset();
 			Level++;
 		}
 	}
 	
-	void StartLevel(){
+	public void StartLevel(){
 		asteroidSpawner.Begin();
 		switch (Level)
 		{
 		case 1:
-			LevelLength = 12;
+			LevelLength = 120;
 			SpawnEnemies(10);
 			break;
 		case 2:
@@ -86,6 +84,19 @@ public class GameManager : MonoBehaviour
 		default:
 			break;
 		}
+		CloseShop();
+		if(Level != 5){
+			timer.UI.enabled = true;
+			timer.stopped = false;
+		}
+	}
+	
+	void OpenShop(){
+		Shop.gameObject.active = true;
+	}
+	
+	void CloseShop(){
+		Shop.gameObject.active = false;
 	}
     
 	void SpawnEnemies(int amount){
