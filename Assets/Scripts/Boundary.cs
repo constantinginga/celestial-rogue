@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,8 +6,12 @@ using UnityEngine.Tilemaps;
 
 public class Boundary : MonoBehaviour
 {
-    [SerializeField] private Transform player;
-    [SerializeField] private bool Horizontal;
+	[SerializeField] private bool Horizontal;
+	Transform player;
+    
+	void Awake(){
+		player = GameObject.FindFirstObjectByType<PlayerController>().transform;
+	}
     
     private void OnTriggerEnter2D(Collider2D other)
     {

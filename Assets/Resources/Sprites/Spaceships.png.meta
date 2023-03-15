@@ -105,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Spaceships_0
+      name: Player_White
       rect:
         serializedVersion: 2
         x: 3
@@ -126,7 +126,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spaceships_1
+      name: Player_Pink
       rect:
         serializedVersion: 2
         x: 43
@@ -147,7 +147,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spaceships_2
+      name: Player_Grey
       rect:
         serializedVersion: 2
         x: 92
@@ -168,7 +168,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spaceships_3
+      name: Player_Yellow
       rect:
         serializedVersion: 2
         x: 3
@@ -189,7 +189,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spaceships_4
+      name: Player_Red
       rect:
         serializedVersion: 2
         x: 47
@@ -210,7 +210,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spaceships_5
+      name: Player_Blu
       rect:
         serializedVersion: 2
         x: 99
@@ -231,7 +231,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spaceships_6
+      name: Player_Green
       rect:
         serializedVersion: 2
         x: 2
@@ -252,7 +252,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spaceships_7
+      name: Enemy_Red
       rect:
         serializedVersion: 2
         x: 185
@@ -273,7 +273,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spaceships_8
+      name: Enemy_Green
       rect:
         serializedVersion: 2
         x: 183
@@ -294,7 +294,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spaceships_9
+      name: Enemy_Pink
       rect:
         serializedVersion: 2
         x: 233
@@ -315,7 +315,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spaceships_10
+      name: Enemy_Grey
       rect:
         serializedVersion: 2
         x: 240
@@ -336,7 +336,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spaceships_11
+      name: Enemy_Blue
       rect:
         serializedVersion: 2
         x: 286
@@ -357,7 +357,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spaceships_12
+      name: Enemy_Purple
       rect:
         serializedVersion: 2
         x: 293
@@ -386,7 +386,7 @@ TextureImporter:
         width: 23
         height: 23
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -407,7 +407,7 @@ TextureImporter:
         width: 4
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -428,7 +428,7 @@ TextureImporter:
         width: 8
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -449,7 +449,7 @@ TextureImporter:
         width: 5
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -470,7 +470,7 @@ TextureImporter:
         width: 8
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -491,7 +491,7 @@ TextureImporter:
         width: 6
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -512,7 +512,7 @@ TextureImporter:
         width: 8
         height: 18
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -535,26 +535,26 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Spaceships_3: -1765770218
-      Spaceships_7: 1101413602
-      Spaceships_6: -107391127
-      Spaceships_9: -911893527
-      Spaceships_2: -748429393
+      Enemy_Pink: -911893527
+      Enemy_Blue: -1199797998
       Flamethrower: -1196063804
-      Spaceships_11: -1199797998
       Sniper_rifle: 1655260819
+      Enemy_Red: 1101413602
       Machinegun: 184108401
-      Spaceships_5: -65764179
+      Player_Blu: -65764179
       Lasergun: 773204380
-      Spaceships_8: 1410777082
       Space_buoy: -1175822444
-      Spaceships_10: -1303317163
+      Player_White: -2131879205
       Rocket_launcher: -570163553
-      Spaceships_0: -2131879205
-      Spaceships_4: 1451701461
+      Player_Green: -107391127
+      Player_Yellow: -1765770218
+      Enemy_Green: 1410777082
+      Enemy_Purple: 2020381191
+      Player_Grey: -748429393
       Shotgun: 604343247
-      Spaceships_1: -1957872993
-      Spaceships_12: 2020381191
+      Player_Pink: -1957872993
+      Enemy_Grey: -1303317163
+      Player_Red: 1451701461
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,14 +10,20 @@ public class AteroidSpawner : MonoBehaviour
     [SerializeField] private int spawnAmountMoving = 1;
     [SerializeField] private int spawnAmountStationary = 5;
     [SerializeField] private float spawnDistance = 50.0f;
+
     [SerializeField] private float trajectoryVariance = 15.0f;
     [SerializeField] private LayerMask layerMask;
+	[SerializeField] private float trajectoryVariance = 15.0f;
+	[SerializeField] private Transform parent;
 
-    void Start()
-    {
-        InvokeRepeating(nameof(spawn), this.spawnRate, this.spawnRate );
-        spawnStationary();
-    }
+	public void Begin(){
+		InvokeRepeating(nameof(spawn), this.spawnRate, this.spawnRate );
+		spawnStationary();
+	}
+	
+	public void Stop(){
+		CancelInvoke();
+	}
 
     private void spawn()
     {
@@ -30,7 +36,8 @@ public class AteroidSpawner : MonoBehaviour
             Quaternion rotation = Quaternion.AngleAxis(variance, Vector3.forward);
             
 
-           AsteroidScript asteroid = Instantiate(this.asteroidPrefab, spawnPoint, rotation);
+	        AsteroidScript asteroid = Instantiate(this.asteroidPrefab, spawnPoint, rotation);
+	        asteroid.transform.SetParent(parent);
            asteroid.size = Random.Range(asteroid.minSize, asteroid.maxSize);
            asteroid.setTrajectory(rotation * -spawnDirection);
         }
@@ -43,6 +50,7 @@ public class AteroidSpawner : MonoBehaviour
             Vector3 spawnPoint = new Vector3(Random.Range(-50, 50),Random.Range(-20, 20),0);
             
             Collider[] colliders = Physics.OverlapSphere(spawnPoint, 0.1f, layerMask);
+
 
             if (colliders.Length == 0)
             {

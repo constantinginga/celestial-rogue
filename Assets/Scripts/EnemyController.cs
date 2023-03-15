@@ -1,60 +1,110 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
-using UnityEngine; 
+using UnityEngine;
+using UnityEditor;
 using UnityEngine.UI;
 using Pathfinding;
 
 public class EnemyController : MonoBehaviour
 {
+    public enum SpaceshipsEnum
+    {
+        Enemy_Red,
+        Enemy_Blue,
+        Enemy_Pink,
+        Enemy_Green,
+        Enemy_Grey,
+        Enemy_Purple
+    };
+
+    public SpaceshipsEnum ChosenSpaceship;
 	public int Health = 10;
-	public float FiringDistance = 10F;
-	public float fireRate = 0.75F;
-	public AIDestinationSetter target;
-	public Slider Heathbar;
-	public ShootingController shootingController;
-	bool canFire = true;
+	public int Reward = 100;
+    public AIDestinationSetter target;
+    public Slider Heathbar;
+    public ShootingController shootingController;
+    public ParticleSystem DeathExplosion;
+    public GameObject ShipWreck;
+    public Texture2D texture;
+	public bool isInvincible;
+	PlayerController Player;
 
-	void Awake(){
-		target.target = GameObject.FindFirstObjectByType<PlayerController>().transform;
-	}
-
-    void Update()
+    void Awake()
     {
-	    if(target.target && isInFiringDistance() && canFire){
-	    	StartCoroutine(shootingController.StartShooting());
-	    	startFiringCooldDown();
-		}
-	    else{
-	    	shootingController.StopShooting();
-	    }
-    }
-
-    public void TakeDamage(int damage)
-    {
-	    Health -= damage;
-	    UpdateHealthbar();
-	    if (Health <= 0)
-        {
-            Destroy(transform.parent.gameObject);
-        }
+	    isInvincible = false;
+	    Player = GameObject.FindFirstObjectByType<PlayerController>();
+	    target.target = Player.transform;
     }
     
-	bool isInFiringDistance(){
-		return Vector2.Distance(transform.position, target.target.position) <= FiringDistance;
+	public void CreateEnemySpaceShip(SpaceshipsEnum chosenSpaceship){
+		switch (chosenSpaceship)
+		{
+		case SpaceshipsEnum.Enemy_Red:
+			//gameObject.AddComponent<Seeker>();
+			break;
+		case SpaceshipsEnum.Enemy_Blue:
+			gameObject.AddComponent<EnemyBlue>();
+			break;
+		case SpaceshipsEnum.Enemy_Pink:
+
+			break;
+		case SpaceshipsEnum.Enemy_Green:
+
+			break;
+		case SpaceshipsEnum.Enemy_Grey:
+
+			break;
+		case SpaceshipsEnum.Enemy_Purple:
+			gameObject.AddComponent<PurpleEnemyController>();
+			break;
+		}
+		ChosenSpaceship = chosenSpaceship;
+		Object[] data = AssetDatabase.LoadAllAssetsAtPath(AssetDatabase.GetAssetPath(texture));
+		if (data != null)
+		{
+			foreach (Object obj in data)
+			{
+				if (obj.GetType() == typeof(Sprite))
+				{
+					Sprite sprite = obj as Sprite;
+					if (sprite.name.Equals(chosenSpaceship.ToString()))
+					{
+						GetComponent<SpriteRenderer>().sprite = sprite;
+						break;
+					}
+				}
+			}
+		}
 	}
-	
-	void UpdateHealthbar(){
-		Heathbar.value = Health;
-	}
-	
-	public void startFiringCooldDown()
+
+    void Update() { }
+
+    public void TakeDamage(int damage)
 	{
-		canFire = false;
-		Invoke("clearFiringCooldown", fireRate);
-	}
-	
-	public void clearFiringCooldown(){
-		canFire = true;
-	}
+        if (!isInvincible)
+        {
+            if (Health <= 0)
+            {
+                Instantiate(DeathExplosion, transform.position, Quaternion.identity);
+                GameObject shipwreck = Instantiate(
+                    ShipWreck,
+                    transform.position,
+                    Quaternion.identity
+                );
+                shipwreck
+                    .GetComponent<ShipWreckController>()
+	                .CreateWreck(ChosenSpaceship.ToString());
+	            Player.Money += Reward;  
+                Destroy(transform.parent.gameObject);
+            }
+            Health -= damage;
+            UpdateHealthbar();
+        }
+    }
+
+    void UpdateHealthbar()
+    {
+        Heathbar.value = Health;
+    }
 }
