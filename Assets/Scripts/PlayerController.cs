@@ -2,10 +2,12 @@
 using UnityEditor;
 using UnityEngine.UI;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement; 
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
-      public enum SpaceshipsEnum
+    public enum SpaceshipsEnum
 	{
 	 Player_Red,
      Player_Blue,
@@ -18,12 +20,13 @@ public class PlayerController : MonoBehaviour
     public SpaceshipsEnum ChosenSpaceship;
     public float speed = 1;
     public int maxHealth = 100;
-    public int currentHealth;
+	public int currentHealth;
+	public int Money = 0;
     public Slider healthBar;
     public ParticleSystem EngineEmission;
     public ParticleSystem DeathExplosion;
     public GameObject ShipWreck;
-    public Texture2D texture;
+	public Texture2D texture;
     public Light2D EngineLight;
     private Rigidbody2D rb;
     private InputController input;
@@ -62,7 +65,7 @@ public class PlayerController : MonoBehaviour
     }
 
     void Update(){
-        if(input.movementPos.x > 0 || input.movementPos.y > 0){
+	    if(input.movementPos.x != 0 || input.movementPos.y != 0){
             EngineEmission.Play();
             EngineLight.enabled = true;
         }
@@ -98,7 +101,9 @@ public class PlayerController : MonoBehaviour
 	    // Handle death
         Instantiate(DeathExplosion, transform.position, Quaternion.identity);
         GameObject shipwreck = Instantiate(ShipWreck, transform.position, Quaternion.identity);
-        shipwreck.GetComponent<ShipWreckController>().CreateWreck(ChosenSpaceship.ToString());
+	    shipwreck.GetComponent<ShipWreckController>().CreateWreck(ChosenSpaceship.ToString());
+	    //Some transition?
+	    SceneManager.LoadScene(2);
 	    Destroy(gameObject);
     }
 

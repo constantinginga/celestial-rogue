@@ -637,14 +637,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 424ab0afb36ff4f1987f4692fc7e3b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChosenSpaceship: 2
+  ChosenSpaceship: 1
   Health: 10
+  Reward: 100
   target: {fileID: 2879563472127542754}
   Heathbar: {fileID: 3860266941321674677}
   shootingController: {fileID: 2710497755550858}
   DeathExplosion: {fileID: 265691840015838397, guid: d178cf55a37037c42bd0bd43af6f0e4e, type: 3}
   ShipWreck: {fileID: 5221794765335220818, guid: 212fb887744ebd34a9cc83b66e14b001, type: 3}
   texture: {fileID: 2800000, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
+  isInvincible: 0
 --- !u!1 &7857347900458089687
 GameObject:
   m_ObjectHideFlags: 0
