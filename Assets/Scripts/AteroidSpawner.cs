@@ -13,7 +13,6 @@ public class AteroidSpawner : MonoBehaviour
 
     [SerializeField] private float trajectoryVariance = 15.0f;
     [SerializeField] private LayerMask layerMask;
-	[SerializeField] private float trajectoryVariance = 15.0f;
 	[SerializeField] private Transform parent;
 
 	public void Begin(){

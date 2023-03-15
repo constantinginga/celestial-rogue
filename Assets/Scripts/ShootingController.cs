@@ -12,7 +12,7 @@ public class ShootingController : MonoBehaviour
     public float bulletSpeed = 10f;
     public int damageAmount = 1;
 
-	/*public float shootDelay = 0.3f;
+	public float shootDelay = 0.3f;
 	public LayerMask opponentLayer;
 	private int shootAmount = 0;
 	public int overHeatThreshold = 10;
@@ -25,7 +25,7 @@ public class ShootingController : MonoBehaviour
     private Coroutine shootingCoroutine;
     private PlayerController playerController;
 
-    private void Awake()
+	/*private void Awake()
 	{
 
 		if (playerController = gameObject.GetComponentInParent<PlayerController>())
@@ -42,15 +42,8 @@ public class ShootingController : MonoBehaviour
 		}
 		else{
 			shootingPoint = transform;
-		}*/
-
-    public float shootDelay = 0.3f;
-    public LayerMask opponentLayer;
-    private InputActionAsset asset;
-    public InputAction shootAction;
-    private InputActionMap weapon;
-    private GameObject bullet;
-    private Coroutine shootingCoroutine;
+	}*/
+		
     private float lastShotTime = -Mathf.Infinity;
 
     private void Awake()

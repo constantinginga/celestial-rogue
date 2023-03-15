@@ -9,7 +9,7 @@ public class Boundary : MonoBehaviour
 	[SerializeField] private bool Horizontal;
 	Transform player;
     
-	void Awake(){
+	void Start(){
 		player = GameObject.FindFirstObjectByType<PlayerController>().transform;
 	}
     

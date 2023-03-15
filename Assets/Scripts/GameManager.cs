@@ -61,11 +61,11 @@ public class GameManager : MonoBehaviour
 		switch (Level)
 		{
 		case 1:
-			LevelLength = 120;
+			LevelLength = 12;
 			SpawnEnemies(10);
 			break;
 		case 2:
-			LevelLength = 180;
+			LevelLength = 18;
 			SpawnEnemies(20);
 			break;
 		case 3:
@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
 	void SpawnEnemies(int amount){
 		for (int i = 0; i < amount; i++) {
 			GameObject enemy = Instantiate(Enemy, GetRandomPositionOnMap(), Quaternion.identity);
-			enemy.GetComponentInChildren<EnemyController>().CreateEnemySpaceShip((EnemyController.SpaceshipsEnum)Random.RandomRange(0,5));
+			enemy.GetComponentInChildren<EnemyController>().CreateEnemySpaceShip((EnemyController.SpaceshipsEnum)Random.RandomRange(0,6));
 			enemy.transform.SetParent(EnemiesParent);
 		}
 	}
