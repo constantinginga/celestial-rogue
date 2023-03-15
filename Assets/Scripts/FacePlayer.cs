@@ -8,11 +8,18 @@ public class FacePlayer : MonoBehaviour
     public Vector2 facingDirection;
     public Rigidbody2D RigidBody;
     public AIPath aIPath;
+    public bool lockedTarget;
+
+    void Awake(){
+        lockedTarget = false;
+    }
 
     // Update is called once per frame
     void Update()
     {
-        FaceVelocity();
+        if(!lockedTarget){
+            FaceVelocity();
+        }
     }
 
     void FaceVelocity()
