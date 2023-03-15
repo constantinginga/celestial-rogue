@@ -8,8 +8,11 @@ public class AteroidSpawner : MonoBehaviour
     [SerializeField] private AsteroidScript asteroidPrefab;
     [SerializeField] private float spawnRate = 2.0f;
     [SerializeField] private int spawnAmountMoving = 1;
-    [SerializeField] private int spawnAmountStationary = 10;
+    [SerializeField] private int spawnAmountStationary = 5;
     [SerializeField] private float spawnDistance = 50.0f;
+
+    [SerializeField] private float trajectoryVariance = 15.0f;
+    [SerializeField] private LayerMask layerMask;
 	[SerializeField] private float trajectoryVariance = 15.0f;
 	[SerializeField] private Transform parent;
 
@@ -45,10 +48,15 @@ public class AteroidSpawner : MonoBehaviour
         for (int i = 0; i < spawnAmountStationary; i++)
         {
             Vector3 spawnPoint = new Vector3(Random.Range(-50, 50),Random.Range(-20, 20),0);
+            
+            Collider[] colliders = Physics.OverlapSphere(spawnPoint, 0.1f, layerMask);
 
-	        AsteroidScript asteroid = Instantiate(this.asteroidPrefab, spawnPoint, this.transform.rotation);
-	        asteroid.transform.SetParent(parent);
-            asteroid.size = asteroid.maxSize;
+
+            if (colliders.Length == 0)
+            {
+                AsteroidScript asteroid = Instantiate(this.asteroidPrefab, spawnPoint, this.transform.rotation);
+                asteroid.size = asteroid.maxSize + 1f;
+            }
         }
     }
 

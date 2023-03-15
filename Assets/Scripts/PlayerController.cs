@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using UnityEngine.UI;
+using TMPro;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement; 
 using TMPro;
@@ -23,6 +24,8 @@ public class PlayerController : MonoBehaviour
 	public int currentHealth;
 	public int Money = 0;
     public Slider healthBar;
+    public Slider overHeat;
+    public TextMeshProUGUI credits;
     public ParticleSystem EngineEmission;
     public ParticleSystem DeathExplosion;
     public GameObject ShipWreck;
@@ -57,6 +60,7 @@ public class PlayerController : MonoBehaviour
         input = GetComponent<InputController>();
         currentHealth = maxHealth;
         UpdateHealthBar();
+        overHeat.maxValue = 10;
     }
 
     void FixedUpdate()
@@ -87,9 +91,17 @@ public class PlayerController : MonoBehaviour
         UpdateHealthBar();
     }
 
+
+    private void updateOverheat(int value)
+    {
+        overHeat.value = value;
+    }
+    
+
     private void Slowdown(int effectAmount){
         speed = effectAmount;
     }
+
 
     private void UpdateHealthBar()
     {
