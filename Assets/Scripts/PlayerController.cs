@@ -3,49 +3,53 @@ using UnityEditor;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Rendering.Universal;
-using UnityEngine.SceneManagement; 
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
     public enum SpaceshipsEnum
-	{
-	 Player_Red,
-     Player_Blue,
-     Player_Green,
-     Player_Grey,
-     Player_White,
-     Player_Yellow,
-     Player_Pink,
-	};
+    {
+        Player_Red,
+        Player_Blue,
+        Player_Green,
+        Player_Grey,
+        Player_White,
+        Player_Yellow,
+        Player_Pink,
+    };
+
     public SpaceshipsEnum ChosenSpaceship;
     public float speed = 1;
     public int maxHealth = 100;
-	public int currentHealth;
-	public int Money = 0;
+    public int currentHealth;
+    public int Money = 0;
     public Slider healthBar;
     public Slider overHeat;
     public TextMeshProUGUI credits;
     public ParticleSystem EngineEmission;
     public ParticleSystem DeathExplosion;
     public GameObject ShipWreck;
-	public Texture2D texture;
+    public Texture2D texture;
     public Light2D EngineLight;
     private Rigidbody2D rb;
     private InputController input;
     public delegate void TakeDamageDelegate(int damageAmount);
     public event TakeDamageDelegate TakeDamageEvent;
+    public GameObject GameOverMenu;
 
-    void Awake(){
+    void Awake()
+    {
         Object[] data = AssetDatabase.LoadAllAssetsAtPath(AssetDatabase.GetAssetPath(texture));
-        if(data != null)
+        if (data != null)
         {
             foreach (Object obj in data)
             {
                 if (obj.GetType() == typeof(Sprite))
                 {
                     Sprite sprite = obj as Sprite;
-                    if(sprite.name.Equals(ChosenSpaceship.ToString())){
+                    if (sprite.name.Equals(ChosenSpaceship.ToString()))
+                    {
                         GetComponent<SpriteRenderer>().sprite = sprite;
                         break;
                     }
@@ -68,16 +72,18 @@ public class PlayerController : MonoBehaviour
         rb.AddRelativeForce(new Vector2(input.movementPos.x, input.movementPos.y) * speed);
     }
 
-    void Update(){
-	    if(input.movementPos.x != 0 || input.movementPos.y != 0){
+    void Update()
+    {
+        if (input.movementPos.x != 0 || input.movementPos.y != 0)
+        {
             EngineEmission.Play();
             EngineLight.enabled = true;
         }
-        else{
+        else
+        {
             EngineEmission.Stop();
             EngineLight.enabled = false;
         }
-
     }
 
     private void TakeDamage(int damageAmount)
@@ -91,32 +97,39 @@ public class PlayerController : MonoBehaviour
         UpdateHealthBar();
     }
 
-
     private void updateOverheat(int value)
     {
         overHeat.value = value;
     }
-    
 
-    private void Slowdown(int effectAmount){
+    private void Slowdown(int effectAmount)
+    {
         speed = effectAmount;
     }
-
 
     private void UpdateHealthBar()
     {
         healthBar.value = currentHealth;
     }
 
+    // Handle death
     private void Die()
     {
-	    // Handle death
         Instantiate(DeathExplosion, transform.position, Quaternion.identity);
         GameObject shipwreck = Instantiate(ShipWreck, transform.position, Quaternion.identity);
-	    shipwreck.GetComponent<ShipWreckController>().CreateWreck(ChosenSpaceship.ToString());
-	    //Some transition?
-	    SceneManager.LoadScene(2);
-	    Destroy(gameObject);
+        shipwreck.GetComponent<ShipWreckController>().CreateWreck(ChosenSpaceship.ToString());
+        //Some transition?
+        //SceneManager.LoadScene(2);
+        Destroy(gameObject);
+        //GameOverMenu.GetComponentInChildren<Button>().onClick.AddListener(input.backToMainMenu);
+        ShowGameOverMenu();
+    }
+
+    public void ShowGameOverMenu()
+    {
+        Time.timeScale = 0f;
+        input.asset.Disable();
+        GameOverMenu.SetActive(true);
     }
 
     private void OnEnable()
