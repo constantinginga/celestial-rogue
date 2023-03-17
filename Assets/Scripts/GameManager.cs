@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     Timer timer;
     AteroidSpawner asteroidSpawner;
     bool stopped;
+    private GameOverController gameOverMenu;
 
     void Awake()
     {
@@ -63,7 +64,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                PlayerController.ShowGameOverMenu();
+                PlayerController.GameOverController.ShowGameOverMenu();
                 // reset the scene somehow?
             }
         }
