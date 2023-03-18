@@ -14,7 +14,7 @@ public class ShootingController : MonoBehaviour
 
 	public float shootDelay = 0.3f;
 	public LayerMask opponentLayer;
-	private int shootAmount = 0;
+	private float shootAmount = 0;
 	public int overHeatThreshold = 10;
 	private bool isPlayer = false;
 	private bool overHeat = false;
@@ -24,30 +24,19 @@ public class ShootingController : MonoBehaviour
     private GameObject bullet;
     private Coroutine shootingCoroutine;
     private PlayerController playerController;
-
-	/*private void Awake()
-	{
-
-		if (playerController = gameObject.GetComponentInParent<PlayerController>())
-		{
-			isPlayer = true;
-		}
-		
-		if(transform.parent.gameObject.layer == 7){
-			asset = GetComponentInParent<InputController>().asset;
-			weapon = asset.FindActionMap("Weapon");
-			shootAction = weapon.FindAction("Shoot");
-			shootAction.performed += _ => Shoot();
-			shootAction.canceled += _ => StopShooting();
-		}
-		else{
-			shootingPoint = transform;
-	}*/
+    
 		
     private float lastShotTime = -Mathf.Infinity;
 
     private void Awake()
     {
+
+	    playerController = gameObject.GetComponentInParent<PlayerController>();
+	    if (playerController != null)
+	    {
+		    isPlayer = true;
+	    }
+	    
         if (transform.parent.gameObject.layer == 7)
         {
             asset = GetComponentInParent<InputController>().asset;
@@ -126,7 +115,7 @@ public class ShootingController : MonoBehaviour
 			overHeat = false;
 		}
 		
-		int loopFor = shootAmount;
+		float loopFor = shootAmount;
 		for (int i = 0; i < loopFor; i++)
 		{
 			if (shootAmount > 0)
@@ -147,14 +136,16 @@ public class ShootingController : MonoBehaviour
 	    while (true)
         {
 
-	       /* if (shootAmount >= overHeatThreshold && isPlayer)
+	        if (shootAmount >= overHeatThreshold && isPlayer)
 	        {
 		        overHeat = true;
 	        }
 	        else
 	        {
 		        bullet = Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
-		        if(bullet.TryGetComponent<BulletController>(out BulletController bulletComponent)){
+		        if (bullet.TryGetComponent<BulletController>(out BulletController bulletComponent))
+		        {
+			        bulletComponent.parentLayer = transform.parent.gameObject.layer;
 			        bulletComponent.damageAmount = damageAmount;
 			        bulletComponent.opponentLayer = opponentLayer.value;
 		        }
@@ -163,23 +154,12 @@ public class ShootingController : MonoBehaviour
 		        
 		        if (isPlayer)
 		        {
-			        shootAmount += 1;
+			        shootAmount += 0.5f;
 		        }
 		        
 	        }
 	        
-	        yield return new WaitForSeconds(shootDelay);*/
-
-            bullet = Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
-            if (bullet.TryGetComponent<BulletController>(out BulletController bulletComponent))
-            {
-                bulletComponent.parentLayer = transform.parent.gameObject.layer;
-                bulletComponent.damageAmount = damageAmount;
-                bulletComponent.opponentLayer = opponentLayer.value;
-            }
-            bullet.GetComponent<Rigidbody2D>().velocity = transform.up * bulletSpeed;
-            Destroy(bullet, 3f); // Destroy the bullet after 3 seconds
-            yield return new WaitForSeconds(shootDelay);
+	        yield return new WaitForSeconds(shootDelay);
 
         }
     }
