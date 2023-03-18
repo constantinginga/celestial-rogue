@@ -5472,7 +5472,7 @@ MonoBehaviour:
   ShipWreck: {fileID: 5221794765335220818, guid: 212fb887744ebd34a9cc83b66e14b001, type: 3}
   texture: {fileID: 2800000, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
   EngineLight: {fileID: 860365738}
-  GameOverMenu: {fileID: 7941557876468430378}
+  GameOverController: {fileID: 1481331965917132359}
 --- !u!114 &5915456456923448233
 MonoBehaviour:
   m_ObjectHideFlags: 0

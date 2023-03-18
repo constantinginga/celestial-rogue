@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
         Shop = Player.GetComponentInChildren<ShopHandler>(true);
         timer = Player.GetComponentInChildren<Timer>();
         asteroidSpawner = GameObject.FindFirstObjectByType<AteroidSpawner>();
-        Level = 5;
+        Level = 1;
         stopped = false;
         StartLevel();
     }
@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
                 SpawnEnemies(40);
                 break;
             case 5:
-                LevelLength = 3;
+                LevelLength = Mathf.Infinity;
                 PlayerController.transform.position = new Vector2(30, -10);
                 SpawnBoss();
                 break;

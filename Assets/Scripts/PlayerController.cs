@@ -36,7 +36,6 @@ public class PlayerController : MonoBehaviour
     private InputController input;
     public delegate void TakeDamageDelegate(int damageAmount);
     public event TakeDamageDelegate TakeDamageEvent;
-    public GameObject GameOverMenu;
     public GameOverController GameOverController;
 
     void Awake()
@@ -64,7 +63,6 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         input = GetComponent<InputController>();
         currentHealth = maxHealth;
-        GameOverController = GameOverMenu.GetComponent<GameOverController>();
         UpdateHealthBar();
         overHeat.maxValue = 10;
     }
