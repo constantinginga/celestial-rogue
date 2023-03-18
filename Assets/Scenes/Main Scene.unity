@@ -1198,6 +1198,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 1492748418577224083, guid: 7678f2e552fca4138aa857425fe6a446, type: 3}
+  PlayerSprites:
+  - {fileID: -65764179, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
+  - {fileID: -107391127, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
+  - {fileID: -748429393, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
+  - {fileID: -1957872993, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
+  - {fileID: 1451701461, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
+  - {fileID: -2131879205, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
+  - {fileID: -1765770218, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
   Enemy: {fileID: 2710497129314524, guid: 4f5ba3f0ea92ad14f90980c55b57dfea, type: 3}
   Boss: {fileID: 7145425536633191077, guid: 946836e5cf62c804ea0f68c987c22f46, type: 3}
   CollisionLayer:
@@ -1205,6 +1213,11 @@ MonoBehaviour:
     m_Bits: 72
   LevelLength: 120
   Level: 1
+  LevelSprites:
+  - {fileID: 21300000, guid: bc4bb26e781949040a96e57e52948d50, type: 3}
+  - {fileID: 21300000, guid: f032e658db794b94c953104cb1004613, type: 3}
+  - {fileID: 21300000, guid: 86285b21b2031bc45ac0d251f13d0b6e, type: 3}
+  Background: {fileID: 1686446233}
   AsteroidParent: {fileID: 1384483516}
   EnemiesParent: {fileID: 1029040512}
 --- !u!1001 &614411561

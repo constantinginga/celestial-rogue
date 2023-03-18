@@ -1,14 +1,18 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
     [Header("Player related components")]
     public GameObject Player;
     PlayerController PlayerController;
+    public Sprite[] PlayerSprites;
+   
 
     [Header("Enemy related components")]
     public GameObject Enemy;
@@ -18,6 +22,8 @@ public class GameManager : MonoBehaviour
     [Header("Level related attributes")]
     public float LevelLength;
     public int Level;
+    public Sprite[] LevelSprites;
+    public GameObject Background;
 
     [Header("Level related components")]
     public Transform AsteroidParent;
@@ -29,10 +35,35 @@ public class GameManager : MonoBehaviour
     AteroidSpawner asteroidSpawner;
     bool stopped;
     private GameOverController gameOverMenu;
+    private SpriteRenderer renderer;
 
     void Awake()
     {
+        
+        // foreach (Sprite sprite in PlayerSprites)
+        // {
+        //
+        //     if (sprite.name.Equals(PlayerPrefs.GetString("ChosenShip")))
+        //     {
+        //         SpriteRenderer x = Player.GetComponentInChildren<SpriteRenderer>();
+        //         if (x == null)
+        //         {
+        //             Debug.LogWarning("NULLLLLLLLLLLL");
+        //             Debug.LogWarning(x.enabled);
+        //         }
+        //         x.sprite = sprite;
+        //     }
+        // }
+        renderer = Player.GetComponentInChildren<SpriteRenderer>();
+       
+        
+        
+        
         Instantiate(Player, new Vector2(0, 0), Quaternion.identity);
+        
+        renderer = Player.GetComponentInChildren<SpriteRenderer>();
+        renderer.sprite = PlayerSprites[0];
+        
         Player = GameObject.FindGameObjectWithTag("Player");
         PlayerController = Player.GetComponentInChildren<PlayerController>();
         Shop = Player.GetComponentInChildren<ShopHandler>(true);
@@ -73,6 +104,8 @@ public class GameManager : MonoBehaviour
     public void StartLevel()
     {
         asteroidSpawner.Begin();
+        Background.GetComponent<SpriteRenderer>().sprite = LevelSprites[Random.Range(0, 2)];
+        
         switch (Level)
         {
             case 1:

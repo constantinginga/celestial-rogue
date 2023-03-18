@@ -99,7 +99,6 @@ public class PlayerController : MonoBehaviour
 
     private void updateOverheat(int value)
     {
-        Debug.LogWarning("UPDATYING");
         overHeat.value = value;
     }
 
