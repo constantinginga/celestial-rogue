@@ -35,35 +35,11 @@ public class GameManager : MonoBehaviour
     AteroidSpawner asteroidSpawner;
     bool stopped;
     private GameOverController gameOverMenu;
-    private SpriteRenderer renderer;
 
     void Awake()
     {
-        
-        // foreach (Sprite sprite in PlayerSprites)
-        // {
-        //
-        //     if (sprite.name.Equals(PlayerPrefs.GetString("ChosenShip")))
-        //     {
-        //         SpriteRenderer x = Player.GetComponentInChildren<SpriteRenderer>();
-        //         if (x == null)
-        //         {
-        //             Debug.LogWarning("NULLLLLLLLLLLL");
-        //             Debug.LogWarning(x.enabled);
-        //         }
-        //         x.sprite = sprite;
-        //     }
-        // }
-        renderer = Player.GetComponentInChildren<SpriteRenderer>();
-       
-        
-        
-        
+
         Instantiate(Player, new Vector2(0, 0), Quaternion.identity);
-        
-        renderer = Player.GetComponentInChildren<SpriteRenderer>();
-        renderer.sprite = PlayerSprites[0];
-        
         Player = GameObject.FindGameObjectWithTag("Player");
         PlayerController = Player.GetComponentInChildren<PlayerController>();
         Shop = Player.GetComponentInChildren<ShopHandler>(true);
@@ -71,6 +47,15 @@ public class GameManager : MonoBehaviour
         asteroidSpawner = GameObject.FindFirstObjectByType<AteroidSpawner>();
         Level = 1;
         stopped = false;
+ 
+        foreach (Sprite sprite in PlayerSprites)
+        {
+            if (sprite.name.Equals(PlayerPrefs.GetString("ChosenShip")))
+            {
+                Player.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
+            }
+        }
+        
         StartLevel();
     }
 
