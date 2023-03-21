@@ -176,8 +176,11 @@ public class ShootingController : MonoBehaviour
 			bulletComponent.damageAmount = damageAmount;
 			bulletComponent.opponentLayer = opponentLayer.value;
 		}
+		
+		// Calculate the direction of the bullet based on the rotation
+		Vector2 direction = rotation * Vector2.up;
 
-		bullet.GetComponent<Rigidbody2D>().velocity = transform.up * bulletSpeed;
+		bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
 		Destroy(bullet, 3f); // Destroy the bullet after 3 seconds
 	}
 

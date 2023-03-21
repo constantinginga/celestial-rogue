@@ -21,6 +21,7 @@ public class EnemyGreen : MonoBehaviour
         enemyController = GetComponent<EnemyController>();
         shootingController = enemyController.shootingController;
         shootingController.isShotGun = true;
+        shootingController.damageAmount = 2;
         target = enemyController.target.target;
     }
     
