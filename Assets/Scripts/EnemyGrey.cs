@@ -8,22 +8,19 @@ public class EnemyGrey : MonoBehaviour
     public int Health = 15;
     public float FiringDistance = 50F;
     public float FiringCooldown = 15F;
-    public float BeamScaleIncrement = 0.05F;
-     public float BeamCooldown = 10F;
+    public float BeamScaleIncrement = 0.5F;
+    public float BeamCooldown = 10F;
     bool canFire;
-    bool canStartBeamCooldown;
     EnemyController enemy;
     AIPath pathFinding;
     FacePlayer facePlayer;
     Transform lockedTargetPosition;
-    GameObject Beam;
 
     void Awake(){
         enemy = GetComponent<EnemyController>();
         pathFinding = GetComponent<AIPath>();
         facePlayer = GetComponent<FacePlayer>();
         pathFinding.endReachedDistance = FiringDistance;
-        canStartBeamCooldown = true;
         canFire = true;
     }
 
@@ -60,16 +57,6 @@ public class EnemyGrey : MonoBehaviour
 		canFire = true;
 	}
 
-    void StartBeamCooldown(){
-        canStartBeamCooldown = false;
-        Invoke("ClearBeamCooldown", BeamCooldown);
-    }
-
-    void ClearBeamCooldown(){
-        canStartBeamCooldown = true;
-        /* Destroy(Beam); */
-    }
-
     void StartFiring(){
         //Lock tranform position
         print("Fire");
@@ -83,20 +70,17 @@ public class EnemyGrey : MonoBehaviour
 
     void CreateBeam(){
         GameObject beam = Instantiate(Resources.Load("Prefabs/Beam", typeof(GameObject)) as GameObject, transform.position, Quaternion.identity);
-        Beam = beam;
         beam.transform.SetParent(transform);
-        beam.transform.localRotation = Quaternion.Euler(0,0,0);
-        beam.transform.GetChild(0).localScale = new Vector3(0,1,1);
-        InvokeRepeating("IncrementBeam", 0, 0.1F);
+        beam.transform.localRotation = Quaternion.Euler(0,0,-90);
+        beam.transform.GetChild(0).localScale = new Vector3(0,0.1F,0.1F);
+        StartCoroutine(IncrementBeam(beam));
     }
 
-    void IncrementBeam(){
-        Beam.transform.GetChild(0).localScale = new Vector3(Beam.transform.localScale.x + BeamScaleIncrement,1,1);
-            if(Beam.transform.GetChild(0).localScale.x >= 1){
-                Beam.transform.GetChild(0).localScale = new Vector3(1,1,1);
-                if(canStartBeamCooldown){
-                    StartBeamCooldown();    
-                }
-            }
+    IEnumerator IncrementBeam(GameObject beam){
+        while(beam.transform.GetChild(0).localScale.x <= 50){
+            beam.transform.GetChild(0).localScale = new Vector3(beam.transform.GetChild(0).localScale.x + BeamScaleIncrement,0.1F,0.1F);
+            Destroy(beam, 5F);
+            yield return new WaitForSeconds(0.005F);
+        }
     }
 }
