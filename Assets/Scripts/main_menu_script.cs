@@ -32,7 +32,7 @@ public class main_menu_script : MonoBehaviour
                         PlayerPrefs.SetString("ChosenShip", PlayerController.SpaceshipsEnum.Player_Pink.ToString() );
                         break;
                     case "Ship4":
-                        PlayerPrefs.SetString("ChosenShip", PlayerController.SpaceshipsEnum.Player_Blue.ToString() );
+                        PlayerPrefs.SetString("ChosenShip", PlayerController.SpaceshipsEnum.Player_Blu.ToString() );
                         break;
                     case "Ship5":
                         PlayerPrefs.SetString("ChosenShip", PlayerController.SpaceshipsEnum.Player_Grey.ToString() );
@@ -76,18 +76,32 @@ public class main_menu_script : MonoBehaviour
     
     public void OnLeftArrowClick() {
         int currentIndex = GetCurrentSpaceShipIndex();
+
+        if (currentIndex == 0)
+        {
+            currentIndex = availableSpaceShips.Count() - 1;
+        }
+        else
+        {
+            currentIndex -= 1;
+        }
         
-        int previousIndex = (currentIndex - 1 + spaceShips.Length) % spaceShips.Length;
-        
-        SwitchSpaceShip(previousIndex);
+        SwitchSpaceShip(currentIndex);
     }
 
     public void OnRightArrowClick() {
         int currentIndex = GetCurrentSpaceShipIndex();
+  
+        if (currentIndex == availableSpaceShips.Count() - 1 )
+        {
+            currentIndex = 0;
+        }
+        else
+        {
+            currentIndex += 1;
+        }
         
-        int nextIndex = (currentIndex + 1) % spaceShips.Length;
-        
-        SwitchSpaceShip(nextIndex);
+        SwitchSpaceShip(currentIndex);
     }
 
     private int GetCurrentSpaceShipIndex() {
