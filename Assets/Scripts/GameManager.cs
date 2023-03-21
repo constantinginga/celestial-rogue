@@ -85,19 +85,19 @@ public class GameManager : MonoBehaviour
         switch (Level)
         {
             case 1:
-	            LevelLength = 3;
+	            LevelLength = 60;
                 SpawnEnemies(10);
                 break;
             case 2:
-	            LevelLength = 3;
+	            LevelLength = 120;
                 SpawnEnemies(20);
                 break;
             case 3:
-	            LevelLength = 3;
+	            LevelLength = 180;
                 SpawnEnemies(30);
                 break;
             case 4:
-	            LevelLength = 3;
+	            LevelLength = 240;
                 SpawnEnemies(40);
                 break;
             case 5:
