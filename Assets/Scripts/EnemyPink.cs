@@ -35,10 +35,7 @@ public class EnemyPink : MonoBehaviour
     }
     void CreateAOE()
     {
-        GameObject AOE = Resources.Load("Prefabs/AOE") as GameObject;
-        AOE.GetComponent<SpriteRenderer>().color = Color.red;
-        AOE.GetComponent<AOEController>().Damage = 30;
-        AOE.GetComponent<AOEController>().SpeedOfGrowth = 5f;
+        GameObject AOE = Resources.Load("Prefabs/AOEBomb Variant") as GameObject;
         Instantiate(AOE, transform.position, Quaternion.identity);
     }
 }
