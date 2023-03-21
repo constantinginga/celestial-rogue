@@ -32,7 +32,7 @@ public class main_menu_script : MonoBehaviour
                         PlayerPrefs.SetString("ChosenShip", PlayerController.SpaceshipsEnum.Player_Pink.ToString() );
                         break;
                     case "Ship4":
-                        PlayerPrefs.SetString("ChosenShip", PlayerController.SpaceshipsEnum.Player_Blu.ToString() );
+                        PlayerPrefs.SetString("ChosenShip", PlayerController.SpaceshipsEnum.Player_Blue.ToString() );
                         break;
                     case "Ship5":
                         PlayerPrefs.SetString("ChosenShip", PlayerController.SpaceshipsEnum.Player_Grey.ToString() );

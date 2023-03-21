@@ -11,8 +11,7 @@ public class GameManager : MonoBehaviour
     [Header("Player related components")]
     public GameObject Player;
     PlayerController PlayerController;
-    public Sprite[] PlayerSprites;
-   
+
 
     [Header("Enemy related components")]
     public GameObject Enemy;
@@ -48,14 +47,7 @@ public class GameManager : MonoBehaviour
         Level = 1;
         stopped = false;
  
-        foreach (Sprite sprite in PlayerSprites)
-        {
-            if (sprite.name.Equals(PlayerPrefs.GetString("ChosenShip")))
-            {
-                Player.GetComponentInChildren<SpriteRenderer>().sprite = sprite;
-            }
-        }
-        
+
         StartLevel();
     }
 

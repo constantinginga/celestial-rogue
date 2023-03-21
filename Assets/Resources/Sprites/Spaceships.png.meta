@@ -210,7 +210,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Blu
+      name: Player_Blue
       rect:
         serializedVersion: 2
         x: 99
@@ -535,13 +535,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Enemy_Pink: -911893527
+      Player_Red: 1451701461
       Enemy_Blue: -1199797998
+      Player_Blue: -65764179
       Flamethrower: -1196063804
       Sniper_rifle: 1655260819
       Enemy_Red: 1101413602
       Machinegun: 184108401
-      Player_Blu: -65764179
       Lasergun: 773204380
       Space_buoy: -1175822444
       Player_White: -2131879205
@@ -554,7 +554,7 @@ TextureImporter:
       Shotgun: 604343247
       Player_Pink: -1957872993
       Enemy_Grey: -1303317163
-      Player_Red: 1451701461
+      Enemy_Pink: -911893527
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
