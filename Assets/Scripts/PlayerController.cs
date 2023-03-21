@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEditor;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Object = UnityEngine.Object;
 
 public class PlayerController : MonoBehaviour
 {
@@ -40,6 +42,8 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+        Enum.TryParse<SpaceshipsEnum>(PlayerPrefs.GetString("ChosenShip"), out ChosenSpaceship);
+        
         Object[] data = AssetDatabase.LoadAllAssetsAtPath(AssetDatabase.GetAssetPath(texture));
         if (data != null)
         {
