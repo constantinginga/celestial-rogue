@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Pathfinding;
 using UnityEngine;
 
 public class EnemyPink : MonoBehaviour
 {
     public int Health = 10;
+    public float speed = 5;
     public EnemyController enemyController;
     private Transform target;
     public float FiringDistance = 3F;
@@ -15,6 +17,7 @@ public class EnemyPink : MonoBehaviour
         enemyController.Health = Health;
         enemyController.Heathbar.maxValue = Health;
         enemyController.Heathbar.value = Health;
+        enemyController.GetComponent<AIPath>().maxSpeed = speed;
         target = enemyController.target.target;
     }
     
