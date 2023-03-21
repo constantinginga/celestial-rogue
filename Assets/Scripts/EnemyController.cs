@@ -51,7 +51,7 @@ public class EnemyController : MonoBehaviour
 
 			break;
 		case SpaceshipsEnum.Enemy_Green:
-
+			gameObject.AddComponent<EnemyGreen>();
 			break;
 		case SpaceshipsEnum.Enemy_Grey:
 
