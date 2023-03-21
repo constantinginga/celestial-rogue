@@ -15,15 +15,8 @@ public class EnemyController : MonoBehaviour
         Enemy_Pink,
         Enemy_Green,
         Enemy_Grey,
-        Enemy_Purple,
+        Enemy_Purple
         
-        Player_Red,
-        Player_White,
-        Player_Pink,
-        Player_Grey,
-        Player_Yellow,
-        Player_Blu,
-        Player_Green
     };
 
     public SpaceshipsEnum ChosenSpaceship;
