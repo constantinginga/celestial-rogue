@@ -53,10 +53,13 @@ public class GameManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        converter += Time.deltaTime;
-        currentTime = (int)converter;
-        if (currentTime == LevelLength && PlayerController.currentHealth > 0 && !stopped)
+	{
+		if(!stopped){
+			converter += Time.deltaTime;
+			currentTime = (int)converter;
+			print(currentTime + " " + stopped);
+		}
+	    if (currentTime >= LevelLength && PlayerController.currentHealth > 0 && !stopped)
         {
             if (Level != 5)
             {
@@ -66,39 +69,45 @@ public class GameManager : MonoBehaviour
                 //Despawn everything in the background meantime
                 asteroidSpawner.Stop();
                 DespawnEverything();
-                currentTime = 0;
-                timer.Reset();
+	            ResetTimer();
                 Level++;
             }
-            else
-            {
-                PlayerController.GameOverController.ShowGameOverMenu();
-                // reset the scene somehow?
-            }
         }
-    }
+	}
+    
+	void ResetTimer(){
+		converter = 0;
+		currentTime = 0;
+		timer.Reset();
+	}
 
     public void StartLevel()
     {
+	    stopped = false;
+	    if (Level != 5)
+	    {
+		    timer.UI.enabled = true;
+		    timer.stopped = false;
+	    }
         asteroidSpawner.Begin();
         Background.GetComponent<SpriteRenderer>().sprite = LevelSprites[Random.Range(0, 2)];
         
         switch (Level)
         {
             case 1:
-                LevelLength = 120;
+	            LevelLength = 60;
                 SpawnEnemies(10);
                 break;
             case 2:
-                LevelLength = 180;
+	            LevelLength = 120;
                 SpawnEnemies(20);
                 break;
             case 3:
-                LevelLength = 240;
+	            LevelLength = 180;
                 SpawnEnemies(30);
                 break;
             case 4:
-                LevelLength = 300;
+	            LevelLength = 240;
                 SpawnEnemies(40);
                 break;
             case 5:
@@ -109,12 +118,7 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
-        CloseShop();
-        if (Level != 5)
-        {
-            timer.UI.enabled = true;
-            timer.stopped = false;
-        }
+	    CloseShop();
     }
 
     void OpenShop()
