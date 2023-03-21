@@ -17,8 +17,10 @@ public class EnemyGreen : MonoBehaviour
 
     private void Awake()
     {
-        gameObject.AddComponent<CircleCollider2D>();
         enemyController = GetComponent<EnemyController>();
+        enemyController.Health = Health;
+        enemyController.Heathbar.maxValue = Health;
+        enemyController.Heathbar.value = Health;
         shootingController = enemyController.shootingController;
         shootingController.isShotGun = true;
         shootingController.damageAmount = 2;

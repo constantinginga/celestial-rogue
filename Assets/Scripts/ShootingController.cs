@@ -145,7 +145,6 @@ public class ShootingController : MonoBehaviour
 		        if (isShotGun)
 		        {
 			        // Diagonal bullets
-			        Debug.LogWarning("Shootgunna");
 			        Quaternion leftRotation = Quaternion.Euler(shootingPoint.eulerAngles.x, shootingPoint.eulerAngles.y, shootingPoint.eulerAngles.z - 15);
 			        Quaternion rightRotation = Quaternion.Euler(shootingPoint.eulerAngles.x, shootingPoint.eulerAngles.y, shootingPoint.eulerAngles.z + 15);
 			        ShootBullet(shootingPoint, leftRotation);
