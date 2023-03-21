@@ -32,7 +32,7 @@ public class EnemyGrey : MonoBehaviour
 
     void Update()
     {
-	    if(isInFiringDistance(transform.position, enemy.target.target.position)){
+	    if(enemy.target.target && isInFiringDistance(transform.position, enemy.target.target.position)){
 	    	if(canFire){
 	    		isFiring = true;
 		    	LockTargetPosition();

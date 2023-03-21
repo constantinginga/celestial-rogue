@@ -57,7 +57,6 @@ public class GameManager : MonoBehaviour
 		if(!stopped){
 			converter += Time.deltaTime;
 			currentTime = (int)converter;
-			print(currentTime + " " + stopped);
 		}
 	    if (currentTime >= LevelLength && PlayerController.currentHealth > 0 && !stopped)
         {
