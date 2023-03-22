@@ -19,7 +19,8 @@ public class GameManager : MonoBehaviour
     public LayerMask CollisionLayer;
 
     [Header("Level related attributes")]
-    public float LevelLength;
+    public float CurrentLevelLength;
+    public float[] LevelLengths;
     public int Level;
     public Sprite[] LevelSprites;
     public GameObject Background;
@@ -28,8 +29,8 @@ public class GameManager : MonoBehaviour
     public Transform AsteroidParent;
     public Transform EnemiesParent;
     ShopHandler Shop;
-    int currentTime = 0;
-    float converter = 0.0F;
+    int currentTime;
+    float converter;
     Timer timer;
     AteroidSpawner asteroidSpawner;
     bool stopped;
@@ -37,17 +38,19 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-
         Instantiate(Player, new Vector2(0, 0), Quaternion.identity);
         Player = GameObject.FindGameObjectWithTag("Player");
         PlayerController = Player.GetComponentInChildren<PlayerController>();
         Shop = Player.GetComponentInChildren<ShopHandler>(true);
         timer = Player.GetComponentInChildren<Timer>();
         asteroidSpawner = GameObject.FindFirstObjectByType<AteroidSpawner>();
+        LevelLengths = new float[] {60.0F, 120.0F, 180.0F, 240.0F};
+        currentTime = (int)LevelLengths[0];
+        converter = LevelLengths[0];
         Level = 1;
         stopped = false;
  
-
+        timer.Start();
         StartLevel();
     }
 
@@ -55,30 +58,35 @@ public class GameManager : MonoBehaviour
     void Update()
 	{
 		if(!stopped){
-			converter += Time.deltaTime;
+			converter -= Time.deltaTime;
 			currentTime = (int)converter;
-			print(currentTime + " " + stopped);
 		}
-	    if (currentTime >= LevelLength && PlayerController.currentHealth > 0 && !stopped)
+	    if (currentTime <= 0 && PlayerController.currentHealth > 0 && !stopped)
         {
             if (Level != 5)
             {
                 //Some transition maybe?
                 stopped = true;
+                timer.stopped = true;
                 OpenShop();
                 //Despawn everything in the background meantime
                 asteroidSpawner.Stop();
                 DespawnEverything();
-	            ResetTimer();
                 Level++;
+	            ResetTimer();
             }
         }
 	}
     
 	void ResetTimer(){
-		converter = 0;
-		currentTime = 0;
-		timer.Reset();
+        if(Level != 5){
+            converter = LevelLengths[Level - 1];
+            currentTime = (int)LevelLengths[Level - 1];
+            timer.Reset();
+        }
+        else{
+            timer.UI.enabled = false;
+        }
 	}
 
     public void StartLevel()
@@ -87,7 +95,6 @@ public class GameManager : MonoBehaviour
 	    if (Level != 5)
 	    {
 		    timer.UI.enabled = true;
-		    timer.stopped = false;
 	    }
         asteroidSpawner.Begin();
         Background.GetComponent<SpriteRenderer>().sprite = LevelSprites[Random.Range(0, 2)];
@@ -95,23 +102,23 @@ public class GameManager : MonoBehaviour
         switch (Level)
         {
             case 1:
-	            LevelLength = 60;
+	            CurrentLevelLength = LevelLengths[0];
                 SpawnEnemies(10);
                 break;
             case 2:
-	            LevelLength = 120;
+	            CurrentLevelLength = LevelLengths[1];
                 SpawnEnemies(20);
                 break;
             case 3:
-	            LevelLength = 180;
+	            CurrentLevelLength = LevelLengths[2];
                 SpawnEnemies(30);
                 break;
             case 4:
-	            LevelLength = 240;
+	            CurrentLevelLength = LevelLengths[3];
                 SpawnEnemies(40);
                 break;
             case 5:
-                LevelLength = Mathf.Infinity;
+                CurrentLevelLength = Mathf.Infinity;
                 PlayerController.transform.position = new Vector2(30, -10);
                 SpawnBoss();
                 break;
@@ -119,6 +126,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
 	    CloseShop();
+		timer.Start();
     }
 
     void OpenShop()
