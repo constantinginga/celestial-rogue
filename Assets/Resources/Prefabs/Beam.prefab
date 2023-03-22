@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1791076746993717859}
   - component: {fileID: 1958987717173763112}
   - component: {fileID: 6346175086486905653}
-  - component: {fileID: 5076313145950254227}
+  - component: {fileID: 2783062313541831212}
   m_Layer: 8
   m_Name: Beam
   m_TagString: Untagged
@@ -112,7 +112,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9999778, y: 1.0017532}
   m_EdgeRadius: 0
---- !u!114 &5076313145950254227
+--- !u!114 &2783062313541831212
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,12 +121,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2602288142106194970}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85483fac8245842b6999e52621fbb653, type: 3}
+  m_Script: {fileID: 11500000, guid: e6ac539ac044172459ed5993acdcaa5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 1
-  opponentLayer: 1
-  parentLayer: 1
+  bulletSpeed: 1000
+  damageAmount: 10
+  opponentLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &4237970033347587644
 GameObject:
   m_ObjectHideFlags: 0

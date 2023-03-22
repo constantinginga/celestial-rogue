@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
@@ -6,46 +6,58 @@ using Pathfinding;
 public class EnemyGrey : MonoBehaviour
 {
     public int Health = 15;
-    public float FiringDistance = 50F;
+	public float FiringDistance = 50F;
     public float FiringCooldown = 15F;
     public float BeamScaleIncrement = 0.5F;
     public float BeamCooldown = 10F;
-    bool canFire;
+	public bool isFiring;
+	bool canFire;
     EnemyController enemy;
     AIPath pathFinding;
     FacePlayer facePlayer;
-    Transform lockedTargetPosition;
+	Transform lockedTargetPosition;
+	Rigidbody2D rigidBody2D;
+	Transform player;
 
-    void Awake(){
+	void Awake(){
+		rigidBody2D = GetComponent<Rigidbody2D>();
         enemy = GetComponent<EnemyController>();
         pathFinding = GetComponent<AIPath>();
-        facePlayer = GetComponent<FacePlayer>();
+		facePlayer = GetComponent<FacePlayer>();
+		player = GameObject.FindFirstObjectByType<PlayerController>().transform;
         pathFinding.endReachedDistance = FiringDistance;
-        canFire = true;
+		canFire = true;
+		isFiring = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(isInFiringDistance(transform.position, enemy.target.target.position) && canFire){
-            LockTargetPosition();
-            StartFiring();
-            StartFiringCooldown();
-        }
-        else{
-            StopFiring();
-            enemy.target.target = GameObject.FindFirstObjectByType<PlayerController>().transform;
-        }
+	    if(isInFiringDistance(transform.position, enemy.target.target.position)){
+	    	if(canFire){
+	    		isFiring = true;
+		    	LockTargetPosition();
+		    	StartFiring();
+		    	StartFiringCooldown();
+	    	}
+	    	else if(!canFire && !isFiring){
+		    	rigidBody2D.constraints = RigidbodyConstraints2D.FreezePosition;
+		    	facePlayer.lockedTarget = true;
+		    	facePlayer.facingDirection = player.position;
+	    	}
+	    }
+	    else{
+	    	rigidBody2D.constraints = RigidbodyConstraints2D.None;
+		    StopFiring();
+		    enemy.target.target = player;
+	    }
     }
 
-    bool isInFiringDistance(Vector2 origin, Vector2 target){
+	bool isInFiringDistance(Vector2 origin, Vector2 target){
         return Vector2.Distance(origin, target) <= FiringDistance;
     }
 
     void LockTargetPosition(){
-        lockedTargetPosition =  enemy.target.target;
-        facePlayer.lockedTarget = true;
-        facePlayer.facingDirection = lockedTargetPosition.position;
+	    rigidBody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     void StartFiringCooldown(){
@@ -58,19 +70,16 @@ public class EnemyGrey : MonoBehaviour
 	}
 
     void StartFiring(){
-        //Lock tranform position
-        print("Fire");
         CreateBeam();
     }
 
     void StopFiring(){
-        facePlayer.lockedTarget = false;
-        /* print("Stop Firing"); */
+	    facePlayer.lockedTarget = false;
     }
 
     void CreateBeam(){
         GameObject beam = Instantiate(Resources.Load("Prefabs/Beam", typeof(GameObject)) as GameObject, transform.position, Quaternion.identity);
-        beam.transform.SetParent(transform);
+	    beam.transform.SetParent(transform);
         beam.transform.localRotation = Quaternion.Euler(0,0,-90);
         beam.transform.GetChild(0).localScale = new Vector3(0,0.1F,0.1F);
         StartCoroutine(IncrementBeam(beam));
