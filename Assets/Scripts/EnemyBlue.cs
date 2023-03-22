@@ -16,7 +16,9 @@ public class EnemyBlue : MonoBehaviour
 
     void Awake(){
         baseController = GetComponent<EnemyController>();
-        baseController.Health = Health;
+	      baseController.Health = Health;
+	      baseController.Heathbar.maxValue = Health;
+	      baseController.Heathbar.value = Health;
         startDebuffCooldDown();
         setNewTarget = true;
         CollisionLayer = LayerMask.GetMask("Player","Enemy","Asteroid");

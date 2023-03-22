@@ -210,7 +210,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Blu
+      name: Player_Blue
       rect:
         serializedVersion: 2
         x: 99
@@ -524,6 +524,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Bullet
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 921
+        width: 4
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d26b667a619a31643a459b1683a3cc9f
+      internalID: -1098012024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -537,11 +558,12 @@ TextureImporter:
     nameFileIdTable:
       Enemy_Pink: -911893527
       Enemy_Blue: -1199797998
+      Player_Blue: -65764179
       Flamethrower: -1196063804
       Sniper_rifle: 1655260819
       Enemy_Red: 1101413602
       Machinegun: 184108401
-      Player_Blu: -65764179
+      Bullet: -1098012024
       Lasergun: 773204380
       Space_buoy: -1175822444
       Player_White: -2131879205

@@ -638,8 +638,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 424ab0afb36ff4f1987f4692fc7e3b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChosenSpaceship: 4
+  ChosenSpaceship: 1
   Health: 10
+  Reward: 100
   target: {fileID: 2879563472127542754}
   Heathbar: {fileID: 3860266941321674677}
   shootingController: {fileID: 2710497755550858}

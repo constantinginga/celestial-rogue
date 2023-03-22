@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
@@ -16,65 +16,73 @@ public class EnemyController : MonoBehaviour
         Enemy_Green,
         Enemy_Grey,
         Enemy_Purple
+        
     };
 
     public SpaceshipsEnum ChosenSpaceship;
-    public int Health = 10;
+	public int Health = 10;
+	public int Reward = 100;
     public AIDestinationSetter target;
     public Slider Heathbar;
     public ShootingController shootingController;
     public ParticleSystem DeathExplosion;
     public GameObject ShipWreck;
     public Texture2D texture;
-    public bool isInvincible;
+	public bool isInvincible;
+	PlayerController Player;
 
     void Awake()
     {
-        isInvincible = false;
-        target.target = GameObject.FindFirstObjectByType<PlayerController>().transform;
-        Object[] data = AssetDatabase.LoadAllAssetsAtPath(AssetDatabase.GetAssetPath(texture));
-        if (data != null)
-        {
-            foreach (Object obj in data)
-            {
-                if (obj.GetType() == typeof(Sprite))
-                {
-                    Sprite sprite = obj as Sprite;
-                    if (sprite.name.Equals(ChosenSpaceship.ToString()))
-                    {
-                        GetComponent<SpriteRenderer>().sprite = sprite;
-                        break;
-                    }
-                }
-            }
-        }
-        switch (ChosenSpaceship)
-        {
-            case SpaceshipsEnum.Enemy_Red:
-                //gameObject.AddComponent<Seeker>();
-                break;
-            case SpaceshipsEnum.Enemy_Blue:
-                gameObject.AddComponent<EnemyBlue>();
-                break;
-            case SpaceshipsEnum.Enemy_Pink:
-
-                break;
-            case SpaceshipsEnum.Enemy_Green:
-
-                break;
-            case SpaceshipsEnum.Enemy_Grey:
-                gameObject.AddComponent<EnemyGrey>();
-                break;
-            case SpaceshipsEnum.Enemy_Purple:
-                gameObject.AddComponent<PurpleEnemyController>();
-                break;
-        }
+	    isInvincible = false;
+	    Player = GameObject.FindFirstObjectByType<PlayerController>();
+	    target.target = Player.transform;
     }
+    
+	public void CreateEnemySpaceShip(SpaceshipsEnum chosenSpaceship){
+		switch (chosenSpaceship)
+		{
+		case SpaceshipsEnum.Enemy_Red:
+			//gameObject.AddComponent<Seeker>();
+			break;
+		case SpaceshipsEnum.Enemy_Blue:
+			gameObject.AddComponent<EnemyBlue>();
+			break;
+		case SpaceshipsEnum.Enemy_Pink:
+
+			break;
+		case SpaceshipsEnum.Enemy_Green:
+
+			break;
+		case SpaceshipsEnum.Enemy_Grey:
+
+			break;
+		case SpaceshipsEnum.Enemy_Purple:
+			gameObject.AddComponent<PurpleEnemyController>();
+			break;
+		}
+		ChosenSpaceship = chosenSpaceship;
+		Object[] data = AssetDatabase.LoadAllAssetsAtPath(AssetDatabase.GetAssetPath(texture));
+		if (data != null)
+		{
+			foreach (Object obj in data)
+			{
+				if (obj.GetType() == typeof(Sprite))
+				{
+					Sprite sprite = obj as Sprite;
+					if (sprite.name.Equals(chosenSpaceship.ToString()))
+					{
+						GetComponent<SpriteRenderer>().sprite = sprite;
+						break;
+					}
+				}
+			}
+		}
+	}
 
     void Update() { }
 
     public void TakeDamage(int damage)
-    {
+	{
         if (!isInvincible)
         {
             if (Health <= 0)
@@ -87,7 +95,8 @@ public class EnemyController : MonoBehaviour
                 );
                 shipwreck
                     .GetComponent<ShipWreckController>()
-                    .CreateWreck(ChosenSpaceship.ToString());
+	                .CreateWreck(ChosenSpaceship.ToString());
+	            Player.Money += Reward;  
                 Destroy(transform.parent.gameObject);
             }
             Health -= damage;

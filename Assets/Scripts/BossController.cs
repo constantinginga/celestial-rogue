@@ -11,7 +11,6 @@ public class BossController : MonoBehaviour
 	public int CurrentPhase;
 	[Header("Components")]
 	public Slider Healthbar;
-	public Transform Target;
 	[Header("Phase 1")]
 	public bool canFire;
 	public float fireRate = 0.75F;
@@ -81,6 +80,8 @@ public class BossController : MonoBehaviour
 		UpdateHealthbar();
 		if (Health <= 0)
 		{
+			//Spawn win popup
+			GameObject.FindFirstObjectByType<GameOverController>().ShowGameOverMenu();
 			Destroy(gameObject);
 		}
 		else if(Health <= MaxHealth/3){

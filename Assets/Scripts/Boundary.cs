@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,16 +6,19 @@ using UnityEngine.Tilemaps;
 
 public class Boundary : MonoBehaviour
 {
-    [SerializeField] private Transform player;
-    [SerializeField] private bool Horizontal;
+	[SerializeField] private bool Horizontal;
+	Transform player;
+    
+	void Start(){
+		player = GameObject.FindFirstObjectByType<PlayerController>().transform;
+	}
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Check if the other collider is the player
         if (other.GetComponent<PlayerController>())
         {
             Vector2 playerPosition = player.position;
-
+            
             if (Horizontal)
             {
                 playerPosition.y = playerPosition.y - playerPosition.y * 2;
@@ -23,7 +26,7 @@ public class Boundary : MonoBehaviour
             else
             {
                 playerPosition.x = playerPosition.x - playerPosition.x * 2;
-            }
+            } 
 
             player.position = playerPosition;
         }
