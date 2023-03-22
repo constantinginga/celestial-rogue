@@ -48,10 +48,10 @@ public class EnemyController : MonoBehaviour
 			gameObject.AddComponent<EnemyBlue>();
 			break;
 		case SpaceshipsEnum.Enemy_Pink:
-
+			gameObject.AddComponent<EnemyPink>();
 			break;
 		case SpaceshipsEnum.Enemy_Green:
-
+			gameObject.AddComponent<EnemyGreen>();
 			break;
 		case SpaceshipsEnum.Enemy_Grey:
 
@@ -96,7 +96,8 @@ public class EnemyController : MonoBehaviour
                 shipwreck
                     .GetComponent<ShipWreckController>()
 	                .CreateWreck(ChosenSpaceship.ToString());
-	            Player.Money += Reward;  
+	            Player.Money += Reward; 
+	            Player.SendMessage("updateMoney");
                 Destroy(transform.parent.gameObject);
             }
             Health -= damage;

@@ -105,7 +105,12 @@ public class PlayerController : MonoBehaviour
     {
         overHeat.value = value;
     }
-
+    
+    private void updateMoney()
+    {
+        credits.text = Money.ToString();
+    }
+    
     private void Slowdown(int effectAmount)
     {
         speed = effectAmount;
