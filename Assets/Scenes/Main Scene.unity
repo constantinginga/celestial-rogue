@@ -1198,20 +1198,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 1492748418577224083, guid: 7678f2e552fca4138aa857425fe6a446, type: 3}
-  PlayerSprites:
-  - {fileID: -65764179, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
-  - {fileID: -107391127, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
-  - {fileID: -748429393, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
-  - {fileID: -1957872993, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
-  - {fileID: 1451701461, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
-  - {fileID: -2131879205, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
-  - {fileID: -1765770218, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
   Enemy: {fileID: 2710497129314524, guid: 4f5ba3f0ea92ad14f90980c55b57dfea, type: 3}
   Boss: {fileID: 7145425536633191077, guid: 946836e5cf62c804ea0f68c987c22f46, type: 3}
   CollisionLayer:
     serializedVersion: 2
     m_Bits: 72
-  LevelLength: 120
+  CurrentLevelLength: 0
+  LevelLengths: []
   Level: 1
   LevelSprites:
   - {fileID: 21300000, guid: bc4bb26e781949040a96e57e52948d50, type: 3}
@@ -2946,6 +2939,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1765274014
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1765274016}
+  - component: {fileID: 1765274015}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1765274015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765274014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 996876b99203a344dba91d57d4ea1260, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds: []
+--- !u!4 &1765274016
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765274014}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1892600865
 PrefabInstance:
