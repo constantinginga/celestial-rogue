@@ -75,3 +75,9 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: BossScene
+    Clip: {fileID: 8300000, guid: 71fa6518307721f4d97944f45f9b67f4, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}

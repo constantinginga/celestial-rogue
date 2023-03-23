@@ -98,6 +98,7 @@ public class GameManager : MonoBehaviour
 	    }
         asteroidSpawner.Begin();
         Background.GetComponent<SpriteRenderer>().sprite = LevelSprites[Random.Range(0, 2)];
+        FindObjectOfType<AudioManager>().Play("GameplaySong");
         
         switch (Level)
         {
@@ -132,6 +133,7 @@ public class GameManager : MonoBehaviour
     void OpenShop()
     {
         Shop.gameObject.active = true;
+        FindObjectOfType<AudioManager>().Stop("GameplaySong");
     }
 
     void CloseShop()

@@ -28,10 +28,9 @@ public class AudioManager : MonoBehaviour
         {
             FindObjectOfType<AudioManager>().Play("MenuSong");
         }
-        else
+        else if (SceneManager.GetActiveScene().buildIndex == 2) 
         {
-            FindObjectOfType<AudioManager>().Play("GameplaySong");
-        
+            FindObjectOfType<AudioManager>().Play("BossScene");
         }
     }
 
