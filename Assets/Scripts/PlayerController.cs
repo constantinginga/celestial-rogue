@@ -97,6 +97,7 @@ public class PlayerController : MonoBehaviour
             Die();
             return;
         }
+        FindObjectOfType<AudioManager>().Play("TakeDamage");
         currentHealth -= damageAmount;
         UpdateHealthBar();
     }
