@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         Enum.TryParse<SpaceshipsEnum>(PlayerPrefs.GetString("ChosenShip"), out ChosenSpaceship);
-        
+
         Object[] data = AssetDatabase.LoadAllAssetsAtPath(AssetDatabase.GetAssetPath(texture));
         if (data != null)
         {
@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour
         shipwreck.GetComponent<ShipWreckController>().CreateWreck(ChosenSpaceship.ToString());
         //Some transition?
         //SceneManager.LoadScene(2);
-        GameOverController.ShowGameOverMenu();
+        GameOverController.ShowGameOverMenu("You died!");
         Destroy(gameObject);
     }
 

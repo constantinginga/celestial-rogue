@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
     public GameObject Player;
     PlayerController PlayerController;
 
-
     [Header("Enemy related components")]
     public GameObject Enemy;
     public GameObject Boss;
@@ -37,29 +36,28 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-
         Instantiate(Player, new Vector2(0, 0), Quaternion.identity);
         Player = GameObject.FindGameObjectWithTag("Player");
         PlayerController = Player.GetComponentInChildren<PlayerController>();
         Shop = Player.GetComponentInChildren<ShopHandler>(true);
         timer = Player.GetComponentInChildren<Timer>();
         asteroidSpawner = GameObject.FindFirstObjectByType<AteroidSpawner>();
-        Level = 1;
+        Level = 5;
         stopped = false;
- 
 
         StartLevel();
     }
 
     // Update is called once per frame
     void Update()
-	{
-		if(!stopped){
-			converter += Time.deltaTime;
-			currentTime = (int)converter;
-			print(currentTime + " " + stopped);
-		}
-	    if (currentTime >= LevelLength && PlayerController.currentHealth > 0 && !stopped)
+    {
+        if (!stopped)
+        {
+            converter += Time.deltaTime;
+            currentTime = (int)converter;
+            print(currentTime + " " + stopped);
+        }
+        if (currentTime >= LevelLength && PlayerController.currentHealth > 0 && !stopped)
         {
             if (Level != 5)
             {
@@ -69,45 +67,46 @@ public class GameManager : MonoBehaviour
                 //Despawn everything in the background meantime
                 asteroidSpawner.Stop();
                 DespawnEverything();
-	            ResetTimer();
+                ResetTimer();
                 Level++;
             }
         }
-	}
-    
-	void ResetTimer(){
-		converter = 0;
-		currentTime = 0;
-		timer.Reset();
-	}
+    }
+
+    void ResetTimer()
+    {
+        converter = 0;
+        currentTime = 0;
+        timer.Reset();
+    }
 
     public void StartLevel()
     {
-	    stopped = false;
-	    if (Level != 5)
-	    {
-		    timer.UI.enabled = true;
-		    timer.stopped = false;
-	    }
+        stopped = false;
+        if (Level != 5)
+        {
+            timer.UI.enabled = true;
+            timer.stopped = false;
+        }
         asteroidSpawner.Begin();
         Background.GetComponent<SpriteRenderer>().sprite = LevelSprites[Random.Range(0, 2)];
-        
+
         switch (Level)
         {
             case 1:
-	            LevelLength = 60;
+                LevelLength = 60;
                 SpawnEnemies(10);
                 break;
             case 2:
-	            LevelLength = 120;
+                LevelLength = 120;
                 SpawnEnemies(20);
                 break;
             case 3:
-	            LevelLength = 180;
+                LevelLength = 180;
                 SpawnEnemies(30);
                 break;
             case 4:
-	            LevelLength = 240;
+                LevelLength = 240;
                 SpawnEnemies(40);
                 break;
             case 5:
@@ -118,7 +117,7 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
-	    CloseShop();
+        CloseShop();
     }
 
     void OpenShop()
