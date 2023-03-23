@@ -41,11 +41,13 @@ public class InputController : MonoBehaviour
     {
         Time.timeScale = 0f;
         asset.Disable();
+        FindObjectOfType<AudioManager>().Pause("GameplaySong");
         EscMenu.SetActive(!EscMenu.activeSelf);
     }
 
     public void backToGame()
     {
+        FindObjectOfType<AudioManager>().Resume("GameplaySong");
         asset.Enable();
         Time.timeScale = 1f;
     }
