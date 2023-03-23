@@ -18,10 +18,10 @@ public class ShootingController : MonoBehaviour
 	public int overHeatThreshold = 10;
 	private bool isPlayer = false;
 	private bool overHeat = false;
+	public bool isShotGun = false;
 	private InputActionAsset asset;
     private InputAction shootAction;
     private InputActionMap weapon;
-    private GameObject bullet;
     private Coroutine shootingCoroutine;
     private PlayerController playerController;
     
@@ -142,15 +142,16 @@ public class ShootingController : MonoBehaviour
 	        }
 	        else
 	        {
-		        bullet = Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
-		        if (bullet.TryGetComponent<BulletController>(out BulletController bulletComponent))
+		        if (isShotGun)
 		        {
-			        bulletComponent.parentLayer = transform.parent.gameObject.layer;
-			        bulletComponent.damageAmount = damageAmount;
-			        bulletComponent.opponentLayer = opponentLayer.value;
+			        // Diagonal bullets
+			        Quaternion leftRotation = Quaternion.Euler(shootingPoint.eulerAngles.x, shootingPoint.eulerAngles.y, shootingPoint.eulerAngles.z - 15);
+			        Quaternion rightRotation = Quaternion.Euler(shootingPoint.eulerAngles.x, shootingPoint.eulerAngles.y, shootingPoint.eulerAngles.z + 15);
+			        ShootBullet(shootingPoint, leftRotation);
+			        ShootBullet(shootingPoint, rightRotation);
 		        }
-		        bullet.GetComponent<Rigidbody2D>().velocity = transform.up * bulletSpeed;
-		        Destroy(bullet, 3f); // Destroy the bullet after 3 seconds
+		        
+		        ShootBullet(shootingPoint, shootingPoint.rotation);
 		        
 		        if (isPlayer)
 		        {
@@ -163,6 +164,25 @@ public class ShootingController : MonoBehaviour
 
         }
     }
+	
+	private void ShootBullet(Transform shootingPoint, Quaternion rotation)
+	{
+		GameObject bullet = Instantiate(bulletPrefab, shootingPoint.position, rotation);
+
+		if (bullet.TryGetComponent<BulletController>(out BulletController bulletComponent))
+		{
+			bulletComponent.parentLayer = transform.parent.gameObject.layer;
+			bulletComponent.damageAmount = damageAmount;
+			bulletComponent.opponentLayer = opponentLayer.value;
+		}
+		
+		// Calculate the direction of the bullet based on the rotation
+		Vector2 direction = rotation * Vector2.up;
+
+		bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
+		Destroy(bullet, 3f); // Destroy the bullet after 3 seconds
+	}
+
 
     private void OnDestroy()
     {

@@ -4,8 +4,6 @@ using UnityEditor;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Rendering.Universal;
-using UnityEngine.SceneManagement;
-using TMPro;
 using Object = UnityEngine.Object;
 
 public class PlayerController : MonoBehaviour
@@ -104,6 +102,11 @@ public class PlayerController : MonoBehaviour
     private void updateOverheat(int value)
     {
         overHeat.value = value;
+    }
+
+    private void updateMoney()
+    {
+        credits.text = Money.ToString();
     }
 
     private void Slowdown(int effectAmount)
