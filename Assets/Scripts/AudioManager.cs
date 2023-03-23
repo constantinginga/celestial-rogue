@@ -31,8 +31,20 @@ public class AudioManager : MonoBehaviour
         else
         {
             FindObjectOfType<AudioManager>().Play("GameplaySong");
-
+        
         }
+    }
+
+    public Boolean isPlayed(String name)
+    {
+        foreach (Sound sound in sounds)
+        {
+            if (sound.name == name && sound.source.isPlaying)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void Stop(String name)

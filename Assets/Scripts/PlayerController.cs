@@ -81,11 +81,16 @@ public class PlayerController : MonoBehaviour
         if (input.movementPos.x != 0 || input.movementPos.y != 0)
         {
             EngineEmission.Play();
+            if (!FindObjectOfType<AudioManager>().isPlayed("ShipThruster"))
+            {
+                FindObjectOfType<AudioManager>().Play("ShipThruster");   
+            }
             EngineLight.enabled = true;
         }
         else
         {
             EngineEmission.Stop();
+            FindObjectOfType<AudioManager>().Stop("ShipThruster");
             EngineLight.enabled = false;
         }
     }

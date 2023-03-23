@@ -47,7 +47,7 @@ MonoBehaviour:
   sounds:
   - name: Shoot
     Clip: {fileID: 8300000, guid: e10bac328b637784d9bd86c9b8286e18, type: 3}
-    volume: 0.5
+    volume: 0.4
     pitch: 1.5
     loop: 0
     source: {fileID: 0}
@@ -65,7 +65,13 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: GameplaySong
     Clip: {fileID: 8300000, guid: 365f7ac598f2f5146b564ef21fba9df3, type: 3}
-    volume: 0.5
+    volume: 0.1
     pitch: 1
     loop: 1
+    source: {fileID: 0}
+  - name: ShipThruster
+    Clip: {fileID: 8300000, guid: e0ff21a3dc15c2c4286bae2c0d9c4194, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
     source: {fileID: 0}
