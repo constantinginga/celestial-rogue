@@ -9,9 +9,22 @@ public class AudioManager : MonoBehaviour
 {
 
     public Sound[] sounds;
+    private static AudioManager instance;
     
     void Awake()
     {
+        if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        
         foreach (Sound sound in sounds)
         {
             sound.source = gameObject.AddComponent<AudioSource>();
@@ -26,11 +39,7 @@ public class AudioManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
-            FindObjectOfType<AudioManager>().Play("MenuSong");
-        }
-        else if (SceneManager.GetActiveScene().buildIndex == 2) 
-        {
-            FindObjectOfType<AudioManager>().Play("BossScene");
+            Play("MenuSong");
         }
     }
 

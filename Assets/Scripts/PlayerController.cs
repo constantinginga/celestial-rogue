@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     public delegate void TakeDamageDelegate(int damageAmount);
     public event TakeDamageDelegate TakeDamageEvent;
     public GameOverController GameOverController;
+    private AudioManager audioManager;
 
     void Awake()
     {
@@ -81,16 +82,16 @@ public class PlayerController : MonoBehaviour
         if (input.movementPos.x != 0 || input.movementPos.y != 0)
         {
             EngineEmission.Play();
-            if (!FindObjectOfType<AudioManager>().isPlayed("ShipThruster"))
+            if (!audioManager.isPlayed("ShipThruster"))
             {
-                FindObjectOfType<AudioManager>().Play("ShipThruster");   
+                audioManager.Play("ShipThruster");   
             }
             EngineLight.enabled = true;
         }
         else
         {
             EngineEmission.Stop();
-            FindObjectOfType<AudioManager>().Stop("ShipThruster");
+            audioManager.Stop("ShipThruster");
             EngineLight.enabled = false;
         }
     }
@@ -102,7 +103,7 @@ public class PlayerController : MonoBehaviour
             Die();
             return;
         }
-        FindObjectOfType<AudioManager>().Play("TakeDamage");
+        audioManager.Play("TakeDamage");
         currentHealth -= damageAmount;
         UpdateHealthBar();
     }

@@ -12,9 +12,11 @@ public class main_menu_script : MonoBehaviour
     public List<GameObject> availableSpaceShips;
     public GameObject mainMenu;
     public GameObject gearMenu;
+    private AudioManager audioManager;
     
     public void StartGame()
     {
+        audioManager.Stop("MenuSong");
         foreach (Transform child in gearMenu.transform)
         {
 

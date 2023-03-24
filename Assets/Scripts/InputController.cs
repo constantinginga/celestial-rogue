@@ -12,6 +12,7 @@ public class InputController : MonoBehaviour
         movementPos;
     public InputActionMap player;
     public GameObject EscMenu;
+    private AudioManager audioManager;
 
     void Awake()
     {
@@ -41,19 +42,20 @@ public class InputController : MonoBehaviour
     {
         Time.timeScale = 0f;
         asset.Disable();
-        FindObjectOfType<AudioManager>().Pause("GameplaySong");
+        audioManager.Pause("GameplaySong");
         EscMenu.SetActive(!EscMenu.activeSelf);
     }
 
     public void backToGame()
     {
-        FindObjectOfType<AudioManager>().Resume("GameplaySong");
+        audioManager.Resume("GameplaySong");
         asset.Enable();
         Time.timeScale = 1f;
     }
 
     public void backToMainMenu()
 	{
+        audioManager.Stop("GameplaySong");
 		Time.timeScale = 1f;
         SceneManager.LoadScene(0);
     }
