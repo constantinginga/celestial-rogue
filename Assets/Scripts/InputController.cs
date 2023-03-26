@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class InputController : MonoBehaviour
 {
@@ -12,10 +13,11 @@ public class InputController : MonoBehaviour
         movementPos;
     public InputActionMap player;
     public GameObject EscMenu;
-    private AudioManager audioManager;
+    public Slider volume;
 
     void Awake()
     {
+        //volume.value = AudioManager.Instance.volume;
         player = asset.FindActionMap("Player");
     }
 
@@ -42,20 +44,25 @@ public class InputController : MonoBehaviour
     {
         Time.timeScale = 0f;
         asset.Disable();
-        audioManager.Pause("GameplaySong");
+        AudioManager.Instance.Pause("GameplaySong");
         EscMenu.SetActive(!EscMenu.activeSelf);
     }
 
     public void backToGame()
     {
-        audioManager.Resume("GameplaySong");
+        AudioManager.Instance.Resume("GameplaySong");
         asset.Enable();
         Time.timeScale = 1f;
     }
 
+    public void updateVolume(float volume)
+    {
+        AudioManager.Instance.setVolume(volume);
+    }
+
     public void backToMainMenu()
 	{
-        audioManager.Stop("GameplaySong");
+        AudioManager.Instance.Stop("GameplaySong");
 		Time.timeScale = 1f;
         SceneManager.LoadScene(0);
     }

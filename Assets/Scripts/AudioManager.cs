@@ -10,17 +10,18 @@ public class AudioManager : MonoBehaviour
 
     public Sound[] sounds;
     private static AudioManager instance;
+    public int volume;
     
     void Awake()
     {
         if(instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(this.gameObject);
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(this.gameObject);
             return;
         }
 
@@ -34,15 +35,7 @@ public class AudioManager : MonoBehaviour
             sound.source.loop = sound.loop;
         }
     }
-
-    private void Start()
-    {
-        if (SceneManager.GetActiveScene().buildIndex == 0)
-        {
-            Play("MenuSong");
-        }
-    }
-
+    
     public Boolean isPlayed(String name)
     {
         foreach (Sound sound in sounds)
@@ -96,6 +89,33 @@ public class AudioManager : MonoBehaviour
             {
                 sound.source.Play();
             }
+        }
+    }
+
+    public void setVolume(float volume)
+    {
+        foreach (Sound sound in sounds)
+        {
+            sound.source.volume = volume;
+        }
+    }
+    
+    public static AudioManager Instance
+    {
+        get
+        {
+            // If instance does not exist, create one.
+            if (instance == null)
+            {
+                instance = FindObjectOfType<AudioManager>();
+                if (instance == null)
+                {
+                    GameObject obj = new GameObject();
+                    obj.name = "AudioManager";
+                    instance = obj.AddComponent<AudioManager>();
+                }
+            }
+            return instance;
         }
     }
 }
