@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         Enum.TryParse<SpaceshipsEnum>(PlayerPrefs.GetString("ChosenShip"), out ChosenSpaceship);
-        
+
         Object[] data = AssetDatabase.LoadAllAssetsAtPath(AssetDatabase.GetAssetPath(texture));
         if (data != null)
         {
@@ -105,12 +105,12 @@ public class PlayerController : MonoBehaviour
     {
         overHeat.value = value;
     }
-    
+
     private void updateMoney()
     {
         credits.text = Money.ToString();
     }
-    
+
     private void Slowdown(int effectAmount)
     {
         speed = effectAmount;
@@ -131,6 +131,47 @@ public class PlayerController : MonoBehaviour
         //SceneManager.LoadScene(2);
         GameOverController.ShowGameOverMenu();
         Destroy(gameObject);
+    }
+
+    public void UpgradeSpeed()
+    {
+        // check if player has enough money
+        // upgrade speed by 10%
+        speed *= 1.1f;
+        // scale money cost depending on current speed
+        Money -= (int)(200 * speed);
+    }
+
+    public void UpgradeDamage()
+    {
+        // check if player has enough money
+        // upgrade damage by 10%
+        // scale money cost depending on current damage
+        Money -= (int)(200 * speed);
+    }
+
+    public void ReduceOverheat()
+    {
+        // check if player has enough money
+        // reduce overheat by 10%
+        // scale money cost depending on current overheat
+        Money -= (int)(200 * speed);
+    }
+
+    public void UpgradeHP()
+    {
+        // check if player has enough money
+        // upgrade hp by 10%
+        // scale money cost depending on current hp
+        Money -= (int)(200 * speed);
+    }
+
+    public void RestoreHP()
+    {
+        // check if player has enough money
+        // restore hp fully, cost depending on current hp
+        Money -= 10 * (maxHealth - currentHealth);
+        currentHealth = maxHealth;
     }
 
     private void OnEnable()
