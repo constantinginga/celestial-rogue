@@ -13,6 +13,7 @@ public class GameOverController : MonoBehaviour
     public void ShowGameOverMenu()
     {
         Time.timeScale = 0f;
+        AudioManager.Instance.StopAll();
         asset.Disable();
         gameObject.SetActive(true);
     }

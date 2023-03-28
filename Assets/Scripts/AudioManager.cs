@@ -48,6 +48,17 @@ public class AudioManager : MonoBehaviour
         return false;
     }
 
+    public void StopAll()
+    {
+        foreach (Sound sound in sounds)
+        {
+            if (sound.source.isPlaying)
+            {
+                sound.source.Stop();
+            }
+        }
+    }
+
     public void Stop(String name)
     {
         foreach (Sound sound in sounds)

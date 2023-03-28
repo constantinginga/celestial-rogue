@@ -17,7 +17,6 @@ public class InputController : MonoBehaviour
 
     void Awake()
     {
-        //volume.value = AudioManager.Instance.volume;
         player = asset.FindActionMap("Player");
     }
 

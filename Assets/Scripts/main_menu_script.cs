@@ -19,7 +19,7 @@ public class main_menu_script : MonoBehaviour
     
     public void StartGame()
     {
-        AudioManager.Instance.Stop("MenuSong");
+        AudioManager.Instance.StopAll();
         foreach (Transform child in gearMenu.transform)
         {
 
@@ -58,6 +58,11 @@ public class main_menu_script : MonoBehaviour
     private void Start()
     {
         AudioManager.Instance.Play("MenuSong");
+    }
+
+    public void SliderSetVolume(float volume)
+    {
+        AudioManager.Instance.setVolume(volume);
     }
 
     public void SwitchToGearMenu()
