@@ -5335,6 +5335,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VentureForthButton: {fileID: 4937770843061738429}
+  RestoreHpButton: {fileID: 8443781450424860398}
+  UpgradeHpButton: {fileID: 4047765036934519666}
+  UpgradeSpeedButton: {fileID: 6535965525917884332}
+  UpgradeDamageButton: {fileID: 7262883168349488362}
+  ReduceOverheatButton: {fileID: 337557817530027880}
 --- !u!1 &448992640173141674
 GameObject:
   m_ObjectHideFlags: 0

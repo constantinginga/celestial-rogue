@@ -5,24 +5,77 @@ using UnityEngine.UI;
 
 public class ShopHandler : MonoBehaviour
 {
-    public Button VentureForthButton;
+    public Button VentureForthButton,
+        RestoreHpButton,
+        UpgradeHpButton,
+        UpgradeSpeedButton,
+        UpgradeDamageButton,
+        ReduceOverheatButton;
     GameManager GameManager;
     PlayerController playerController;
+
+    Dictionary<UpgradeType, int> upgradeCosts;
+
+    public enum UpgradeType
+    {
+        RestoreHP,
+        UpgradeHP,
+        UpgradeSpeed,
+        UpgradeDamage,
+        ReduceOverheat
+    }
 
     void Awake()
     {
         GameManager = GameObject.FindFirstObjectByType<GameManager>();
         playerController = GameObject.FindFirstObjectByType<PlayerController>();
+        upgradeCosts = new Dictionary<UpgradeType, int>()
+        {
+            {
+                UpgradeType.RestoreHP,
+                5 * (playerController.maxHealth - playerController.currentHealth)
+            },
+            { UpgradeType.UpgradeHP, (int)(3 * playerController.maxHealth) },
+            { UpgradeType.UpgradeSpeed, (int)(200 * playerController.speed) },
+            { UpgradeType.UpgradeDamage, 10 },
+            { UpgradeType.ReduceOverheat, 10 }
+        };
     }
+
+    // void OnBecameVisible()
+    // {
+    //     upgradeCosts = new Dictionary<UpgradeType, int>()
+    //     {
+    //         {
+    //             UpgradeType.RestoreHP,
+    //             5 * (playerController.maxHealth - playerController.currentHealth)
+    //         },
+    //         { UpgradeType.UpgradeHP, (int)(3 * playerController.maxHealth) },
+    //         { UpgradeType.UpgradeSpeed, 10 },
+    //         { UpgradeType.UpgradeDamage, 10 },
+    //         { UpgradeType.ReduceOverheat, 10 }
+    //     };
+    // }
 
     void Update()
     {
-        // check if player has enough credits to buy upgrades
-        // check if player has enough credits to restore hp
-        // check if player has enough credits to upgrade hp
-        // check if player has enough credits to upgrade speed
-        // check if player has enough credits to upgrade damage
-        // check if player has enough credits to reduce overheat
+        CheckButtons();
+    }
+
+    private void CheckButtons()
+    {
+        //Debug.Log($"{playerController.currentHealth}, {playerController.maxHealth}");
+        RestoreHpButton.interactable =
+            playerController.Money >= upgradeCosts[UpgradeType.RestoreHP]
+            && playerController.currentHealth < playerController.maxHealth;
+        UpgradeHpButton.interactable =
+            playerController.Money >= upgradeCosts[UpgradeType.UpgradeHP];
+        UpgradeSpeedButton.interactable =
+            playerController.Money >= upgradeCosts[UpgradeType.UpgradeSpeed];
+        UpgradeDamageButton.interactable =
+            playerController.Money >= upgradeCosts[UpgradeType.UpgradeDamage];
+        ReduceOverheatButton.interactable =
+            playerController.Money >= upgradeCosts[UpgradeType.ReduceOverheat];
     }
 
     public void VentureForth()
@@ -32,28 +85,39 @@ public class ShopHandler : MonoBehaviour
 
     public void RestoreHP()
     {
-        playerController.RestoreHP();
+        playerController.UpdateShip(UpgradeType.RestoreHP, upgradeCosts[UpgradeType.RestoreHP]);
+        upgradeCosts[UpgradeType.RestoreHP] =
+            5 * (playerController.maxHealth - playerController.currentHealth);
     }
 
     public void UpgradeHP()
     {
-        playerController.UpgradeHP();
-        // upgrade ship hp based on cost, and subtract cost from player's credits
+        playerController.UpdateShip(UpgradeType.UpgradeHP, upgradeCosts[UpgradeType.UpgradeHP]);
+        upgradeCosts[UpgradeType.UpgradeHP] = (int)(3 * playerController.maxHealth);
     }
 
     public void UpgradeSpeed()
     {
-        playerController.UpgradeSpeed();
-        // if speed updgraded, notify player, otherwise notify player that they don't have enough credits
+        playerController.UpdateShip(
+            UpgradeType.UpgradeSpeed,
+            upgradeCosts[UpgradeType.UpgradeSpeed]
+        );
+        upgradeCosts[UpgradeType.UpgradeSpeed] = (int)(200 * playerController.speed);
     }
 
     public void UpgradeDamage()
     {
-        playerController.UpgradeDamage();
+        playerController.UpdateShip(
+            UpgradeType.UpgradeDamage,
+            upgradeCosts[UpgradeType.UpgradeDamage]
+        );
     }
 
     public void ReduceOverheat()
     {
-        playerController.ReduceOverheat();
+        playerController.UpdateShip(
+            UpgradeType.ReduceOverheat,
+            upgradeCosts[UpgradeType.ReduceOverheat]
+        );
     }
 }

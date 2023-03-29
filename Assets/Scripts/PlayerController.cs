@@ -4,8 +4,6 @@ using UnityEditor;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Rendering.Universal;
-using UnityEngine.SceneManagement;
-using TMPro;
 using Object = UnityEngine.Object;
 
 public class PlayerController : MonoBehaviour
@@ -133,45 +131,38 @@ public class PlayerController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void UpgradeSpeed()
+    public void UpdateShip(ShopHandler.UpgradeType type, int cost)
     {
-        // check if player has enough money
-        // upgrade speed by 10%
-        speed *= 1.1f;
-        // scale money cost depending on current speed
-        Money -= (int)(200 * speed);
-    }
+        // extra check, just in case
+        if (Money < cost)
+        {
+            return;
+        }
 
-    public void UpgradeDamage()
-    {
-        // check if player has enough money
-        // upgrade damage by 10%
-        // scale money cost depending on current damage
-        Money -= (int)(200 * speed);
-    }
+        switch (type)
+        {
+            case ShopHandler.UpgradeType.RestoreHP:
+                currentHealth = maxHealth;
+                UpdateHealthBar();
+                break;
+            case ShopHandler.UpgradeType.UpgradeHP:
+                // increase max hp by 10%
+                maxHealth = (int)(maxHealth * 1.1f);
+                break;
+            case ShopHandler.UpgradeType.UpgradeDamage:
+                //ReduceOverheat();
+                break;
+            case ShopHandler.UpgradeType.UpgradeSpeed:
+                // increase speed by 10%
+                speed *= 1.1f;
+                break;
+            case ShopHandler.UpgradeType.ReduceOverheat:
+                // reduce overheat by 10%
+                break;
+        }
 
-    public void ReduceOverheat()
-    {
-        // check if player has enough money
-        // reduce overheat by 10%
-        // scale money cost depending on current overheat
-        Money -= (int)(200 * speed);
-    }
-
-    public void UpgradeHP()
-    {
-        // check if player has enough money
-        // upgrade hp by 10%
-        // scale money cost depending on current hp
-        Money -= (int)(200 * speed);
-    }
-
-    public void RestoreHP()
-    {
-        // check if player has enough money
-        // restore hp fully, cost depending on current hp
-        Money -= 10 * (maxHealth - currentHealth);
-        currentHealth = maxHealth;
+        Money -= cost;
+        updateMoney();
     }
 
     private void OnEnable()
