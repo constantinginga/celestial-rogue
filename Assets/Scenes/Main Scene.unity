@@ -1198,20 +1198,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 1492748418577224083, guid: 7678f2e552fca4138aa857425fe6a446, type: 3}
-  PlayerSprites:
-  - {fileID: -65764179, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
-  - {fileID: -107391127, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
-  - {fileID: -748429393, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
-  - {fileID: -1957872993, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
-  - {fileID: 1451701461, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
-  - {fileID: -2131879205, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
-  - {fileID: -1765770218, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
   Enemy: {fileID: 2710497129314524, guid: 4f5ba3f0ea92ad14f90980c55b57dfea, type: 3}
   Boss: {fileID: 7145425536633191077, guid: 946836e5cf62c804ea0f68c987c22f46, type: 3}
   CollisionLayer:
     serializedVersion: 2
     m_Bits: 72
-  LevelLength: 120
+  CurrentLevelLength: 0
+  enemiesAmountThreshold: 0
+  LevelLengths: []
   Level: 1
   LevelSprites:
   - {fileID: 21300000, guid: bc4bb26e781949040a96e57e52948d50, type: 3}
@@ -1220,6 +1214,9 @@ MonoBehaviour:
   Background: {fileID: 1686446233}
   AsteroidParent: {fileID: 1384483516}
   EnemiesParent: {fileID: 1029040512}
+  HorizontalCollider: {fileID: 1210520569}
+  VerticalCollider: {fileID: 530462526}
+  Enemies: {fileID: 1029040511}
 --- !u!1001 &614411561
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3066,3 +3063,64 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09276948482441348920e2bcb2adb631, type: 3}
+--- !u!1001 &6866763305764773640
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6866763305113628310, guid: de44b129c14c6fe43a6bd60aec74b585, type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6866763305113628311, guid: de44b129c14c6fe43a6bd60aec74b585, type: 3}
+      propertyPath: sounds.Array.data[4].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6866763305113628328, guid: de44b129c14c6fe43a6bd60aec74b585, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6866763305113628328, guid: de44b129c14c6fe43a6bd60aec74b585, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6866763305113628328, guid: de44b129c14c6fe43a6bd60aec74b585, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6866763305113628328, guid: de44b129c14c6fe43a6bd60aec74b585, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6866763305113628328, guid: de44b129c14c6fe43a6bd60aec74b585, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6866763305113628328, guid: de44b129c14c6fe43a6bd60aec74b585, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6866763305113628328, guid: de44b129c14c6fe43a6bd60aec74b585, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6866763305113628328, guid: de44b129c14c6fe43a6bd60aec74b585, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6866763305113628328, guid: de44b129c14c6fe43a6bd60aec74b585, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6866763305113628328, guid: de44b129c14c6fe43a6bd60aec74b585, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6866763305113628328, guid: de44b129c14c6fe43a6bd60aec74b585, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: de44b129c14c6fe43a6bd60aec74b585, type: 3}

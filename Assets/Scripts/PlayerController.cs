@@ -79,11 +79,16 @@ public class PlayerController : MonoBehaviour
         if (input.movementPos.x != 0 || input.movementPos.y != 0)
         {
             EngineEmission.Play();
+            if (!AudioManager.Instance.isPlayed("ShipThruster"))
+            {
+                AudioManager.Instance.Play("ShipThruster");   
+            }
             EngineLight.enabled = true;
         }
         else
         {
             EngineEmission.Stop();
+            AudioManager.Instance.Stop("ShipThruster");
             EngineLight.enabled = false;
         }
     }
@@ -95,6 +100,7 @@ public class PlayerController : MonoBehaviour
             Die();
             return;
         }
+        AudioManager.Instance.Play("TakeDamage");
         currentHealth -= damageAmount;
         UpdateHealthBar();
     }
@@ -127,7 +133,7 @@ public class PlayerController : MonoBehaviour
         shipwreck.GetComponent<ShipWreckController>().CreateWreck(ChosenSpaceship.ToString());
         //Some transition?
         //SceneManager.LoadScene(2);
-        GameOverController.ShowGameOverMenu();
+        GameOverController.ShowGameOverMenu("You died!");
         Destroy(gameObject);
     }
 
