@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,11 +11,11 @@ public class GameManager : MonoBehaviour
     [Header("Enemy related components")]
     public GameObject Enemy;
     public GameObject Boss;
-	public LayerMask CollisionLayer;
+    public LayerMask CollisionLayer;
 
     [Header("Level related attributes")]
-	public float CurrentLevelLength;
-	public int enemiesAmountThreshold;
+    public float CurrentLevelLength;
+    public int enemiesAmountThreshold;
     public float[] LevelLengths;
     public int Level;
     public Sprite[] LevelSprites;
@@ -22,11 +23,11 @@ public class GameManager : MonoBehaviour
 
     [Header("Level related components")]
     public Transform AsteroidParent;
-	public Transform EnemiesParent;
-	public GameObject HorizontalCollider;
-	public GameObject VerticalCollider;
-	List<BoxCollider2D> boundaryCols;
-	EnemyController[] enemiesList;
+    public Transform EnemiesParent;
+    public GameObject HorizontalCollider;
+    public GameObject VerticalCollider;
+    List<BoxCollider2D> boundaryCols;
+    EnemyController[] enemiesList;
     ShopHandler Shop;
     int currentTime;
     float converter;
@@ -35,22 +36,21 @@ public class GameManager : MonoBehaviour
     bool stopped;
     private GameOverController gameOverMenu;
 
-
     void Awake()
     {
         Instantiate(Player, new Vector2(0, 0), Quaternion.identity);
         Player = GameObject.FindGameObjectWithTag("Player");
         PlayerController = Player.GetComponentInChildren<PlayerController>();
         Shop = Player.GetComponentInChildren<ShopHandler>(true);
-	    timer = Player.GetComponentInChildren<Timer>();
-	    boundaryCols = new List<BoxCollider2D>();
-	    asteroidSpawner = GameObject.FindFirstObjectByType<AteroidSpawner>();
-	    boundaryCols.Add(HorizontalCollider.GetComponents<BoxCollider2D>()[0]);
-	    boundaryCols.Add(HorizontalCollider.GetComponents<BoxCollider2D>()[1]);
-	    boundaryCols.Add(VerticalCollider.GetComponents<BoxCollider2D>()[0]);
-	    boundaryCols.Add(VerticalCollider.GetComponents<BoxCollider2D>()[1]);
-	    enemiesAmountThreshold = 5;
-        LevelLengths = new float[] {60.0F, 120.0F, 180.0F, 240.0F};
+        timer = Player.GetComponentInChildren<Timer>();
+        boundaryCols = new List<BoxCollider2D>();
+        asteroidSpawner = GameObject.FindFirstObjectByType<AteroidSpawner>();
+        boundaryCols.Add(HorizontalCollider.GetComponents<BoxCollider2D>()[0]);
+        boundaryCols.Add(HorizontalCollider.GetComponents<BoxCollider2D>()[1]);
+        boundaryCols.Add(VerticalCollider.GetComponents<BoxCollider2D>()[0]);
+        boundaryCols.Add(VerticalCollider.GetComponents<BoxCollider2D>()[1]);
+        enemiesAmountThreshold = 5;
+        LevelLengths = new float[] { 60.0F, 120.0F, 180.0F, 240.0F };
         currentTime = (int)LevelLengths[0];
         converter = LevelLengths[0];
         Level = 1;
@@ -62,16 +62,18 @@ public class GameManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-	{
-		enemiesList = EnemiesParent.GetComponentsInChildren<EnemyController>();
-		if(enemiesList.Length < enemiesAmountThreshold && !stopped){
-			SpawnEnemies(10);
-		}
-		if(!stopped){
-			converter -= Time.deltaTime;
-			currentTime = (int)converter;
-		}
-	    if (currentTime <= 0 && PlayerController.currentHealth > 0 && !stopped)
+    {
+        enemiesList = EnemiesParent.GetComponentsInChildren<EnemyController>();
+        if (enemiesList.Length < enemiesAmountThreshold && !stopped)
+        {
+            SpawnEnemies(10);
+        }
+        if (!stopped)
+        {
+            converter -= Time.deltaTime;
+            currentTime = (int)converter;
+        }
+        if (currentTime <= 0 && PlayerController.currentHealth > 0 && !stopped)
         {
             if (Level != 5)
             {
@@ -159,7 +161,11 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < amount; i++)
         {
-	        GameObject enemy = Instantiate(Enemy, GetRandomPositionOnBoundaryOfMap(Random.Range(0, 4)), Quaternion.identity);
+            GameObject enemy = Instantiate(
+                Enemy,
+                GetRandomPositionOnBoundaryOfMap(Random.Range(0, 4)),
+                Quaternion.identity
+            );
             enemy
                 .GetComponentInChildren<EnemyController>()
                 .CreateEnemySpaceShip((EnemyController.SpaceshipsEnum)Random.RandomRange(0, 6));
@@ -167,15 +173,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-	Vector2 GetRandomPositionOnBoundaryOfMap(int index)
-	{
-		BoxCollider2D collider = boundaryCols[index];
+    Vector2 GetRandomPositionOnBoundaryOfMap(int index)
+    {
+        BoxCollider2D collider = boundaryCols[index];
         while (true)
         {
             GameObject tmp = new GameObject();
-	        tmp.transform.position = new Vector3(
-		        Random.Range(collider.bounds.min.x, collider.bounds.max.x),
-		        Random.Range(collider.bounds.min.y, collider.bounds.max.y),
+            tmp.transform.position = new Vector3(
+                Random.Range(collider.bounds.min.x, collider.bounds.max.x),
+                Random.Range(collider.bounds.min.y, collider.bounds.max.y),
                 0
             );
             tmp.AddComponent<CircleCollider2D>();
