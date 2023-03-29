@@ -15,6 +15,7 @@ public class GameOverController : MonoBehaviour
     public void ShowGameOverMenu(string message)
     {
         Time.timeScale = 0f;
+        AudioManager.Instance.StopAll();
         asset.Disable();
         gameObject.SetActive(true);
         transform.Find("GameOver").GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text = message;

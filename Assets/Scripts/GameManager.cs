@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     bool stopped;
     private GameOverController gameOverMenu;
 
+
     void Awake()
     {
         Instantiate(Player, new Vector2(0, 0), Quaternion.identity);
@@ -96,7 +97,7 @@ public class GameManager : MonoBehaviour
         }
         asteroidSpawner.Begin();
         Background.GetComponent<SpriteRenderer>().sprite = LevelSprites[Random.Range(0, 2)];
-
+        AudioManager.Instance.Play("GameplaySong");
         switch (Level)
         {
             case 1:
@@ -116,6 +117,8 @@ public class GameManager : MonoBehaviour
                 SpawnEnemies(40);
                 break;
             case 5:
+                AudioManager.Instance.Stop("GameplaySong");
+                AudioManager.Instance.Play("BossScene");
                 CurrentLevelLength = Mathf.Infinity;
                 PlayerController.transform.position = new Vector2(30, -10);
                 SpawnBoss();
@@ -130,6 +133,7 @@ public class GameManager : MonoBehaviour
     void OpenShop()
     {
         Shop.gameObject.active = true;
+        AudioManager.Instance.Stop("GameplaySong");
     }
 
     void CloseShop()
