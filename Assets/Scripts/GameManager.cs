@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
+﻿using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
@@ -11,7 +6,6 @@ public class GameManager : MonoBehaviour
     [Header("Player related components")]
     public GameObject Player;
     PlayerController PlayerController;
-
 
     [Header("Enemy related components")]
     public GameObject Enemy;
@@ -45,24 +39,25 @@ public class GameManager : MonoBehaviour
         Shop = Player.GetComponentInChildren<ShopHandler>(true);
         timer = Player.GetComponentInChildren<Timer>();
         asteroidSpawner = GameObject.FindFirstObjectByType<AteroidSpawner>();
-        LevelLengths = new float[] {60.0F, 120.0F, 180.0F, 240.0F};
+        LevelLengths = new float[] { 60.0F, 120.0F, 180.0F, 240.0F };
         currentTime = (int)LevelLengths[0];
         converter = LevelLengths[0];
         Level = 1;
         stopped = false;
- 
+
         timer.Start();
         StartLevel();
     }
 
     // Update is called once per frame
     void Update()
-	{
-		if(!stopped){
-			converter -= Time.deltaTime;
-			currentTime = (int)converter;
-		}
-	    if (currentTime <= 0 && PlayerController.currentHealth > 0 && !stopped)
+    {
+        if (!stopped)
+        {
+            converter -= Time.deltaTime;
+            currentTime = (int)converter;
+        }
+        if (currentTime <= 0 && PlayerController.currentHealth > 0 && !stopped)
         {
             if (Level != 5)
             {
@@ -74,49 +69,51 @@ public class GameManager : MonoBehaviour
                 asteroidSpawner.Stop();
                 DespawnEverything();
                 Level++;
-	            ResetTimer();
+                ResetTimer();
             }
         }
-	}
-    
-	void ResetTimer(){
-        if(Level != 5){
+    }
+
+    void ResetTimer()
+    {
+        if (Level != 5)
+        {
             converter = LevelLengths[Level - 1];
             currentTime = (int)LevelLengths[Level - 1];
             timer.Reset();
         }
-        else{
+        else
+        {
             timer.UI.enabled = false;
         }
-	}
+    }
 
     public void StartLevel()
     {
-	    stopped = false;
-	    if (Level != 5)
-	    {
-		    timer.UI.enabled = true;
-	    }
+        stopped = false;
+        if (Level != 5)
+        {
+            timer.UI.enabled = true;
+        }
         asteroidSpawner.Begin();
         Background.GetComponent<SpriteRenderer>().sprite = LevelSprites[Random.Range(0, 2)];
         AudioManager.Instance.Play("GameplaySong");
-        
         switch (Level)
         {
             case 1:
-	            CurrentLevelLength = LevelLengths[0];
+                CurrentLevelLength = LevelLengths[0];
                 SpawnEnemies(10);
                 break;
             case 2:
-	            CurrentLevelLength = LevelLengths[1];
+                CurrentLevelLength = LevelLengths[1];
                 SpawnEnemies(20);
                 break;
             case 3:
-	            CurrentLevelLength = LevelLengths[2];
+                CurrentLevelLength = LevelLengths[2];
                 SpawnEnemies(30);
                 break;
             case 4:
-	            CurrentLevelLength = LevelLengths[3];
+                CurrentLevelLength = LevelLengths[3];
                 SpawnEnemies(40);
                 break;
             case 5:
@@ -129,8 +126,8 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
-	    CloseShop();
-		timer.Start();
+        CloseShop();
+        timer.Start();
     }
 
     void OpenShop()

@@ -4,8 +4,6 @@ using UnityEditor;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Rendering.Universal;
-using UnityEngine.SceneManagement;
-using TMPro;
 using Object = UnityEngine.Object;
 
 public class PlayerController : MonoBehaviour
@@ -43,7 +41,7 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         Enum.TryParse<SpaceshipsEnum>(PlayerPrefs.GetString("ChosenShip"), out ChosenSpaceship);
-        
+
         Object[] data = AssetDatabase.LoadAllAssetsAtPath(AssetDatabase.GetAssetPath(texture));
         if (data != null)
         {
@@ -111,12 +109,12 @@ public class PlayerController : MonoBehaviour
     {
         overHeat.value = value;
     }
-    
+
     private void updateMoney()
     {
         credits.text = Money.ToString();
     }
-    
+
     private void Slowdown(int effectAmount)
     {
         speed = effectAmount;
@@ -135,7 +133,7 @@ public class PlayerController : MonoBehaviour
         shipwreck.GetComponent<ShipWreckController>().CreateWreck(ChosenSpaceship.ToString());
         //Some transition?
         //SceneManager.LoadScene(2);
-        GameOverController.ShowGameOverMenu();
+        GameOverController.ShowGameOverMenu("You died!");
         Destroy(gameObject);
     }
 
