@@ -1,8 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;     
+using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class main_menu_script : MonoBehaviour
 {
@@ -12,9 +15,11 @@ public class main_menu_script : MonoBehaviour
     public List<GameObject> availableSpaceShips;
     public GameObject mainMenu;
     public GameObject gearMenu;
+
     
     public void StartGame()
     {
+        AudioManager.Instance.StopAll();
         foreach (Transform child in gearMenu.transform)
         {
 
@@ -48,6 +53,16 @@ public class main_menu_script : MonoBehaviour
         }
         
         SceneManager.LoadScene(1);
+    }
+
+    private void Start()
+    {
+        AudioManager.Instance.Play("MenuSong");
+    }
+
+    public void SliderSetVolume(float volume)
+    {
+        AudioManager.Instance.setVolume(volume);
     }
 
     public void SwitchToGearMenu()

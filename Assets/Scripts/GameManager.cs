@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
@@ -11,7 +6,6 @@ public class GameManager : MonoBehaviour
     [Header("Player related components")]
     public GameObject Player;
     PlayerController PlayerController;
-
 
     [Header("Enemy related components")]
     public GameObject Enemy;
@@ -41,6 +35,7 @@ public class GameManager : MonoBehaviour
     bool stopped;
     private GameOverController gameOverMenu;
 
+
     void Awake()
     {
         Instantiate(Player, new Vector2(0, 0), Quaternion.identity);
@@ -60,7 +55,7 @@ public class GameManager : MonoBehaviour
         converter = LevelLengths[0];
         Level = 1;
         stopped = false;
- 
+
         timer.Start();
         StartLevel();
     }
@@ -88,51 +83,56 @@ public class GameManager : MonoBehaviour
                 asteroidSpawner.Stop();
                 DespawnEverything();
                 Level++;
-	            ResetTimer();
+                ResetTimer();
             }
         }
-	}
-    
-	void ResetTimer(){
-        if(Level != 5){
+    }
+
+    void ResetTimer()
+    {
+        if (Level != 5)
+        {
             converter = LevelLengths[Level - 1];
             currentTime = (int)LevelLengths[Level - 1];
             timer.Reset();
         }
-        else{
+        else
+        {
             timer.UI.enabled = false;
         }
-	}
+    }
 
     public void StartLevel()
     {
-	    stopped = false;
-	    if (Level != 5)
-	    {
-		    timer.UI.enabled = true;
-	    }
+        stopped = false;
+        if (Level != 5)
+        {
+            timer.UI.enabled = true;
+        }
         asteroidSpawner.Begin();
         Background.GetComponent<SpriteRenderer>().sprite = LevelSprites[Random.Range(0, 2)];
-        
+        AudioManager.Instance.Play("GameplaySong");
         switch (Level)
         {
             case 1:
-	            CurrentLevelLength = LevelLengths[0];
+                CurrentLevelLength = LevelLengths[0];
                 SpawnEnemies(10);
                 break;
             case 2:
-	            CurrentLevelLength = LevelLengths[1];
+                CurrentLevelLength = LevelLengths[1];
                 SpawnEnemies(20);
                 break;
             case 3:
-	            CurrentLevelLength = LevelLengths[2];
+                CurrentLevelLength = LevelLengths[2];
                 SpawnEnemies(30);
                 break;
             case 4:
-	            CurrentLevelLength = LevelLengths[3];
+                CurrentLevelLength = LevelLengths[3];
                 SpawnEnemies(40);
                 break;
             case 5:
+                AudioManager.Instance.Stop("GameplaySong");
+                AudioManager.Instance.Play("BossScene");
                 CurrentLevelLength = Mathf.Infinity;
                 PlayerController.transform.position = new Vector2(30, -10);
                 SpawnBoss();
@@ -140,13 +140,14 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
-	    CloseShop();
-		timer.Start();
+        CloseShop();
+        timer.Start();
     }
 
     void OpenShop()
     {
         Shop.gameObject.active = true;
+        AudioManager.Instance.Stop("GameplaySong");
     }
 
     void CloseShop()
