@@ -1204,6 +1204,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 72
   CurrentLevelLength: 0
+  enemiesAmountThreshold: 0
   LevelLengths: []
   Level: 1
   LevelSprites:
@@ -1213,6 +1214,9 @@ MonoBehaviour:
   Background: {fileID: 1686446233}
   AsteroidParent: {fileID: 1384483516}
   EnemiesParent: {fileID: 1029040512}
+  HorizontalCollider: {fileID: 1210520569}
+  VerticalCollider: {fileID: 530462526}
+  Enemies: {fileID: 1029040511}
 --- !u!1001 &614411561
 PrefabInstance:
   m_ObjectHideFlags: 0
