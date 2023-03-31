@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
 
     private void updateMoney()
     {
-        credits.text = Money.ToString();
+        credits.text = "Credits: " + Money.ToString();
     }
 
     private void Slowdown(int effectAmount)
