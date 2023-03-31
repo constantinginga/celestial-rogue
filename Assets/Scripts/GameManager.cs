@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     [Header("Player related components")]
     public GameObject Player;
     PlayerController PlayerController;
+    ShootingController shootingController;
 
     [Header("Enemy related components")]
     public GameObject Enemy;
@@ -34,13 +35,13 @@ public class GameManager : MonoBehaviour
     Timer timer;
     AteroidSpawner asteroidSpawner;
     bool stopped;
-    private GameOverController gameOverMenu;
 
     void Awake()
     {
         Instantiate(Player, new Vector2(0, 0), Quaternion.identity);
         Player = GameObject.FindGameObjectWithTag("Player");
         PlayerController = Player.GetComponentInChildren<PlayerController>();
+        shootingController = Player.GetComponentInChildren<ShootingController>();
         Shop = Player.GetComponentInChildren<ShopHandler>(true);
         timer = Player.GetComponentInChildren<Timer>();
         boundaryCols = new List<BoxCollider2D>();
@@ -50,7 +51,7 @@ public class GameManager : MonoBehaviour
         boundaryCols.Add(VerticalCollider.GetComponents<BoxCollider2D>()[0]);
         boundaryCols.Add(VerticalCollider.GetComponents<BoxCollider2D>()[1]);
         enemiesAmountThreshold = 5;
-        LevelLengths = new float[] { 60.0F, 120.0F, 180.0F, 240.0F };
+        LevelLengths = new float[] { 6.0F, 120.0F, 180.0F, 240.0F };
         currentTime = (int)LevelLengths[0];
         converter = LevelLengths[0];
         Level = 1;
@@ -80,6 +81,7 @@ public class GameManager : MonoBehaviour
                 //Some transition maybe?
                 stopped = true;
                 timer.stopped = true;
+                shootingController.shootAction.Disable();
                 OpenShop();
                 //Despawn everything in the background meantime
                 asteroidSpawner.Stop();
@@ -154,6 +156,7 @@ public class GameManager : MonoBehaviour
 
     void CloseShop()
     {
+        shootingController.shootAction.Enable();
         Shop.gameObject.active = false;
     }
 

@@ -14,13 +14,16 @@ public class AteroidSpawner : MonoBehaviour
     [SerializeField] private float trajectoryVariance = 15.0f;
     [SerializeField] private LayerMask layerMask;
 	[SerializeField] private Transform parent;
+    bool stopSpawning = false;
 
 	public void Begin(){
 		InvokeRepeating(nameof(spawn), this.spawnRate, this.spawnRate );
+        stopSpawning = false;
 		spawnStationary();
 	}
 	
 	public void Stop(){
+        stopSpawning = true;
 		CancelInvoke();
 	}
 
@@ -44,17 +47,20 @@ public class AteroidSpawner : MonoBehaviour
 
     private void spawnStationary()
     {
-        for (int i = 0; i < spawnAmountStationary; i++)
+        if (!stopSpawning)
         {
-            Vector3 spawnPoint = new Vector3(Random.Range(-50, 50),Random.Range(-20, 20),0);
-            
-            Collider[] colliders = Physics.OverlapSphere(spawnPoint, 0.1f, layerMask);
-
-
-            if (colliders.Length == 0)
+            for (int i = 0; i < spawnAmountStationary; i++)
             {
-                AsteroidScript asteroid = Instantiate(this.asteroidPrefab, spawnPoint, this.transform.rotation);
-                asteroid.size = asteroid.maxSize + 1f;
+                Vector3 spawnPoint = new Vector3(Random.Range(-50, 50),Random.Range(-20, 20),0);
+            
+                Collider[] colliders = Physics.OverlapSphere(spawnPoint, 0.1f, layerMask);
+
+
+                if (colliders.Length == 0)
+                {
+                    AsteroidScript asteroid = Instantiate(this.asteroidPrefab, spawnPoint, this.transform.rotation);
+                    asteroid.size = asteroid.maxSize + 1f;
+                }
             }
         }
     }
