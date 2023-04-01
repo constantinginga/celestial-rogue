@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     public Texture2D texture;
     public Light2D EngineLight;
     private Rigidbody2D rb;
-    private InputController input;
+    public InputController input;
     public delegate void TakeDamageDelegate(int damageAmount);
     public event TakeDamageDelegate TakeDamageEvent;
     public GameOverController GameOverController;
@@ -116,7 +116,7 @@ public class PlayerController : MonoBehaviour
 
     private void updateMoney()
     {
-        credits.text = Money.ToString();
+        credits.text = "Credits: " + Money.ToString();
     }
 
     private void Slowdown(int effectAmount)

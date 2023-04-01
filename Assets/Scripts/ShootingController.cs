@@ -21,7 +21,7 @@ public class ShootingController : MonoBehaviour
     private bool overHeat = false;
     public bool isShotGun = false;
     private InputActionAsset asset;
-    private InputAction shootAction;
+    public InputAction shootAction;
     private InputActionMap weapon;
     private Coroutine shootingCoroutine;
     private PlayerController playerController;
