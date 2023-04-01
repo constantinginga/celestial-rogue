@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +12,8 @@ public class ShopHandler : MonoBehaviour
         ReduceOverheatButton;
     GameManager GameManager;
     PlayerController playerController;
+
+    ShootingController[] shootingController;
 
     Dictionary<UpgradeType, int> upgradeCosts;
 
@@ -29,33 +30,21 @@ public class ShopHandler : MonoBehaviour
     {
         GameManager = GameObject.FindFirstObjectByType<GameManager>();
         playerController = GameObject.FindFirstObjectByType<PlayerController>();
+        shootingController = GameObject.FindObjectsOfType<ShootingController>();
         upgradeCosts = new Dictionary<UpgradeType, int>()
         {
             {
                 UpgradeType.RestoreHP,
-                5 * (playerController.maxHealth - playerController.currentHealth)
+                4 * (playerController.maxHealth - playerController.currentHealth) + 100
             },
             { UpgradeType.UpgradeHP, (int)(3 * playerController.maxHealth) },
-            { UpgradeType.UpgradeSpeed, (int)(200 * playerController.speed) },
-            { UpgradeType.UpgradeDamage, 10 },
-            { UpgradeType.ReduceOverheat, 10 }
+            { UpgradeType.UpgradeSpeed, (int)(20 * playerController.speed) },
+            { UpgradeType.UpgradeDamage, 100 * shootingController[0].damageAmount },
+            { UpgradeType.ReduceOverheat, (int)(20 * shootingController[0].overHeatThreshold) }
         };
-    }
 
-    // void OnBecameVisible()
-    // {
-    //     upgradeCosts = new Dictionary<UpgradeType, int>()
-    //     {
-    //         {
-    //             UpgradeType.RestoreHP,
-    //             5 * (playerController.maxHealth - playerController.currentHealth)
-    //         },
-    //         { UpgradeType.UpgradeHP, (int)(3 * playerController.maxHealth) },
-    //         { UpgradeType.UpgradeSpeed, 10 },
-    //         { UpgradeType.UpgradeDamage, 10 },
-    //         { UpgradeType.ReduceOverheat, 10 }
-    //     };
-    // }
+        CheckButtons();
+    }
 
     void Update()
     {
@@ -64,7 +53,6 @@ public class ShopHandler : MonoBehaviour
 
     private void CheckButtons()
     {
-        //Debug.Log($"{playerController.currentHealth}, {playerController.maxHealth}");
         RestoreHpButton.interactable =
             playerController.Money >= upgradeCosts[UpgradeType.RestoreHP]
             && playerController.currentHealth < playerController.maxHealth;
@@ -85,14 +73,18 @@ public class ShopHandler : MonoBehaviour
 
     public void RestoreHP()
     {
-        playerController.UpdateShip(UpgradeType.RestoreHP, upgradeCosts[UpgradeType.RestoreHP]);
+        playerController.UpdateShip(UpgradeType.RestoreHP, upgradeCosts[UpgradeType.RestoreHP], 1);
         upgradeCosts[UpgradeType.RestoreHP] =
-            5 * (playerController.maxHealth - playerController.currentHealth);
+            4 * (playerController.maxHealth - playerController.currentHealth);
     }
 
     public void UpgradeHP()
     {
-        playerController.UpdateShip(UpgradeType.UpgradeHP, upgradeCosts[UpgradeType.UpgradeHP]);
+        playerController.UpdateShip(
+            UpgradeType.UpgradeHP,
+            upgradeCosts[UpgradeType.UpgradeHP],
+            1.1f
+        );
         upgradeCosts[UpgradeType.UpgradeHP] = (int)(3 * playerController.maxHealth);
     }
 
@@ -100,24 +92,39 @@ public class ShopHandler : MonoBehaviour
     {
         playerController.UpdateShip(
             UpgradeType.UpgradeSpeed,
-            upgradeCosts[UpgradeType.UpgradeSpeed]
+            upgradeCosts[UpgradeType.UpgradeSpeed],
+            1.1f
         );
-        upgradeCosts[UpgradeType.UpgradeSpeed] = (int)(200 * playerController.speed);
+        upgradeCosts[UpgradeType.UpgradeSpeed] = (int)(20 * playerController.speed);
     }
 
     public void UpgradeDamage()
     {
         playerController.UpdateShip(
             UpgradeType.UpgradeDamage,
-            upgradeCosts[UpgradeType.UpgradeDamage]
+            upgradeCosts[UpgradeType.UpgradeDamage],
+            1
         );
+        shootingController[0].damageAmount += 1;
+        shootingController[1].damageAmount += 1;
+        upgradeCosts[UpgradeType.UpgradeDamage] = 100 * shootingController[0].damageAmount;
     }
 
     public void ReduceOverheat()
     {
+        shootingController[0].overHeatThreshold = (int)(
+            shootingController[0].overHeatThreshold * 1.1f
+        );
+        shootingController[1].overHeatThreshold = (int)(
+            shootingController[1].overHeatThreshold * 1.1f
+        );
         playerController.UpdateShip(
             UpgradeType.ReduceOverheat,
-            upgradeCosts[UpgradeType.ReduceOverheat]
+            upgradeCosts[UpgradeType.ReduceOverheat],
+            shootingController[0].overHeatThreshold
+        );
+        upgradeCosts[UpgradeType.ReduceOverheat] = (int)(
+            20 * shootingController[0].overHeatThreshold
         );
     }
 }

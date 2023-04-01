@@ -10,33 +10,32 @@ public class ShootingController : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform shootingPoint;
     public float bulletSpeed = 10f;
+
     public int damageAmount = 1;
 
-	public float shootDelay = 0.3f;
-	public LayerMask opponentLayer;
-	private float shootAmount = 0;
-	public int overHeatThreshold = 10;
-	private bool isPlayer = false;
-	private bool overHeat = false;
-	public bool isShotGun = false;
-	private InputActionAsset asset;
+    public float shootDelay = 0.3f;
+    public LayerMask opponentLayer;
+    private float shootAmount = 0;
+    public int overHeatThreshold = 10;
+    private bool isPlayer = false;
+    private bool overHeat = false;
+    public bool isShotGun = false;
+    private InputActionAsset asset;
     private InputAction shootAction;
     private InputActionMap weapon;
     private Coroutine shootingCoroutine;
     private PlayerController playerController;
-    
-		
+
     private float lastShotTime = -Mathf.Infinity;
 
     private void Awake()
     {
+        playerController = gameObject.GetComponentInParent<PlayerController>();
+        if (playerController != null)
+        {
+            isPlayer = true;
+        }
 
-	    playerController = gameObject.GetComponentInParent<PlayerController>();
-	    if (playerController != null)
-	    {
-		    isPlayer = true;
-	    }
-	    
         if (transform.parent.gameObject.layer == 7)
         {
             asset = GetComponentInParent<InputController>().asset;
@@ -79,7 +78,7 @@ public class ShootingController : MonoBehaviour
 
         if (shootingCoroutine == null)
         {
-	        shootingCoroutine = StartCoroutine(StartShooting());
+            shootingCoroutine = StartCoroutine(StartShooting());
         }
     }
 
@@ -93,97 +92,99 @@ public class ShootingController : MonoBehaviour
 
         if (isPlayer)
         {
-	        StartCoroutine(coolDown());
+            StartCoroutine(coolDown());
         }
-        
     }
 
-
-	private void Update()
-	{
-		if (isPlayer)
-		{
-			playerController.SendMessage("updateOverheat", shootAmount);
-		}
-	}
-
-	public IEnumerator coolDown()
-	{
-		if (overHeat && shootAmount < overHeatThreshold + 1)
-		{
-			shootAmount += overHeatThreshold / 2;
-			overHeat = false;
-		}
-		
-		float loopFor = shootAmount;
-		for (int i = 0; i < loopFor; i++)
-		{
-			if (shootAmount > 0)
-			{
-				if (shootingCoroutine != null)
-				{
-					break;
-				}
-				shootAmount -= 1;	
-			}
-			yield return new WaitForSeconds(1);
-		}
-		StopCoroutine(coolDown());
-	}
-
-	public IEnumerator StartShooting()
+    private void Update()
     {
-	    while (true)
+        if (isPlayer)
         {
-
-	        if (shootAmount >= overHeatThreshold && isPlayer)
-	        {
-		        overHeat = true;
-	        }
-	        else
-	        {
-		        if (isShotGun)
-		        {
-			        // Diagonal bullets
-			        Quaternion leftRotation = Quaternion.Euler(shootingPoint.eulerAngles.x, shootingPoint.eulerAngles.y, shootingPoint.eulerAngles.z - 15);
-			        Quaternion rightRotation = Quaternion.Euler(shootingPoint.eulerAngles.x, shootingPoint.eulerAngles.y, shootingPoint.eulerAngles.z + 15);
-			        ShootBullet(shootingPoint, leftRotation);
-			        ShootBullet(shootingPoint, rightRotation);
-		        }
-		        
-		        ShootBullet(shootingPoint, shootingPoint.rotation);
-		        
-		        if (isPlayer)
-		        {
-			        FindObjectOfType<AudioManager>().Play("Shoot");
-			        shootAmount += 0.5f;
-		        }
-		        
-	        }
-	        
-	        yield return new WaitForSeconds(shootDelay);
-
+            playerController.SendMessage("updateOverheat", shootAmount);
         }
     }
-	
-	private void ShootBullet(Transform shootingPoint, Quaternion rotation)
-	{
-		GameObject bullet = Instantiate(bulletPrefab, shootingPoint.position, rotation);
 
-		if (bullet.TryGetComponent<BulletController>(out BulletController bulletComponent))
-		{
-			bulletComponent.parentLayer = transform.parent.gameObject.layer;
-			bulletComponent.damageAmount = damageAmount;
-			bulletComponent.opponentLayer = opponentLayer.value;
-		}
-		
-		// Calculate the direction of the bullet based on the rotation
-		Vector2 direction = rotation * Vector2.up;
+    public IEnumerator coolDown()
+    {
+        if (overHeat && shootAmount < overHeatThreshold + 1)
+        {
+            shootAmount += overHeatThreshold / 2;
+            overHeat = false;
+        }
 
-		bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
-		Destroy(bullet, 3f); // Destroy the bullet after 3 seconds
-	}
+        float loopFor = shootAmount;
+        for (int i = 0; i < loopFor; i++)
+        {
+            if (shootAmount > 0)
+            {
+                if (shootingCoroutine != null)
+                {
+                    break;
+                }
+                shootAmount -= 1;
+            }
+            yield return new WaitForSeconds(1);
+        }
+        StopCoroutine(coolDown());
+    }
 
+    public IEnumerator StartShooting()
+    {
+        while (true)
+        {
+            if (shootAmount >= overHeatThreshold && isPlayer)
+            {
+                overHeat = true;
+            }
+            else
+            {
+                if (isShotGun)
+                {
+                    // Diagonal bullets
+                    Quaternion leftRotation = Quaternion.Euler(
+                        shootingPoint.eulerAngles.x,
+                        shootingPoint.eulerAngles.y,
+                        shootingPoint.eulerAngles.z - 15
+                    );
+                    Quaternion rightRotation = Quaternion.Euler(
+                        shootingPoint.eulerAngles.x,
+                        shootingPoint.eulerAngles.y,
+                        shootingPoint.eulerAngles.z + 15
+                    );
+                    ShootBullet(shootingPoint, leftRotation);
+                    ShootBullet(shootingPoint, rightRotation);
+                }
+
+                ShootBullet(shootingPoint, shootingPoint.rotation);
+
+                if (isPlayer)
+                {
+                    FindObjectOfType<AudioManager>().Play("Shoot");
+                    shootAmount += 0.5f;
+                }
+            }
+
+            yield return new WaitForSeconds(shootDelay);
+        }
+    }
+
+    private void ShootBullet(Transform shootingPoint, Quaternion rotation)
+    {
+        GameObject bullet = Instantiate(bulletPrefab, shootingPoint.position, rotation);
+
+        if (bullet.TryGetComponent<BulletController>(out BulletController bulletComponent))
+        {
+            bulletComponent.parentLayer = transform.parent.gameObject.layer;
+            bulletComponent.damageAmount = damageAmount;
+            bulletComponent.opponentLayer = opponentLayer.value;
+        }
+
+        // Calculate the direction of the bullet based on the rotation
+        Vector2 direction = rotation * Vector2.up;
+
+        bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
+        Destroy(bullet, 3f); // Destroy the bullet after 3 seconds
+    }
 
     private void OnDestroy()
     {

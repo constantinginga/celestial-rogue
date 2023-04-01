@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
             EngineEmission.Play();
             if (!AudioManager.Instance.isPlayed("ShipThruster"))
             {
-                AudioManager.Instance.Play("ShipThruster");   
+                AudioManager.Instance.Play("ShipThruster");
             }
             EngineLight.enabled = true;
         }
@@ -107,6 +107,10 @@ public class PlayerController : MonoBehaviour
 
     private void updateOverheat(int value)
     {
+        if (value > overHeat.maxValue)
+        {
+            overHeat.maxValue = value;
+        }
         overHeat.value = value;
     }
 
@@ -137,7 +141,7 @@ public class PlayerController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void UpdateShip(ShopHandler.UpgradeType type, int cost)
+    public void UpdateShip(ShopHandler.UpgradeType type, int cost, float effectAmount)
     {
         // extra check, just in case
         if (Money < cost)
@@ -152,18 +156,15 @@ public class PlayerController : MonoBehaviour
                 UpdateHealthBar();
                 break;
             case ShopHandler.UpgradeType.UpgradeHP:
-                // increase max hp by 10%
-                maxHealth = (int)(maxHealth * 1.1f);
+                maxHealth = (int)(maxHealth * effectAmount);
                 break;
             case ShopHandler.UpgradeType.UpgradeDamage:
-                //ReduceOverheat();
-                break;
+            //
             case ShopHandler.UpgradeType.UpgradeSpeed:
-                // increase speed by 10%
-                speed *= 1.1f;
+                speed *= effectAmount;
                 break;
             case ShopHandler.UpgradeType.ReduceOverheat:
-                // reduce overheat by 10%
+                updateOverheat((int)effectAmount);
                 break;
         }
 
