@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
         boundaryCols.Add(VerticalCollider.GetComponents<BoxCollider2D>()[0]);
         boundaryCols.Add(VerticalCollider.GetComponents<BoxCollider2D>()[1]);
         enemiesAmountThreshold = 5;
-        LevelLengths = new float[] { 6.0F, 120.0F, 180.0F, 240.0F };
+	    LevelLengths = new float[] { 60.0F, 120.0F, 180.0F, 240.0F };
         currentTime = (int)LevelLengths[0];
         converter = LevelLengths[0];
         Level = 1;
