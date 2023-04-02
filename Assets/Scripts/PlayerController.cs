@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
             EngineEmission.Play();
             if (!AudioManager.Instance.isPlayed("ShipThruster"))
             {
-                AudioManager.Instance.Play("ShipThruster");   
+                AudioManager.Instance.Play("ShipThruster");
             }
             EngineLight.enabled = true;
         }
@@ -107,6 +107,10 @@ public class PlayerController : MonoBehaviour
 
     private void updateOverheat(int value)
     {
+        if (value > overHeat.maxValue)
+        {
+            overHeat.maxValue = value;
+        }
         overHeat.value = value;
     }
 
@@ -135,6 +139,37 @@ public class PlayerController : MonoBehaviour
         //SceneManager.LoadScene(2);
         GameOverController.ShowGameOverMenu("You died!");
         Destroy(gameObject);
+    }
+
+    public void UpdateShip(ShopHandler.UpgradeType type, int cost, float effectAmount)
+    {
+        // extra check, just in case
+        if (Money < cost)
+        {
+            return;
+        }
+
+        switch (type)
+        {
+            case ShopHandler.UpgradeType.RestoreHP:
+                currentHealth = maxHealth;
+                UpdateHealthBar();
+                break;
+            case ShopHandler.UpgradeType.UpgradeHP:
+                maxHealth = (int)(maxHealth * effectAmount);
+                break;
+            case ShopHandler.UpgradeType.UpgradeDamage:
+            //
+            case ShopHandler.UpgradeType.UpgradeSpeed:
+                speed *= effectAmount;
+                break;
+            case ShopHandler.UpgradeType.ReduceOverheat:
+                updateOverheat((int)effectAmount);
+                break;
+        }
+
+        Money -= cost;
+        updateMoney();
     }
 
     private void OnEnable()
