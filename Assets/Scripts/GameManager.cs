@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
         LevelLengths = new float[] { 60.0F, 120.0F, 180.0F, 240.0F };
         currentTime = (int)LevelLengths[0];
         converter = LevelLengths[0];
-        Level = 1;
+	    Level = 1;
         stopped = false;
 
         timer.Start();
@@ -112,8 +112,8 @@ public class GameManager : MonoBehaviour
         if (Level != 5)
         {
             timer.UI.enabled = true;
+	        asteroidSpawner.Begin();
         }
-        asteroidSpawner.Begin();
         Background.GetComponent<SpriteRenderer>().sprite = LevelSprites[Random.Range(0, 2)];
         AudioManager.Instance.Play("GameplaySong");
         switch (Level)
@@ -138,7 +138,8 @@ public class GameManager : MonoBehaviour
                 AudioManager.Instance.Stop("GameplaySong");
                 AudioManager.Instance.Play("BossScene");
                 CurrentLevelLength = Mathf.Infinity;
-                PlayerController.transform.position = new Vector2(30, -10);
+	            PlayerController.transform.position = new Vector2(30, -10);
+	            asteroidSpawner.Stop();
                 SpawnBoss();
                 break;
             default:
@@ -181,7 +182,8 @@ public class GameManager : MonoBehaviour
         BoxCollider2D collider = boundaryCols[index];
         while (true)
         {
-            GameObject tmp = new GameObject();
+	        GameObject tmp = new GameObject();
+	        tmp.name = "Enemy Spawn";
             tmp.transform.position = new Vector3(
                 Random.Range(collider.bounds.min.x, collider.bounds.max.x),
                 Random.Range(collider.bounds.min.y, collider.bounds.max.y),
@@ -190,10 +192,12 @@ public class GameManager : MonoBehaviour
             tmp.AddComponent<CircleCollider2D>();
             tmp.GetComponent<CircleCollider2D>().isTrigger = true;
             tmp.GetComponent<CircleCollider2D>().radius = 0.235F;
-            CircleCollider2D col = tmp.GetComponent<CircleCollider2D>();
+	        CircleCollider2D col = tmp.GetComponent<CircleCollider2D>();
+	        Vector2 result = tmp.transform.position;
+	        Destroy(tmp);
             if (!col.IsTouchingLayers(CollisionLayer))
             {
-                return tmp.transform.position;
+                return result;
             }
         }
     }

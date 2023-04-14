@@ -167,7 +167,8 @@ public class BossController : MonoBehaviour
     {
         while (true)
         {
-            GameObject tmp = new GameObject();
+	        GameObject tmp = new GameObject();
+	        tmp.name = "Boss AOE";
             tmp.transform.position = new Vector3(
                 Random.Range(-50F, 50F),
                 Random.Range(-20F, 20F),
@@ -175,10 +176,12 @@ public class BossController : MonoBehaviour
             );
             tmp.AddComponent<CircleCollider2D>();
             tmp.GetComponent<CircleCollider2D>().isTrigger = true;
-            CircleCollider2D col = tmp.GetComponent<CircleCollider2D>();
+	        CircleCollider2D col = tmp.GetComponent<CircleCollider2D>();
+	        Vector3 result = tmp.transform.position;
+            Destroy(tmp);
             if (!col.IsTouchingLayers(blockingLayer))
             {
-                return tmp.transform.position;
+	            return result;
             }
         }
     }
