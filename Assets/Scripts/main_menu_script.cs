@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,20 +10,17 @@ using Random = UnityEngine.Random;
 
 public class main_menu_script : MonoBehaviour
 {
-
     public GameObject[] spaceShips;
     private GameObject ship;
     public List<GameObject> availableSpaceShips;
     public GameObject mainMenu;
     public GameObject gearMenu;
 
-    
     public void StartGame()
     {
         AudioManager.Instance.StopAll();
         foreach (Transform child in gearMenu.transform)
         {
-
             if (child.gameObject.activeSelf)
             {
                 switch (child.name)
@@ -66,7 +63,7 @@ public class main_menu_script : MonoBehaviour
                 }
             }
         }
-        
+
         SceneManager.LoadScene(1);
     }
 
@@ -88,23 +85,30 @@ public class main_menu_script : MonoBehaviour
         availableSpaceShips[0].SetActive(true);
     }
 
-    public void SwitchSpaceShip(int index) {
-        for (int i = 0; i < availableSpaceShips.Count; i++) {
-            if (i == index) {
+    public void SwitchSpaceShip(int index)
+    {
+        for (int i = 0; i < availableSpaceShips.Count; i++)
+        {
+            if (i == index)
+            {
                 availableSpaceShips[i].SetActive(true);
-            } else {
+            }
+            else
+            {
                 availableSpaceShips[i].SetActive(false);
             }
         }
     }
-    
-    private void SelectRandomSpaceShips() {
+
+    private void SelectRandomSpaceShips()
+    {
         Shuffle();
         availableSpaceShips.Clear();
         availableSpaceShips.AddRange(spaceShips.Take(3));
     }
-    
-    public void OnLeftArrowClick() {
+
+    public void OnLeftArrowClick()
+    {
         int currentIndex = GetCurrentSpaceShipIndex();
 
         if (currentIndex == 0)
@@ -115,14 +119,15 @@ public class main_menu_script : MonoBehaviour
         {
             currentIndex -= 1;
         }
-        
+
         SwitchSpaceShip(currentIndex);
     }
 
-    public void OnRightArrowClick() {
+    public void OnRightArrowClick()
+    {
         int currentIndex = GetCurrentSpaceShipIndex();
-  
-        if (currentIndex == availableSpaceShips.Count() - 1 )
+
+        if (currentIndex == availableSpaceShips.Count() - 1)
         {
             currentIndex = 0;
         }
@@ -130,22 +135,27 @@ public class main_menu_script : MonoBehaviour
         {
             currentIndex += 1;
         }
-        
+
         SwitchSpaceShip(currentIndex);
     }
 
-    private int GetCurrentSpaceShipIndex() {
-        for (int i = 0; i < spaceShips.Length; i++) {
-            if (spaceShips[i].activeSelf) {
+    private int GetCurrentSpaceShipIndex()
+    {
+        for (int i = 0; i < spaceShips.Length; i++)
+        {
+            if (spaceShips[i].activeSelf)
+            {
                 return i;
             }
         }
-        
+
         return 0;
     }
-    
-    public void Shuffle() {
-        for (int i = 0; i < spaceShips.Length; i++) {
+
+    public void Shuffle()
+    {
+        for (int i = 0; i < spaceShips.Length; i++)
+        {
             int rnd = Random.Range(0, spaceShips.Length);
             ship = spaceShips[rnd];
             spaceShips[rnd] = spaceShips[i];
@@ -155,8 +165,6 @@ public class main_menu_script : MonoBehaviour
 
     public void QuitGame()
     {
-        Application.Quit(); 
+        Application.Quit();
     }
-
-
 }
