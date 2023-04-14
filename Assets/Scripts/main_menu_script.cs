@@ -24,6 +24,12 @@ public class main_menu_script : MonoBehaviour
             {
                 switch (child.name)
                 {
+                    case "Ship1":
+                        PlayerPrefs.SetString(
+                            "ChosenShip",
+                            PlayerController.SpaceshipsEnum.Player_Red.ToString()
+                        );
+                        break;
                     case "Ship2":
                         PlayerPrefs.SetString(
                             "ChosenShip",
