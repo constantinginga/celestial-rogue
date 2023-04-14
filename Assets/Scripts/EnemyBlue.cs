@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
@@ -39,7 +39,7 @@ public class EnemyBlue : MonoBehaviour
     }
 
     void CreateDebuffAOE(){
-        Instantiate(Resources.Load ("Prefabs/DebuffAOE") as GameObject, transform.position, Quaternion.identity);
+		Instantiate(Resources.Load ("Prefabs/DebuffAOE") as GameObject, transform.position, Quaternion.identity);
     }
 
     void startDebuffCooldDown()
@@ -64,7 +64,8 @@ public class EnemyBlue : MonoBehaviour
 
     Transform chooseRandomLocation(){
         while(true){
-                GameObject tmp = new GameObject();
+	        GameObject tmp = new GameObject();
+	        tmp.name = "Blue enemy waypoint" + GetInstanceID();
                 tmp.transform.position = new Vector3(Random.Range(-50F, 50F), Random.Range(-20F, 20F), 0);
                 tmp.AddComponent<CircleCollider2D>();
                 tmp.GetComponent<CircleCollider2D>().isTrigger = true;
