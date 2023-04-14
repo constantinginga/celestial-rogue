@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,14 @@ public class ShopHandler : MonoBehaviour
         UpgradeSpeedButton,
         UpgradeDamageButton,
         ReduceOverheatButton;
+
+    public TextMeshProUGUI CreditsRemaining;
+
+    private TextMeshProUGUI RestoreHpCost,
+        UpgradeHpCost,
+        UpgradeSpeedCost,
+        UpgradeDamageCost,
+        ReduceOverheatCost;
     GameManager GameManager;
     PlayerController playerController;
 
@@ -43,12 +52,25 @@ public class ShopHandler : MonoBehaviour
             { UpgradeType.ReduceOverheat, (int)(20 * shootingController[0].overHeatThreshold) }
         };
 
+        GetCostsUI();
+
         CheckButtons();
+        UpdateCostsUI();
     }
 
     void Update()
     {
         CheckButtons();
+        UpdateCostsUI();
+    }
+
+    private void GetCostsUI()
+    {
+        RestoreHpCost = RestoreHpButton.GetComponentsInChildren<TextMeshProUGUI>()[1];
+        UpgradeHpCost = UpgradeHpButton.GetComponentsInChildren<TextMeshProUGUI>()[1];
+        UpgradeSpeedCost = UpgradeSpeedButton.GetComponentsInChildren<TextMeshProUGUI>()[1];
+        UpgradeDamageCost = UpgradeDamageButton.GetComponentsInChildren<TextMeshProUGUI>()[1];
+        ReduceOverheatCost = ReduceOverheatButton.GetComponentsInChildren<TextMeshProUGUI>()[1];
     }
 
     private void CheckButtons()
@@ -64,6 +86,17 @@ public class ShopHandler : MonoBehaviour
             playerController.Money >= upgradeCosts[UpgradeType.UpgradeDamage];
         ReduceOverheatButton.interactable =
             playerController.Money >= upgradeCosts[UpgradeType.ReduceOverheat];
+    }
+
+    private void UpdateCostsUI()
+    {
+        CreditsRemaining.text = $"Credits: {playerController.Money}";
+
+        RestoreHpCost.text = upgradeCosts[UpgradeType.RestoreHP].ToString();
+        UpgradeHpCost.text = upgradeCosts[UpgradeType.UpgradeHP].ToString();
+        UpgradeSpeedCost.text = upgradeCosts[UpgradeType.UpgradeSpeed].ToString();
+        UpgradeDamageCost.text = upgradeCosts[UpgradeType.UpgradeDamage].ToString();
+        ReduceOverheatCost.text = upgradeCosts[UpgradeType.ReduceOverheat].ToString();
     }
 
     public void VentureForth()

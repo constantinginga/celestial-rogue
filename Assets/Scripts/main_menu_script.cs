@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class main_menu_script : MonoBehaviour
@@ -25,46 +26,39 @@ public class main_menu_script : MonoBehaviour
                 switch (child.name)
                 {
                     case "Ship1":
-                        PlayerPrefs.SetString(
-                            "ChosenShip",
-                            PlayerController.SpaceshipsEnum.Player_Red.ToString()
-                        );
+                        PlayerPrefs.SetString("ChosenShip", PlayerController.SpaceshipsEnum.Player_Red.ToString() );
+                        PlayerPrefs.SetFloat("ShipHealth", child.GetComponentsInChildren<Slider>()[0].value);
+                        PlayerPrefs.SetFloat("ShipSpeed", child.GetComponentsInChildren<Slider>()[1].value);
                         break;
                     case "Ship2":
-                        PlayerPrefs.SetString(
-                            "ChosenShip",
-                            PlayerController.SpaceshipsEnum.Player_Green.ToString()
-                        );
+                        PlayerPrefs.SetString("ChosenShip", PlayerController.SpaceshipsEnum.Player_Green.ToString() );
+                        PlayerPrefs.SetFloat("ShipHealth", child.GetComponentsInChildren<Slider>()[0].value);
+                        PlayerPrefs.SetFloat("ShipSpeed", child.GetComponentsInChildren<Slider>()[1].value);
                         break;
                     case "Ship3":
-                        PlayerPrefs.SetString(
-                            "ChosenShip",
-                            PlayerController.SpaceshipsEnum.Player_Pink.ToString()
-                        );
+                        PlayerPrefs.SetString("ChosenShip", PlayerController.SpaceshipsEnum.Player_Pink.ToString() );
+                        PlayerPrefs.SetFloat("ShipHealth", child.GetComponentsInChildren<Slider>()[0].value);
+                        PlayerPrefs.SetFloat("ShipSpeed", child.GetComponentsInChildren<Slider>()[1].value);
                         break;
                     case "Ship4":
-                        PlayerPrefs.SetString(
-                            "ChosenShip",
-                            PlayerController.SpaceshipsEnum.Player_Blue.ToString()
-                        );
+                        PlayerPrefs.SetString("ChosenShip", PlayerController.SpaceshipsEnum.Player_Blue.ToString() );
+                        PlayerPrefs.SetFloat("ShipHealth", child.GetComponentsInChildren<Slider>()[0].value);
+                        PlayerPrefs.SetFloat("ShipSpeed", child.GetComponentsInChildren<Slider>()[1].value);
                         break;
                     case "Ship5":
-                        PlayerPrefs.SetString(
-                            "ChosenShip",
-                            PlayerController.SpaceshipsEnum.Player_Grey.ToString()
-                        );
+                        PlayerPrefs.SetString("ChosenShip", PlayerController.SpaceshipsEnum.Player_Grey.ToString() );
+                        PlayerPrefs.SetFloat("ShipHealth", child.GetComponentsInChildren<Slider>()[0].value);
+                        PlayerPrefs.SetFloat("ShipSpeed", child.GetComponentsInChildren<Slider>()[1].value);
                         break;
                     case "Ship6":
-                        PlayerPrefs.SetString(
-                            "ChosenShip",
-                            PlayerController.SpaceshipsEnum.Player_White.ToString()
-                        );
+                        PlayerPrefs.SetString("ChosenShip", PlayerController.SpaceshipsEnum.Player_White.ToString() );
+                        PlayerPrefs.SetFloat("ShipHealth", child.GetComponentsInChildren<Slider>()[0].value);
+                        PlayerPrefs.SetFloat("ShipSpeed", child.GetComponentsInChildren<Slider>()[1].value);
                         break;
                     case "Ship7":
-                        PlayerPrefs.SetString(
-                            "ChosenShip",
-                            PlayerController.SpaceshipsEnum.Player_Yellow.ToString()
-                        );
+                        PlayerPrefs.SetString("ChosenShip", PlayerController.SpaceshipsEnum.Player_Yellow.ToString() );
+                        PlayerPrefs.SetFloat("ShipHealth", child.GetComponentsInChildren<Slider>()[0].value);
+                        PlayerPrefs.SetFloat("ShipSpeed", child.GetComponentsInChildren<Slider>()[1].value);
                         break;
                 }
             }

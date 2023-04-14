@@ -41,16 +41,26 @@ public class InputController : MonoBehaviour
 
     void Open(InputAction.CallbackContext context)
     {
-        Time.timeScale = 0f;
-        asset.Disable();
-        AudioManager.Instance.Pause("GameplaySong");
-        EscMenu.SetActive(!EscMenu.activeSelf);
+        if (!EscMenu.activeSelf)
+        {
+            Time.timeScale = 0f;
+            asset.FindActionMap("Player").Disable();
+            asset.FindActionMap("Weapon").Disable();
+            AudioManager.Instance.Pause("GameplaySong");
+            EscMenu.SetActive(true);
+        }
+        else
+        {
+            EscMenu.SetActive(false);
+            backToGame();
+        }
     }
 
     public void backToGame()
     {
         AudioManager.Instance.Resume("GameplaySong");
-        asset.Enable();
+        asset.FindActionMap("Player").Enable();
+        asset.FindActionMap("Weapon").Enable();
         Time.timeScale = 1f;
     }
 
