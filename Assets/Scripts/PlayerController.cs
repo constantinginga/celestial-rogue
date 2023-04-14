@@ -41,6 +41,9 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         Enum.TryParse<SpaceshipsEnum>(PlayerPrefs.GetString("ChosenShip"), out ChosenSpaceship);
+        this.maxHealth = Mathf.RoundToInt(PlayerPrefs.GetFloat("ShipHealth"));
+        this.healthBar.maxValue = Mathf.RoundToInt(PlayerPrefs.GetFloat("ShipHealth"));
+        this.speed = PlayerPrefs.GetFloat("ShipSpeed");
 
         Object[] data = AssetDatabase.LoadAllAssetsAtPath(AssetDatabase.GetAssetPath(texture));
         if (data != null)
