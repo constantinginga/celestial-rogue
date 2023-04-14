@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
 {
     public enum SpaceshipsEnum
     {
-        Player_Red,
         Player_Blue,
         Player_Green,
         Player_Grey,
