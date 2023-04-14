@@ -156,7 +156,9 @@ public class PlayerController : MonoBehaviour
                 UpdateHealthBar();
                 break;
             case ShopHandler.UpgradeType.UpgradeHP:
+                var prevMaxHealth = maxHealth;
                 maxHealth = (int)(maxHealth * effectAmount);
+                currentHealth += maxHealth - prevMaxHealth;
                 break;
             case ShopHandler.UpgradeType.UpgradeDamage:
             //
