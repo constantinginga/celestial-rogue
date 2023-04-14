@@ -57,7 +57,7 @@ public class AsteroidScript : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<PlayerController>() != null)
         {
-            collision.gameObject.SendMessage("TakeDamage", 10 + speed);
+	        collision.gameObject.SendMessage("TakeDamage", 0.2 + speed);
         }
     }
     

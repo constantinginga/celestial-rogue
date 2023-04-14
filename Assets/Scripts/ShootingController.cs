@@ -160,7 +160,7 @@ public class ShootingController : MonoBehaviour
                 if (isPlayer)
                 {
                     FindObjectOfType<AudioManager>().Play("Shoot");
-                    shootAmount += 0.5f;
+	                shootAmount += 0.3f;
                 }
             }
 

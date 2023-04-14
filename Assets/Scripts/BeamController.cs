@@ -14,7 +14,8 @@ public class BeamController : MonoBehaviour
 	
 	protected void OnDestroy()
 	{
-		GameObject bullet = Instantiate(Resources.Load("Prefabs/Bullet") as GameObject, parent.transform.position, Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z));
+		GameObject bullet = Instantiate(Resources.Load("Prefabs/Bullet") as GameObject, parent.transform.position, Quaternion.identity);
+		bullet.transform.rotation = parent.transform.rotation;
 		if (bullet.TryGetComponent<BulletController>(out BulletController bulletComponent))
 		{
 			bulletComponent.parentLayer = parent.gameObject.layer;
