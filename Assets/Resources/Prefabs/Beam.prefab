@@ -125,10 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 1000
-  damageAmount: 10
-  opponentLayer:
-    serializedVersion: 2
-    m_Bits: 128
+  damageAmount: 50
 --- !u!1 &4237970033347587644
 GameObject:
   m_ObjectHideFlags: 0
