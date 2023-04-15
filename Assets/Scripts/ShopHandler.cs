@@ -44,13 +44,17 @@ public class ShopHandler : MonoBehaviour
         {
             {
                 UpgradeType.RestoreHP,
-                4 * (playerController.maxHealth - playerController.currentHealth) + 100
+                10 * (playerController.maxHealth - playerController.currentHealth)
             },
             { UpgradeType.UpgradeHP, (int)(3 * playerController.maxHealth) },
             { UpgradeType.UpgradeSpeed, (int)(20 * playerController.speed) },
             { UpgradeType.UpgradeDamage, 100 * shootingController[0].damageAmount },
             { UpgradeType.ReduceOverheat, (int)(20 * shootingController[0].overHeatThreshold) }
         };
+
+        Debug.Log(
+            $"AWAKE: HP: {playerController.currentHealth}, Max HP: {playerController.maxHealth}"
+        );
 
         GetCostsUI();
 
@@ -64,6 +68,12 @@ public class ShopHandler : MonoBehaviour
         UpdateCostsUI();
     }
 
+    void OnEnable()
+    {
+        upgradeCosts[UpgradeType.RestoreHP] =
+            10 * (playerController.maxHealth - playerController.currentHealth);
+    }
+
     private void GetCostsUI()
     {
         RestoreHpCost = RestoreHpButton.GetComponentsInChildren<TextMeshProUGUI>()[1];
@@ -75,6 +85,7 @@ public class ShopHandler : MonoBehaviour
 
     private void CheckButtons()
     {
+        Debug.Log($"HP: {playerController.currentHealth}, Max HP: {playerController.maxHealth}");
         RestoreHpButton.interactable =
             playerController.Money >= upgradeCosts[UpgradeType.RestoreHP]
             && playerController.currentHealth < playerController.maxHealth;
@@ -108,7 +119,7 @@ public class ShopHandler : MonoBehaviour
     {
         playerController.UpdateShip(UpgradeType.RestoreHP, upgradeCosts[UpgradeType.RestoreHP], 1);
         upgradeCosts[UpgradeType.RestoreHP] =
-            4 * (playerController.maxHealth - playerController.currentHealth);
+            10 * (playerController.maxHealth - playerController.currentHealth);
     }
 
     public void UpgradeHP()
