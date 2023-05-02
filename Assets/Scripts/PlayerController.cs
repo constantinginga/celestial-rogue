@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Rendering.Universal;
+using System.Collections.Generic;
 using Object = UnityEngine.Object;
 
 public class PlayerController : MonoBehaviour
@@ -19,7 +20,8 @@ public class PlayerController : MonoBehaviour
         Player_Pink,
     };
 
-    public SpaceshipsEnum ChosenSpaceship;
+	public SpaceshipsEnum ChosenSpaceship;
+	public List<Sprite> Sprites = new List<Sprite>();
     public float speed = 1;
     public int maxHealth = 100;
     public int currentHealth;
@@ -44,23 +46,15 @@ public class PlayerController : MonoBehaviour
         this.maxHealth = Mathf.RoundToInt(PlayerPrefs.GetFloat("ShipHealth"));
         this.healthBar.maxValue = Mathf.RoundToInt(PlayerPrefs.GetFloat("ShipHealth"));
         this.speed = PlayerPrefs.GetFloat("ShipSpeed");
-
-        Object[] data = AssetDatabase.LoadAllAssetsAtPath(AssetDatabase.GetAssetPath(texture));
-        if (data != null)
-        {
-            foreach (Object obj in data)
-            {
-                if (obj.GetType() == typeof(Sprite))
-                {
-                    Sprite sprite = obj as Sprite;
-                    if (sprite.name.Equals(ChosenSpaceship.ToString()))
-                    {
-                        GetComponent<SpriteRenderer>().sprite = sprite;
-                        break;
-                    }
-                }
-            }
-        }
+		
+	    foreach (Sprite sprite in Sprites)
+	    {
+		    if (sprite.name.Equals(ChosenSpaceship.ToString()))
+		    {
+			    GetComponent<SpriteRenderer>().sprite = sprite;
+			    break;
+		    }
+	    }
     }
 
     void Start()

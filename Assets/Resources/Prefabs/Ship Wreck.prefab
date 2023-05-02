@@ -154,29 +154,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24d0f8b02e4fe4e428a7fe2d08ac7dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Spaceships: 8
   Parts:
   - {fileID: 5221794766133301972}
   - {fileID: 5221794765715772795}
   - {fileID: 5221794764691735915}
   - {fileID: 5221794766028741686}
   Sprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1937258484, guid: 4f1baefd8e43bc343b68a5ef4d24f802, type: 3}
+  - {fileID: -98409391, guid: 4f1baefd8e43bc343b68a5ef4d24f802, type: 3}
+  - {fileID: 679148014, guid: 4f1baefd8e43bc343b68a5ef4d24f802, type: 3}
+  - {fileID: -212826993, guid: 4f1baefd8e43bc343b68a5ef4d24f802, type: 3}
+  - {fileID: 1105126368, guid: 4f1baefd8e43bc343b68a5ef4d24f802, type: 3}
+  - {fileID: 1566089710, guid: 4f1baefd8e43bc343b68a5ef4d24f802, type: 3}
+  - {fileID: -1777135319, guid: 4f1baefd8e43bc343b68a5ef4d24f802, type: 3}
+  - {fileID: 567711602, guid: 4f1baefd8e43bc343b68a5ef4d24f802, type: 3}
+  - {fileID: 1662962432, guid: 4f1baefd8e43bc343b68a5ef4d24f802, type: 3}
+  - {fileID: -1472604911, guid: 4f1baefd8e43bc343b68a5ef4d24f802, type: 3}
+  - {fileID: -1865578052, guid: 4f1baefd8e43bc343b68a5ef4d24f802, type: 3}
+  - {fileID: -878658971, guid: 4f1baefd8e43bc343b68a5ef4d24f802, type: 3}
+  - {fileID: -1672815058, guid: 4f1baefd8e43bc343b68a5ef4d24f802, type: 3}
+  - {fileID: 1473744055, guid: 4f1baefd8e43bc343b68a5ef4d24f802, type: 3}
+  - {fileID: -71405491, guid: 4f1baefd8e43bc343b68a5ef4d24f802, type: 3}
+  - {fileID: 1920116183, guid: 4f1baefd8e43bc343b68a5ef4d24f802, type: 3}
+  - {fileID: -1644080565, guid: 4f1baefd8e43bc343b68a5ef4d24f802, type: 3}
+  - {fileID: 808427740, guid: 4f1baefd8e43bc343b68a5ef4d24f802, type: 3}
+  - {fileID: -78485114, guid: 4f1baefd8e43bc343b68a5ef4d24f802, type: 3}
+  - {fileID: 1635701003, guid: 4f1baefd8e43bc343b68a5ef4d24f802, type: 3}
+  - {fileID: -1094405952, guid: 4f1baefd8e43bc343b68a5ef4d24f802, type: 3}
+  - {fileID: -1679516040, guid: 4f1baefd8e43bc343b68a5ef4d24f802, type: 3}
+  - {fileID: 1286111664, guid: 4f1baefd8e43bc343b68a5ef4d24f802, type: 3}
+  - {fileID: 1625755611, guid: 4f1baefd8e43bc343b68a5ef4d24f802, type: 3}
   texture: {fileID: 2800000, guid: 4f1baefd8e43bc343b68a5ef4d24f802, type: 3}
 --- !u!1 &5221794765715772788
 GameObject:

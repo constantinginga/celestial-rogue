@@ -5469,6 +5469,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ChosenSpaceship: 0
+  Sprites:
+  - {fileID: -65764179, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
+  - {fileID: -107391127, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
+  - {fileID: -748429393, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
+  - {fileID: -1957872993, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
+  - {fileID: 1451701461, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
+  - {fileID: -1765770218, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
+  - {fileID: -2131879205, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
   speed: 6
   maxHealth: 100
   currentHealth: 100
@@ -6539,7 +6547,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1492748418577224109}
-  - component: {fileID: 1466503791}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -6565,18 +6572,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1466503791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1492748418577224083}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd93ad9a5f4b04bdea2264f7c8379e17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1709509634726963717
 GameObject:
   m_ObjectHideFlags: 0

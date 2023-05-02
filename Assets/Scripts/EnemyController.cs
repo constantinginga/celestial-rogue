@@ -17,7 +17,8 @@ public class EnemyController : MonoBehaviour
         Enemy_Purple
     };
 
-    public SpaceshipsEnum ChosenSpaceship;
+	public SpaceshipsEnum ChosenSpaceship;
+	public List<Sprite> Sprites = new List<Sprite>();
     public int Health = 10;
     public int Reward = 100;
     public AIDestinationSetter target;
@@ -56,23 +57,15 @@ public class EnemyController : MonoBehaviour
                 gameObject.AddComponent<PurpleEnemyController>();
                 break;
         }
-        ChosenSpaceship = chosenSpaceship;
-        Object[] data = AssetDatabase.LoadAllAssetsAtPath(AssetDatabase.GetAssetPath(texture));
-        if (data != null)
-        {
-            foreach (Object obj in data)
-            {
-                if (obj.GetType() == typeof(Sprite))
-                {
-                    Sprite sprite = obj as Sprite;
-                    if (sprite.name.Equals(chosenSpaceship.ToString()))
-                    {
-                        GetComponent<SpriteRenderer>().sprite = sprite;
-                        break;
-                    }
-                }
-            }
-        }
+	    ChosenSpaceship = chosenSpaceship;
+	    foreach (Sprite sprite in Sprites)
+	    {
+		    if (sprite.name.Equals(ChosenSpaceship.ToString()))
+		    {
+			    GetComponent<SpriteRenderer>().sprite = sprite;
+			    break;
+		    }
+	    }
     }
 
     void Update() { }

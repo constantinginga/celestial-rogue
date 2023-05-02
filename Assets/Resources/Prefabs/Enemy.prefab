@@ -639,6 +639,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ChosenSpaceship: 1
+  Sprites:
+  - {fileID: -1199797998, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
+  - {fileID: 1410777082, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
+  - {fileID: -1303317163, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
+  - {fileID: -911893527, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
+  - {fileID: 2020381191, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
+  - {fileID: 1101413602, guid: a8774667b85a6f242baeacf8a476d49f, type: 3}
   Health: 10
   Reward: 100
   target: {fileID: 2879563472127542754}

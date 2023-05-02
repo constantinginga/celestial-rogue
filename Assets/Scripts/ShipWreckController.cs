@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -6,25 +6,9 @@ using UnityEngine;
 public class ShipWreckController : MonoBehaviour
 {
     public Rigidbody2D[] Parts; 
-    public List<Sprite> Sprites;
+	public List<Sprite> Sprites = new List<Sprite>();
     public Texture2D texture;
     int counter = 0;
-    void Awake(){
-        //Choose correct sprite
-        Sprites = new List<Sprite>();
-        Object[] data = AssetDatabase.LoadAllAssetsAtPath(AssetDatabase.GetAssetPath(texture));
-        if(data != null)
-        {
-            foreach (Object obj in data)
-            {
-                if (obj.GetType() == typeof(Sprite))
-                {
-                    Sprite sprite = obj as Sprite;
-                    Sprites.Add(sprite);
-                }
-            }
-        }
-    }
 
     public void CreateWreck(string chosenSpaceship){
         foreach(Sprite sprite in Sprites){
