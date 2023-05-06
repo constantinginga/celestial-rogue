@@ -1229,7 +1229,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Celestial Rouge
+  m_text: Celestial Rogue
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f91d16a7848a64a9f81be61012c08443, type: 2}
   m_sharedMaterial: {fileID: -8020639707122421327, guid: f91d16a7848a64a9f81be61012c08443, type: 2}
